@@ -13,7 +13,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # My Chosen Gems
-gem "paperclip", "~> 4.1"
+gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'aws-sdk', '~> 1.5.7'
 gem "figaro"
 gem 'bcrypt-ruby', :require => 'bcrypt'
