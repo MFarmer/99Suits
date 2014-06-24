@@ -11,24 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624181711) do
+ActiveRecord::Schema.define(version: 20140624194014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: true do |t|
     t.integer  "user_id"
-    t.string   "brand",          null: false
-    t.string   "condition",      null: false
-    t.decimal  "original_price", null: false
-    t.text     "description",    null: false
-    t.decimal  "sale_price",     null: false
-    t.integer  "trade_price",    null: false
-    t.boolean  "allow_pickup",   null: false
-    t.decimal  "weight",         null: false
-    t.string   "size",           null: false
+    t.string   "brand",                          null: false
+    t.string   "condition",                      null: false
+    t.decimal  "original_price",                 null: false
+    t.text     "description",                    null: false
+    t.decimal  "sale_price",                     null: false
+    t.integer  "trade_price",                    null: false
+    t.boolean  "allow_pickup",   default: false, null: false
+    t.decimal  "weight",                         null: false
+    t.string   "size",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title",                          null: false
+    t.string   "category"
   end
 
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree

@@ -1,0 +1,40 @@
+<%= flash[:errors] %>
+
+<form action="<%= user_items_url %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="title">Title</label>
+  <input id="title" type="text" name="item[title]" value="<%= @item.title %>"><br>
+
+  <label for="category">Category</label>
+  <input id="category" type="text" name="item[category]" value="<%= @item.category %>"><br>
+
+  <label for="brand">Brand</label>
+  <input id="brand" type="text" name="item[brand]" value="<%= @item.brand %>"><br>
+
+  <label for="condition">Condition</label>
+  <input id="condition" type="text" name="item[condition]" value="<%= @item.condition %>"><br>
+
+  <label for="original_price">Original Price</label>
+  <input id="original_price" type="text" name="item[original_price]" value="<%= @item.original_price %>"><br>
+
+  <label for="description">Description</label>
+  <textarea id="description" name="item[description]"><%= @item.description %></textarea><br>
+
+  <label for="sale_price">Sale Price</label>
+  <input id="sale_price" name="item[sale_price]" type="text" value="<%= @item.sale_price %>"><br>
+
+  <label for="trade_price">Trade Price</label>
+  <input id="trade_price" name="item[trade_price]" type="text" value="<%= @item.trade_price %>"><br>
+
+  <label for="allow_pickup">Allow Pickup?</label>
+  <input id="allow_pickup" type="checkbox" name="item[allow_pickup]" value="true" <% "checked" if @item.allow_pickup %>><br>
+
+  <label for="weight">Weight</label>
+  <input id="weight" name="item[weight]" value="<%= @item.weight %>"><br>
+
+  <label for="size">Size</label>
+  <input id="size" name="item[size]" value="<%= @item.size %>"><br>
+
+  <input type="submit" value="List Item">
+</form>

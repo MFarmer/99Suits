@@ -2,7 +2,7 @@
   <ul>
     <li>Feed</li>
     <li>Discover</li>
-    <li>List Item</li>
+    <li><%= link_to 'List Item', new_user_item_url(current_user.id) %></li>
     <li>Activity</li>
     <li><%= current_user.fname %>'s Account</li>
     <li><%= link_to "Sign Out", session_url, :method => :delete %></li>
