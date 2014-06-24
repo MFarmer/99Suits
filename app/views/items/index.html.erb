@@ -17,7 +17,7 @@
   <% if @items.count > 0 %>
     <% @items.each do |item| %>
       <tr>
-        <td></td>
+        <td><%= image_tag item.photo.url(:thumb) %></td>
         <td><%= item.title %></td>
         <td><%= item.category %></td>
         <td><%= item.brand %></td>
@@ -30,7 +30,7 @@
     <% end %>
   <% else %>
     <tr>
-      <td colspan="8">No items are for sale.</td>
+      <td colspan="9">No items are for sale.</td>
     </tr>
   <% end %>
   </tbody>

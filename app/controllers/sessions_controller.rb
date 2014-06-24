@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  before_filter :require_signed_out!, :only => :home
+
   def home
 
   end
