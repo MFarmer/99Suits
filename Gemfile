@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.0'
 gem "paperclip", "~> 4.1"
 gem 'aws-sdk', '~> 1.5.7'
 gem "figaro"
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
