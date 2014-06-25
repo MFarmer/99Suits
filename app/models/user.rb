@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   # Relationships
   has_many :items
+  has_many :likes
+  has_many :comments
 
   # Validations
   if Rails.env.development?

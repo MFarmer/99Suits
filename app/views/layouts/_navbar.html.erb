@@ -1,6 +1,6 @@
 <% if signed_in? %>
   <ul>
-    <li>Feed</li>
+    <li><%= link_to 'Feed', feed_all_url %></li>
     <li>Discover</li>
     <li><%= link_to 'List Item', new_user_item_url(current_user.id) %></li>
     <li>Activity</li>

@@ -2,6 +2,8 @@ class Item < ActiveRecord::Base
 
   # Relationships
   belongs_to :user
+  has_many :likes
+  has_many :comments
 
   # Validations
   if Rails.env.development?
@@ -17,4 +19,9 @@ class Item < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
   validates :title, :condition, :category, :original_price, :description, :weight, :size, :presence => true
+
+  def like_count
+    likes = Like.where("item_id = ?", self.id)
+    likes.count
+  end
 end

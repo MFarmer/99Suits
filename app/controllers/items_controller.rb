@@ -16,11 +16,26 @@ class ItemsController < ApplicationController
 
     if @item.save
       flash.now[:notice] = "Successfully created item."
-      redirect_to items_url
+      redirect_to feed_all_url
     else
       flash.now[:errors] = @item.errors.full_messages
       render :new
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
+    @comments = @item.comments
+  end
+
+  def like
+    like = Like.new(user_id: current_user.id, item_id: params[:id])
+    if like.save
+      flash.now[:notice] = "Item was liked!"
+    else
+      flash.now[:errors] = "Unable to like the item."
+    end
+    redirect_to item_url(params[:id])
   end
 
   private

@@ -1,0 +1,42 @@
+<%= image_tag @item.user.avatar.url(:thumb) %>
+<p><%= @item.user.username %> is selling his</p>
+<h3><%= @item.title %></h3>
+
+<%= image_tag @item.photo.url(:medium) %>
+
+<table>
+  <tr>
+    <th>Size</th>
+    <td><%= @item.size %></td>
+  </tr>
+  <tr>
+    <th>Condition</th>
+    <td><%= @item.condition %></td>
+  </tr>
+  <tr>
+    <th>Original Price</th>
+    <td><%= number_to_currency(@item.original_price) %></td>
+  </tr>
+  <tr>
+    <th>Brand</th>
+    <td><%= @item.brand %></td>
+  </tr>
+</table>
+
+<p><%= @item.description %></p>
+
+<h3><%= pluralize(@item.like_count, 'Likes') %></h3>
+<%= button_to "Like", item_like_url(@item.id), :method => :get %>
+
+<hr>
+<!-- Comment Form -->
+<form action="<%= item_comments_url(@item.id) %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="comment">Add Comment</label><br>
+  <input type="hidden" name="comment[item_id]" value="<%= @item.id %>">
+  <textarea id="comment" name="comment[content]"></textarea><br>
+  <input type="submit" value="Submit">
+</form>
+
+<%= render partial: "comments_list" %>

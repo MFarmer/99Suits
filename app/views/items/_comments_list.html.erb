@@ -1,0 +1,11 @@
+<ul>
+  <% @comments.each do |comment| %>
+    <li>
+      <p>
+        <b><%= comment.author.username %></b>
+        <%= comment.content %>
+        <p><%= comment.updated_at %></p>
+      </p>
+    </li>
+  <% end %>
+</ul>

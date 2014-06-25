@@ -9,6 +9,7 @@
   <th>Trade Price</th>
   <th>Allow Pickup?</th>
   <th>Seller</th>
+  <th>Action</th>
   </thead>
   <tbody>
 
@@ -24,6 +25,7 @@
         <td><%= item.trade_price %></td>
         <td><%= item.allow_pickup %></td>
         <td><%= item.user.username %></td>
+        <td><%= link_to "View", item_url(item.id) %></td>
       </tr>
     <% end %>
   <% else %>
