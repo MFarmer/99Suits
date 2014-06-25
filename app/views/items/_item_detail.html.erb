@@ -8,8 +8,18 @@
     <td><%= @item.condition %></td>
   </tr>
   <tr>
-    <th>Original Price</th>
-    <td><%= number_to_currency(@item.original_price) %></td>
+    <th>Price</th>
+    <td>
+      <del><%= number_to_currency(@item.original_price) %></del>
+      <% if @item.sale_price && @item.trade_price %>
+        <%= number_to_currency(@item.sale_price) %> (<%= 100 - (100 * @item.sale_price / @item.original_price).round() %>% off)
+        OR <%= @item.trade_price %> Karma
+      <% elsif @item.sale_price %>
+        <%= number_to_currency(@item.sale_price) %> (<%= 100 - (100 * @item.sale_price / @item.original_price).round() %>% off)
+      <% else %>
+        <%= @item.trade_price %> Karma
+      <% end %>
+    </td>
   </tr>
   <tr>
     <th>Brand</th>

@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
   before_filter :require_signed_in!
+  before_action :require_not_sold!, :only => :show
 
   def index
     @items = Item.all
@@ -43,6 +44,13 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:title, :brand, :category, :photo, :condition, :original_price, :description,
                                  :sale_price, :trade_price, :allow_pickup, :weight, :size)
+  end
+
+  def require_not_sold!
+    if Order.where("item_id = ?", params[:id]).count > 0
+      flash.now[:errors] = ["Sorry, the item is no longer available."]
+      redirect_to feed_all_url
+    end
   end
 
 end

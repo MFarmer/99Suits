@@ -6,6 +6,8 @@
 
 <p>Buyer: <%= current_user.username %></p>
 <p>Seller: <%= @item.user.username %></p>
+
+<p><%= flash[:errors] %></p>
 <%= form_for @order, :url => item_orders_url(@item.id) do |f| %>
 
   <%= f.label :street %>
@@ -17,9 +19,26 @@
   <%= f.label :state %>
   <%= f.text_field :state %><br>
 
-  <p>Sale Amount: <%= number_to_currency(@item.sale_price) %></p>
-  <p>Trade Amount: <%= @item.trade_price %> Karma</p>
+  <%= f.label :zip %>
+  <%= f.text_field :zip %><br>
+
   <%= f.label :purchase_type %>
-  <%= f.select :purchase_type, ["Cash", "Trade"] %>
+
+  <% if @item.trade_price.nil? %>
+    <%= f.select :purchase_type, ["Purchase"] %><br>
+  <% elsif @item.sale_price.nil? %>
+    <%= f.select :purchase_type, ["Trade"] %><br>
+  <% else %>
+    <%= f.select :purchase_type, ["Cash", "Trade"] %><br>
+  <% end %>
+
+  <%= f.label :shipping_type %>
+  <% if @item.allow_pickup %>
+    <%= f.select :purchase_type, ["Ship", "Local Pickup"] %>
+  <% else %>
+    <%= f.select :purchase_type, ["Ship"] %>
+  <% end %>
+
+  <%= f.submit "Submit Order" %>
 
 <% end %>

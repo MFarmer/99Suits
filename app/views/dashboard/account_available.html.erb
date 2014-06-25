@@ -28,3 +28,30 @@
 <hr>
 
 <h1>Available</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Sale Price</th>
+      <th>Trade Price</th>
+      <th>Title</th>
+      <th>Posted Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @items.count > 0 %>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= image_tag item.photo.url(:thumb) %></td>
+          <td><%= number_to_currency(item.sale_price) %></td>
+          <td><%= item.trade_price %></td>
+          <td><%= item.title %></td>
+          <td><%= item.created_at %></td>
+          <td>Edit Destroy</td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

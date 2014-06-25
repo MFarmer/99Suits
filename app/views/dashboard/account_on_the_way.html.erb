@@ -24,5 +24,34 @@
   <li>On the Way</li>
   <li><%= link_to "Leave Feedback", account_leave_feedback_url %></li>
 </ul>
+
 <hr>
+
 <h1>On the Way</h1>
+
+<table border="1">
+  <thead>
+  <tr>
+    <td>Photo</td>
+    <td>Item Title</td>
+    <td>Seller</td>
+    <td>Date Shipped</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @items.count > 0 %>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= image_tag item.photo.url(:thumb) %></td>
+        <td><%= item.title %></td>
+        <td><%= full_name(item.user) %></td>
+        <td>Shipping in Progress</td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="6">You have no items pending shipment to you.</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -8,7 +8,6 @@ class Item < ActiveRecord::Base
 
   CONDITION_OPTIONS = ["Damaged", "Used", "Like New", "New"]
 
-
   # Relationships
   belongs_to :user
   has_many :likes

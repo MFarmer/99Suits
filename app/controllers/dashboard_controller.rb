@@ -10,51 +10,58 @@ class DashboardController < ApplicationController
   end
 
   def account_feedback
-
+    @feedback = current_user.feedbacks
   end
 
+  # Items which have not been ordered
   def account_available
-
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.user_id = #{current_user.id}")
   end
 
+  # Items which current user ordered and have shipped
   def account_received
-
+    @items = Item.joins(:order).where('orders.user_id = ? AND orders.shipping_date IS NOT ?', current_user.id, nil)
   end
 
+  # Items which current user is seller and item has shipped
   def account_gone
-
+    @items = Item.joins(:order).where('items.user_id = ? AND orders.shipping_date IS NOT ?', current_user.id, nil)
   end
 
+  # All Items which current user has sold but not yet shipped
   def account_ship
-
+    @items = Item.joins(:order).where('items.user_id = ? AND orders.shipping_date IS ? AND orders.shipping_type = ?', current_user.id, nil, "Ship")
   end
 
   def account_pickup
-
+    @items = Item.joins(:order).where('items.user_id = ? AND orders.shipping_date IS ? AND orders.shipping_type = ?', current_user.id, nil, "Pickup")
   end
 
+  # Items current user sold and have shipped AND have not received feedback [TODO]
   def account_pending_feedback
-
+    @items = Item.joins(:order).where('items.user_id = ? AND orders.shipping_date IS NOT ? AND ', current_user.id, nil)
   end
 
+  # Items current user has purchased and have not yet shipped
   def account_on_the_way
-
+    @items = Item.joins(:order).where('orders.user_id = ? AND orders.shipping_date IS ?', current_user.id, nil)
   end
 
   def account_leave_feedback
-
+    @orders = Order.joins("LEFT OUTER JOIN feedbacks ON orders.id = feedbacks.order_id WHERE feedbacks.order_id IS NULL")
   end
 
   def feed_all
-    @items = Item.all
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL")
+    #@items = Item.all
   end
 
   def feed_sale
-    @items = Item.where("sale_price IS NOT ?", nil)
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.sale_price IS NOT NULL")
   end
 
   def feed_trade
-    @items = Item.where("trade_price IS NOT ?", nil)
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.trade_price IS NOT NULL")
   end
 
   def discover_people
@@ -62,7 +69,7 @@ class DashboardController < ApplicationController
   end
 
   def discover_items
-    @items = Item.all
+
   end
 
   def profile_items_available

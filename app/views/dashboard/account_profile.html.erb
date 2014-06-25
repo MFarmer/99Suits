@@ -31,21 +31,35 @@
 
 <%= image_tag current_user.avatar.url(:thumb) %>
 
-<%= form_for current_user, :url => user_url(current_user.id) do |f| %>
+<form action="<%= user_url(current_user.id) %>" method="POST" enctype="multipart/form-data">
 
-  <%= f.label :avatar %><br>
-  <%= f.file_field :avatar %><br><br>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH">
 
-  <%= f.label :fname %><br>
-  <%= f.text_field :fname %><br><br>
+  <label for="avatar">Avatar</label>
+  <input id="avatar" type="file" name="user[avatar]"><br>
 
-  <%= f.label :lname %><br>
-  <%= f.text_field :lname %><br><br>
+  <label>First Name</label>
+  <input type="text" name="user[fname]" value="<%= current_user.fname %>"><br>
 
-  <%= f.label :email %><br>
-  <%= f.text_field :email %><br><br>
+  <label>Last Name</label>
+  <input type="text" name="user[lname]" value="<%= current_user.lname %>"><br>
 
-  <%= f.label :username %><br>
-  <%= f.text_field :username %><br><br>
+  <label>E-Mail</label>
+  <input type="text" name="user[email]" value="<%= current_user.email %>"><br>
 
-<% end %>
+  <label>Username</label>
+  <input type="text" name="user[username]" value="<%= current_user.username %>"><br>
+
+  <label>Current Password</label>
+  <input type="password" name="user[current_password]" value=""><br>
+
+  <label>New Password</label>
+  <input type="password" name="user[password]" value=""><br>
+
+  <label>Re-enter New Password</label>
+  <input type="password" name="user[password_confirmation]" value=""><br>
+
+  <button>Update Account</button>
+
+</form>

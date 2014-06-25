@@ -28,3 +28,32 @@
 <hr>
 
 <h1>Received</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Title</th>
+      <th>Purchase Type</th>
+      <th>Order Date</th>
+      <th>Shipped Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% if @items.count > 0 %>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= image_tag item.photo.url(:thumb) %></td>
+        <td><%= item.title %></td>
+        <td><%= item.order.purchase_type %></td>
+        <td><%= item.order.created_at %></td>
+        <td><%= item.order.shipping_date %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="5">You have not received any items.</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

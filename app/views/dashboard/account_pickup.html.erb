@@ -28,3 +28,34 @@
 <hr>
 
 <h1>Ready to be picked up</h1>
+
+<table border="1">
+  <thead>
+  <tr>
+    <td>Photo</td>
+    <td>Item Title</td>
+    <td>Buyer</td>
+    <td>Address</td>
+    <td>Date Sold</td>
+    <td>Action</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @items.count > 0 %>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= image_tag item.photo.url(:thumb) %></td>
+        <td><%= item.title %></td>
+        <td><%= full_name(item.order.buyer) %></td>
+        <td><%= address(item.order) %></td>
+        <td><%= item.order.created_at %></td>
+        <td>Mark as Picked Up</td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="6">You have no items awaiting pickup.</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
