@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.0'
 
 # My Chosen Gems
 gem 'paperclip', github: 'thoughtbot/paperclip'
+gem "paperclip-dropbox", ">= 1.1.7"
 gem 'aws-sdk', '~> 1.5.7'
 gem "figaro"
 gem 'bcrypt-ruby', :require => 'bcrypt'
