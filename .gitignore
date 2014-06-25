@@ -6,6 +6,9 @@
 
 .idea/
 
+# Ignore files uploaded on localhost
+/public/system
+
 # Ignore bundler config.
 /.bundle
 
