@@ -1,43 +1,43 @@
 <%= flash[:errors] %>
 
-<form action="<%= user_items_url %>" method="POST" enctype="multipart/form-data">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<%= form_for @item, :url => user_items_url(current_user.id), :html => { :multipart => true } do |f| %>
 
-  <label for="photo">Photo</label>
-  <input id="photo" type="file" name="item[photo]"><br>
+  <%= f.label :photo %>
+  <%= f.file_field :photo %><br>
 
-  <label for="title">Title</label>
-  <input id="title" type="text" name="item[title]" value="<%= @item.title %>"><br>
+  <%= f.label :title %>
+  <%= f.text_field :title %><br>
 
-  <label for="category">Category</label>
-  <input id="category" type="text" name="item[category]" value="<%= @item.category %>"><br>
+  <%= f.label :category %>
+  <%= f.select :category, Item::CATEGORY_OPTIONS %>
 
-  <label for="brand">Brand</label>
-  <input id="brand" type="text" name="item[brand]" value="<%= @item.brand %>"><br>
+  <%= f.label :brand %>
+  <%= f.text_field :brand %><br>
 
-  <label for="condition">Condition</label>
-  <input id="condition" type="text" name="item[condition]" value="<%= @item.condition %>"><br>
+  <%= f.label :condition %>
+  <%= f.select :condition, Item::CONDITION_OPTIONS %><br>
 
-  <label for="original_price">Original Price</label>
-  <input id="original_price" type="text" name="item[original_price]" value="<%= @item.original_price %>"><br>
+  <%= f.label :original_price %>
+  <%= f.text_field :original_price %><br>
 
-  <label for="description">Description</label>
-  <textarea id="description" name="item[description]"><%= @item.description %></textarea><br>
+  <%= f.label :description %>
+  <%= f.text_area :description %><br>
 
-  <label for="sale_price">Sale Price</label>
-  <input id="sale_price" name="item[sale_price]" type="text" value="<%= @item.sale_price %>"><br>
+  <%= f.label :sale_price %>
+  <%= f.text_field :sale_price %><br>
 
-  <label for="trade_price">Trade Price</label>
-  <input id="trade_price" name="item[trade_price]" type="text" value="<%= @item.trade_price %>"><br>
+  <%= f.label :trade_price %>
+  <%= f.text_field :trade_price %><br>
 
-  <label for="allow_pickup">Allow Pickup?</label>
-  <input id="allow_pickup" type="checkbox" name="item[allow_pickup]" value="true" <% "checked" if @item.allow_pickup %>><br>
+  <%= f.label :allow_pickup %>
+  <%= f.check_box :allow_pickup %><br>
 
-  <label for="weight">Weight</label>
-  <input id="weight" name="item[weight]" value="<%= @item.weight %>"><br>
+  <%= f.label :weight %>
+  <%= f.text_field :weight %><br>
 
-  <label for="size">Size</label>
-  <input id="size" name="item[size]" value="<%= @item.size %>"><br>
+  <%= f.label :size %>
+  <%= f.text_field :size %><br>
 
-  <input type="submit" value="List Item">
-</form>
+  <%= f.submit %>
+
+<% end %>

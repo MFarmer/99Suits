@@ -1,5 +1,14 @@
 class Item < ActiveRecord::Base
 
+  CATEGORY_OPTIONS = ["Armwear", "Belts", "Coats",
+                      "Footwear", "Headgear", "Jackets",
+                      "Neckwear", "Ponchos", "Robes and Cloaks",
+                      "Sports", "Suits", "Tops",
+                      "Trousers and Shorts", "Undergarments"]
+
+  CONDITION_OPTIONS = ["Damaged", "Used", "Like New", "New"]
+
+
   # Relationships
   belongs_to :user
   has_many :likes

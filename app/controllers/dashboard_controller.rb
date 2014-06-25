@@ -12,4 +12,16 @@ class DashboardController < ApplicationController
     @items = Item.where("trade_price IS NOT ?", nil)
   end
 
+  def profile_items_available
+    @items = Item.where("user_id = ?", params[:id])
+  end
+
+  def profile_items_sold
+    @items = Item.where("user_id = ?", params[:id])
+  end
+
+  def profile_items_traded
+    @items = Item.where("user_id = ?", params[:id])
+  end
+
 end

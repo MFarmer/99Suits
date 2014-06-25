@@ -1,0 +1,34 @@
+<%= image_tag @user.avatar.url(:medium) %>
+<h1><%= @user.username %></h1>
+<p>Member since <%= @user.created_at %></p>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Transactions</th>
+      <th>Followers</th>
+      <th>Following</th>
+      <th>Avg. Ship Time</th>
+      <th>Last Seen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+
+<h3><%= @user.username %>'s Listings</h3>
+<ul>
+  <li>Available</li>
+  <li>Sold</li>
+  <li>Traded</li>
+</ul>
