@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
 
+  before_filter :require_signed_in!
+
   def feed_all
     @items = Item.all
   end
