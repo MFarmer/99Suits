@@ -16,6 +16,5 @@ class Item < ActiveRecord::Base
 
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
-  validates :title, :condition, :category, :original_price, :description,
-            :sale_price, :trade_price, :weight, :size, :presence => true
+  validates :title, :condition, :category, :original_price, :description, :weight, :size, :presence => true
 end

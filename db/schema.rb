@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624220627) do
+ActiveRecord::Schema.define(version: 20140625034810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20140624220627) do
     t.string   "condition",                          null: false
     t.decimal  "original_price",                     null: false
     t.text     "description",                        null: false
-    t.decimal  "sale_price",                         null: false
-    t.integer  "trade_price",                        null: false
+    t.decimal  "sale_price"
+    t.decimal  "trade_price"
     t.boolean  "allow_pickup",       default: false, null: false
     t.decimal  "weight",                             null: false
     t.string   "size",                               null: false
