@@ -1,0 +1,9 @@
+<h1>Feed <small>(<%= pluralize(@items.count, 'Items') %>)</small></h1>
+
+<ul>
+  <li><%= link_to "All", feed_all_url %></li>
+  <li>Sale</li>
+  <li><%= link_to "Trade", feed_trade_url %></li>
+</ul>
+
+<%= render partial: "items_table" %>

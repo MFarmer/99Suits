@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
     if user
       sign_in(user)
-      redirect_to items_url
+      redirect_to feed_all_url
     else
       flash.now[:errors] = ["Invalid credentials. Please try again."]
       render :new
