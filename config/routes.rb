@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "session#new"
+  root "sessions#new"
 
   resource :session, :only => [:new, :destroy, :create]
 
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :items, :only => [:index, :show]
+  resources :items, :only => [:show]
 
   get '/feed', to: 'dashboard#feed_all', as: 'feed_all'
   get '/feed/sale', to: 'dashboard#feed_sale', as: 'feed_sale'
