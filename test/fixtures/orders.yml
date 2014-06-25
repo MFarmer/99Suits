@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  item_id: 
+  purchase_type: MyString
+  shipping_date: 2014-06-25 10:06:47
+  street: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+
+two:
+  user_id: 
+  item_id: 
+  purchase_type: MyString
+  shipping_date: 2014-06-25 10:06:47
+  street: MyString
+  city: MyString
+  state: MyString
+  zip: MyString

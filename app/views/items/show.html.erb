@@ -4,29 +4,14 @@
 
 <%= image_tag @item.photo.url(:medium) %>
 
-<table>
-  <tr>
-    <th>Size</th>
-    <td><%= @item.size %></td>
-  </tr>
-  <tr>
-    <th>Condition</th>
-    <td><%= @item.condition %></td>
-  </tr>
-  <tr>
-    <th>Original Price</th>
-    <td><%= number_to_currency(@item.original_price) %></td>
-  </tr>
-  <tr>
-    <th>Brand</th>
-    <td><%= @item.brand %></td>
-  </tr>
-</table>
+<%= render partial: "item_detail" %>
 
 <p><%= @item.description %></p>
 
 <h3><%= pluralize(@item.like_count, 'Likes') %></h3>
 <%= button_to "Like", item_like_url(@item.id), :method => :get %>
+
+<%= button_to "BUY NOW", new_item_order_url(@item.id), :method => :get %>
 
 <hr>
 <!-- Comment Form -->

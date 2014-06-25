@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Size</th>
+    <td><%= @item.size %></td>
+  </tr>
+  <tr>
+    <th>Condition</th>
+    <td><%= @item.condition %></td>
+  </tr>
+  <tr>
+    <th>Original Price</th>
+    <td><%= number_to_currency(@item.original_price) %></td>
+  </tr>
+  <tr>
+    <th>Brand</th>
+    <td><%= @item.brand %></td>
+  </tr>
+</table>

@@ -1,0 +1,51 @@
+<h3>Overview</h3>
+<ul>
+  <li>Profile Settings</li>
+  <li><%= link_to "Reports", account_reports_url %></li>
+  <li><%= link_to "Feedback", account_feedback_url %></li>
+</ul>
+
+<h3>My Closet</h3>
+<ul>
+  <li><%= link_to "Available", account_available_url %></li>
+  <li><%= link_to "Received", account_received_url %></li>
+  <li><%= link_to "Gone", account_gone_url %></li>
+</ul>
+
+<h3>Selling & Trading</h3>
+<ul>
+  <li><%= link_to "Ready to Ship", account_ship_url %></li>
+  <li><%= link_to "Ready to be picked up", account_pickup_url %></li>
+  <li><%= link_to "Waiting for Feedback", account_pending_feedback_url %></li>
+</ul>
+
+<h3>Receiving</h3>
+<ul>
+  <li><%= link_to "On the Way", account_on_the_way_url %></li>
+  <li><%= link_to "Leave Feedback", account_leave_feedback_url %></li>
+</ul>
+
+<hr>
+
+<h1>Profile Settings</h1>
+
+<%= image_tag current_user.avatar.url(:thumb) %>
+
+<%= form_for current_user, :url => user_url(current_user.id) do |f| %>
+
+  <%= f.label :avatar %><br>
+  <%= f.file_field :avatar %><br><br>
+
+  <%= f.label :fname %><br>
+  <%= f.text_field :fname %><br><br>
+
+  <%= f.label :lname %><br>
+  <%= f.text_field :lname %><br><br>
+
+  <%= f.label :email %><br>
+  <%= f.text_field :email %><br><br>
+
+  <%= f.label :username %><br>
+  <%= f.text_field :username %><br><br>
+
+<% end %>

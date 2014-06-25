@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
   has_many :items
   has_many :likes
   has_many :comments
+  has_many :orders
+  has_many(
+      :feedbacks,
+      :through => :orders,
+      :source => :feedback
+  )
 
   # Validations
   if Rails.env.development?

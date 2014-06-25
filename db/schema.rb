@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625044214) do
+ActiveRecord::Schema.define(version: 20140625145811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20140625044214) do
 
   add_index "comments", ["item_id"], name: "index_comments_on_item_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "feedbacks", force: true do |t|
+    t.integer  "order_id"
+    t.text     "content",    null: false
+    t.integer  "rating",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feedbacks", ["order_id"], name: "index_feedbacks_on_order_id", using: :btree
 
   create_table "items", force: true do |t|
     t.integer  "user_id"
@@ -59,6 +69,22 @@ ActiveRecord::Schema.define(version: 20140625044214) do
 
   add_index "likes", ["item_id"], name: "index_likes_on_item_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
+  create_table "orders", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.string   "purchase_type", null: false
+    t.datetime "shipping_date"
+    t.string   "street",        null: false
+    t.string   "city",          null: false
+    t.string   "state",         null: false
+    t.string   "zip",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["item_id"], name: "index_orders_on_item_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "fname",               null: false

@@ -13,6 +13,7 @@ class Item < ActiveRecord::Base
   belongs_to :user
   has_many :likes
   has_many :comments
+  has_one :order
 
   # Validations
   if Rails.env.development?
