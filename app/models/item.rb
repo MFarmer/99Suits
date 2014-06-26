@@ -20,8 +20,6 @@ class Item < ActiveRecord::Base
   else
     has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" },
                       :default_url => "/images/:style/missing.png",
-                      :storage => :dropbox,
-                      :dropbox_credentials => Rails.root.join("config/dropbox.yml"),
                       :path => ":style/:id_:filename"
   end
 
