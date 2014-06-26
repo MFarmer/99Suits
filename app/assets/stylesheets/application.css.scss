@@ -67,7 +67,7 @@ nav li a {
 
 .container {
   width: 980px;
-  background-color: #eee;
+//  background-color: #eee;
   margin: auto;
 }
 
@@ -176,4 +176,150 @@ h1 small {
 
 .item-bottom {
   background-color: lime;
+}
+
+.jumbotron {
+  width: 100%;
+  background-color: blue;
+  padding: 20px;
+  height: 250px;
+}
+
+.jumbotron:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.jumbotron #jumbo-left {
+  float: left;
+  background-color: green;
+  width: 560px;
+  padding: 20px;
+}
+
+#jumbo-left h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+#jumbo-left h3 {
+  font-size: 28px;
+}
+
+.jumbotron #jumbo-right {
+  float: right;
+  background-color: purple;
+  width: 340px;
+  padding: 20px;
+}
+
+.feature-bar {
+  background-color: gray;
+  padding: 10px;
+}
+
+.feature-bar h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.feature-bar:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.col-1 {
+  float: left;
+  width: 287px;
+  background-color: yellow;
+  padding: 20px;
+}
+
+.right {
+  float: right;
+  width: 652px;
+}
+
+.right .col-2 {
+  float: left;
+  width: 286px;
+  background-color: orange;
+  padding: 20px;
+}
+
+.right .col-3 {
+  float: right;
+  width: 286px;
+  background-color: lime;
+  padding: 20px;
+}
+
+.testimonials {
+  background-color: #eee;
+  height: 300px;
+  padding: 20px;
+}
+
+.left-testimonials {
+  width: 490px;
+  background-color: brown;
+  float: left;
+}
+
+.right-testimonials {
+  width: 490px;
+  background-color: tan;
+  float: right;
+}
+
+.testimonial-box {
+  background-color: #eee;
+  width: 490px;
+  margin-bottom: 20px;
+}
+
+.testimonial-box .img-holder {
+  float: left;
+  width: 128px;
+}
+
+.testimonial-box:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.testimonial-box .text-holder {
+  padding: 20px;
+  width: 322px;
+  float: right;
+  background-color: pink;
+}
+
+.testimonial-box img {
+  border-radius: 100px;
+  width: 117px;
+  border: 5px solid lightgray;
+}
+
+.testimonial-box p {
+  font-weight: lighter;
+  font-size: 20px;
+}
+
+.testimonial-box p:before {
+  content: "\"";
+}
+
+.testimonial-box p:after {
+  content: "\"";
+}
+
+.testimonial-box small {
+  color: darkgray;
+  font-size: 14px;
+  float: right;
+  margin-top: 20px;
 }
