@@ -1,10 +1,10 @@
 <a href="<%= item_url(item.id) %>" class="thumbnail">
   <div class="photo-box">
-    <%= image_tag item.photo.url(:medium) %>
+    <img src="<%= item.photo.url(:medium) %>">
   </div>
   <div class="description-box">
     <div class="avatar-box">
-      <%= image_tag item.user.avatar.url(:thumb) %>
+      <img src="<%= item.user.avatar.url(:thumb) %>">
     </div>
     <div class="detail-box">
       <p><%= truncate(item.title, :length => 16) %></p>

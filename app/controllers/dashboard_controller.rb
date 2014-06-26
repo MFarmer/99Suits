@@ -52,16 +52,18 @@ class DashboardController < ApplicationController
   end
 
   def feed_all
-    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL")
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL").includes(:user)
     #@items = Item.all
   end
 
   def feed_sale
-    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.sale_price IS NOT NULL")
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
+ orders.item_id IS NULL AND items.sale_price IS NOT NULL").includes(:user)
   end
 
   def feed_trade
-    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.trade_price IS NOT NULL")
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
+ orders.item_id IS NULL AND items.trade_price IS NOT NULL").includes(:user)
   end
 
   def discover_people
