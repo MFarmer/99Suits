@@ -1,0 +1,179 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body, p, h1, h2, h3, a, img, div, table, hr, ul, li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  color: black;
+  font-family: "Helvetica", sans-serif;
+}
+
+.bottom-bar {
+
+}
+
+img.polaroid {
+  border: 10px solid #fbfbfb;
+  box-shadow: 1px 1px 1px gray;
+}
+
+nav h1 {
+  font-size: 30px;
+  text-align: center;
+  padding: 10px;
+}
+
+nav ul {
+  max-width: 510px;
+  margin: auto;
+}
+
+nav ul:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  padding: 5px 15px 5px 15px;
+  display: inline-block;
+}
+
+.container {
+  width: 980px;
+  background-color: #eee;
+  margin: auto;
+}
+
+.left-col {
+  float: left;
+  width: 150px;
+  padding: 5px;
+}
+
+.left-col li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.left-col li ul {
+  padding-left: 5px;
+  margin-top:0;
+}
+
+.left-col > ul {
+  padding-right: 10px;
+}
+
+.left-col ul {
+  margin-top: 15px;
+  border-right: 1px solid #eee;
+}
+
+.left-col ul ul {
+  border-right: 0px solid #eee;
+}
+.main-col {
+  float: right;
+  width: 780px;
+  padding: 20px;
+}
+
+h1 small {
+  font-weight: lighter;
+}
+
+.main-col h1 {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.main-col h1 small {
+  color: lightgrey;
+}
+
+.left-col h3 {
+  font-weight: bold;
+}
+
+.item-box {
+  background-color: pink;
+}
+
+.item-box:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.item-left {
+  background-color: purple;
+  width: 250px;
+  float: left;
+  text-align: center;
+}
+
+.item-right {
+  background-color: orange;
+  float: right;
+  width: 530px;
+}
+
+.item-top {
+  background-color: magenta;
+}
+
+.item-top img {
+  border-radius: 100px;
+  width: 75px;
+  border: 3px solid #eeeeee;
+  box-shadow: 1px 1px 1px gray;
+  float: left;
+}
+
+.item-top:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.item-top p {
+  float: left;
+  font-size: 18px;
+  color: gray;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.item-bottom {
+  background-color: lime;
+}

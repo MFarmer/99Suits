@@ -1,27 +1,44 @@
-<%= image_tag @item.user.avatar.url(:thumb) %>
-<p><%= @item.user.username %> is selling his</p>
-<h3><%= @item.title %></h3>
+<div class="left-col">
 
-<%= image_tag @item.photo.url(:medium) %>
+</div>
 
-<%= render partial: "item_detail" %>
+<div class="main-col">
 
-<p><%= @item.description %></p>
+  <div class="item-box">
 
-<h3><%= pluralize(@item.like_count, 'Likes') %></h3>
-<%= button_to "Like", item_like_url(@item.id), :method => :get %>
+    <div class="item-left">
+      <%= image_tag @item.photo.url(:medium) %>
+    </div>
 
-<%= button_to "BUY NOW", new_item_order_url(@item.id), :method => :get %>
+    <div class="item-right">
 
-<hr>
-<!-- Comment Form -->
-<form action="<%= item_comments_url(@item.id) %>" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <div class="item-top">
+        <%= image_tag @item.user.avatar.url(:thumb) %>
+        <p><%= @item.user.username %> is selling his</p>
+      </div>
 
-  <label for="comment">Add Comment</label><br>
-  <input type="hidden" name="comment[item_id]" value="<%= @item.id %>">
-  <textarea id="comment" name="comment[content]"></textarea><br>
-  <input type="submit" value="Submit">
-</form>
+      <div class="item-bottom">
+        <h3><%= @item.title %></h3>
+        <%= render partial: "item_detail" %>
+      </div>
+    </div>
 
-<%= render partial: "comments_list" %>
+  </div>
+
+  <p><%= @item.description %></p>
+
+  <h3><%= pluralize(@item.like_count, 'Likes') %></h3>
+
+  <hr>
+  <!-- Comment Form -->
+  <form action="<%= item_comments_url(@item.id) %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <label for="comment">Add Comment</label><br>
+    <input type="hidden" name="comment[item_id]" value="<%= @item.id %>">
+    <textarea id="comment" name="comment[content]"></textarea><br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <%= render partial: "comments_list" %>
+</div>

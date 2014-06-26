@@ -1,10 +1,17 @@
-<% if signed_in? %>
-  <ul>
-    <li><%= link_to 'Feed', feed_all_url %></li>
-    <li>Discover</li>
-    <li><%= link_to 'List Item', new_user_item_url(current_user.id) %></li>
-    <li>Activity</li>
-    <li><%= link_to "Account", account_profile_url %></li>
-    <li><%= link_to "Sign Out", session_url, :method => :delete %></li>
-  </ul>
-<% end %>
+<nav>
+
+  <h1>99suits</h1>
+
+  <div class="bottom-bar">
+    <% if signed_in? %>
+      <ul id="horizontal-list">
+        <li><%= link_to 'Feed', feed_all_url %></li>
+        <li><%= link_to 'Discover', feed_all_url %></li>
+        <li><%= link_to 'List Item', new_user_item_url(current_user.id) %></li>
+        <li><%= link_to 'Activity', feed_all_url %></li>
+        <li><%= link_to "Account", account_profile_url %></li>
+        <li><%= link_to "Sign Out", session_url, :method => :delete %></li>
+      </ul>
+    <% end %>
+  </div>
+</nav>

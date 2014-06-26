@@ -1,9 +1,12 @@
-<h1>Feed <small>(<%= pluralize(@items.count, 'Items') %>)</small></h1>
+<div class="left-col">
+  <ul>
+    <li><%= link_to "All", feed_all_url %></li>
+    <li>Sale</li>
+    <li><%= link_to "Trade", feed_trade_url %></li>
+  </ul>
+</div>
 
-<ul>
-  <li><%= link_to "All", feed_all_url %></li>
-  <li>Sale</li>
-  <li><%= link_to "Trade", feed_trade_url %></li>
-</ul>
-
-<%= render partial: "items_table" %>
+<div class="main-col">
+  <h1>Feed <small>(<%= pluralize(@items.count, 'Items') %>)</small></h1>
+  <%= render partial: "items_table" %>
+</div>
