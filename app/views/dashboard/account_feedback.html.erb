@@ -1,36 +1,12 @@
-<h3>Overview</h3>
-<ul>
-  <li><%= link_to "Profile Settings", account_profile_url %></li>
-  <li><%= link_to "Reports", account_reports_url %></li>
-  <li>Feedback</li>
-</ul>
+<div class="left-col">
+  <%= render partial: "account_sidenav" %>
+</div>
 
-<h3>My Closet</h3>
-<ul>
-  <li><%= link_to "Available", account_available_url %></li>
-  <li><%= link_to "Received", account_received_url %></li>
-  <li><%= link_to "Gone", account_gone_url %></li>
-</ul>
+<div class="main-col">
+  <h1>Feedback</h1>
 
-<h3>Selling & Trading</h3>
-<ul>
-  <li><%= link_to "Ready to Ship", account_ship_url %></li>
-  <li><%= link_to "Ready to be picked up", account_pickup_url %></li>
-  <li><%= link_to "Waiting for Feedback", account_pending_feedback_url %></li>
-</ul>
-
-<h3>Receiving</h3>
-<ul>
-  <li><%= link_to "On the Way", account_on_the_way_url %></li>
-  <li><%= link_to "Leave Feedback", account_leave_feedback_url %></li>
-</ul>
-
-<hr>
-
-<h1>Feedback</h1>
-
-<table border="1">
-  <thead>
+  <table border="1">
+    <thead>
     <tr>
       <th>Order</th>
       <th>Rating</th>
@@ -38,22 +14,23 @@
       <th>Buyer</th>
       <th>Content</th>
     </tr>
-  </thead>
-  <tbody>
-  <% if @feedback.count > 0 %>
-    <% @feedback.each do |feedback| %>
+    </thead>
+    <tbody>
+    <% if @feedback.count > 0 %>
+      <% @feedback.each do |feedback| %>
+        <tr>
+          <td><%= feedback.item.title %></td>
+          <td><%= feedback.rating %></td>
+          <td><%= feedback.date %></td>
+          <td><%= feedback.user.username %></td>
+          <td><%= feedback.content %></td>
+        </tr>
+      <% end %>
+    <% else %>
       <tr>
-        <td><%= feedback.item.title %></td>
-        <td><%= feedback.rating %></td>
-        <td><%= feedback.date %></td>
-        <td><%= feedback.user.username %></td>
-        <td><%= feedback.content %></td>
+        <td colspan="5">You have no feedback.</td>
       </tr>
     <% end %>
-  <% else %>
-    <tr>
-      <td colspan="5">You have no feedback.</td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

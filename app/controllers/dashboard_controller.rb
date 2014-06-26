@@ -72,6 +72,10 @@ class DashboardController < ApplicationController
 
   end
 
+  def activity
+
+  end
+
   def profile_items_available
     @items = Item.where("user_id = ?", params[:id])
   end

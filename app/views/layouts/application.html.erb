@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>99 Suits</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>99 Suits</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<h1>99 Suits</h1>
-<hr>
+    <%= render partial: "layouts/navbar" %>
 
-  <%= render partial: "layouts/navbar" %>
+    <div class="container">
+      <%= yield %>
+    </div>
 
-<hr>
-
-<%= yield %>
-
-</body>
+  </body>
 </html>

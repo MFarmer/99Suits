@@ -1,9 +1,18 @@
-<%= image_tag @user.avatar.url(:medium) %>
-<h1><%= @user.username %></h1>
-<p>Member since <%= @user.created_at %></p>
+<div class="left-col">
+  <ul>
+    <li>Available</li>
+    <li>Sold</li>
+    <li>Traded</li>
+  </ul>
+</div>
 
-<table border="1">
-  <thead>
+<div class="main-col">
+  <h1><%= @user.username %> <small>Member since <%= @user.created_at %></small></h1>
+
+  <%= image_tag @user.avatar.url(:medium) %>
+
+  <table border="1">
+    <thead>
     <tr>
       <th>Transactions</th>
       <th>Followers</th>
@@ -11,8 +20,8 @@
       <th>Avg. Ship Time</th>
       <th>Last Seen</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr>
       <td>0</td>
       <td>0</td>
@@ -20,15 +29,6 @@
       <td>0</td>
       <td>0</td>
     </tr>
-  </tbody>
-</table>
-
-<hr>
-
-
-<h3><%= @user.username %>'s Listings</h3>
-<ul>
-  <li>Available</li>
-  <li>Sold</li>
-  <li>Traded</li>
-</ul>
+    </tbody>
+  </table>
+</div>
