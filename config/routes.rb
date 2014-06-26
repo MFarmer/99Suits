@@ -34,5 +34,7 @@ Rails.application.routes.draw do
 
   get '/orders/:id/mark_as_shipped', to: 'orders#mark_as_shipped', as: 'mark_as_shipped'
 
+  get '/orders/:id/confirmation', to: 'orders#confirmation', as: 'order_confirmation'
+
   get '/items/:id/like', to: 'items#like', as: 'item_like'
 end

@@ -1,0 +1,29 @@
+<h3>Your order has been placed. Yay!</h3>
+
+<p>Here are the details of your order:</p>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Order Date</th>
+      <th>Purchase Amount</th>
+      <th>Shipping Type</th>
+      <th>Seller</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= image_tag @order.item.photo.url(:thumb) %><br>
+        <%= @order.item.title %>
+      </td>
+      <td><%= @order.created_at %></td>
+      <td><%= @order.purchase_type %></td>
+      <td><%= @order.shipping_type %></td>
+      <td><%= link_to full_name(@order.item.user), user_url(@order.item.user.id) %></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You may track the shipping status on your account page <%= link_to "here", account_on_the_way_url %>.</p>

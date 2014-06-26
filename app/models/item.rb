@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
                       "Sports", "Suits", "Tops",
                       "Trousers and Shorts", "Undergarments"]
 
-  CONDITION_OPTIONS = ["Damaged", "Used", "Like New", "New"]
+  CONDITION_OPTIONS = ["New w/ tags", "Never Worn", "Excellent", "Good"]
 
   # Relationships
   belongs_to :user

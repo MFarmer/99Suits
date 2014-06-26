@@ -18,12 +18,16 @@ class OrdersController < ApplicationController
 
     if @order.save
       flash.now[:notice] = "Successfully created order."
-      redirect_to feed_all_url
+      redirect_to order_confirmation_url(@order.id)
     else
       flash.now[:errors] = @order.errors.full_messages
       render :new
     end
 
+  end
+
+  def confirmation
+    @order = Order.find(params[:id])
   end
 
   def mark_as_shipped
@@ -36,7 +40,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:street, :city, :state, :zip, :purchase_type)
+    params.require(:order).permit(:street, :city, :state, :zip, :purchase_type, :shipping_type)
   end
 
 end

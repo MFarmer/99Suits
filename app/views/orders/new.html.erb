@@ -34,9 +34,9 @@
 
   <%= f.label :shipping_type %>
   <% if @item.allow_pickup %>
-    <%= f.select :purchase_type, ["Ship", "Local Pickup"] %>
+    <%= f.select :shipping_type, ["Ship", "Local Pickup"] %>
   <% else %>
-    <%= f.select :purchase_type, ["Ship"] %>
+    <%= f.select :shipping_type, ["Ship"] %>
   <% end %>
 
   <%= f.submit "Submit Order" %>

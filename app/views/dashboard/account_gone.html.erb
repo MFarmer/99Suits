@@ -37,6 +37,7 @@
     <th>Purchase Type</th>
     <th>Order Date</th>
     <th>Shipped Date</th>
+    <th>Buyer</th>
   </tr>
   </thead>
   <tbody>
@@ -48,6 +49,7 @@
         <td><%= item.order.purchase_type %></td>
         <td><%= item.order.created_at %></td>
         <td><%= item.order.shipping_date %></td>
+        <td><%= link_to full_name(item.order.buyer), user_url(item.order.buyer.id) %></td>
       </tr>
     <% end %>
   <% else %>
