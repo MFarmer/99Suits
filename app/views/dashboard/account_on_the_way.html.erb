@@ -3,32 +3,17 @@
 </div>
 
 <div class="main-col">
+
   <h1>On the Way</h1>
 
-  <table border="1">
-    <thead>
-    <tr>
-      <td>Photo</td>
-      <td>Item Title</td>
-      <td>Seller</td>
-      <td>Date Shipped</td>
-    </tr>
-    </thead>
-    <tbody>
-    <% if @items.count > 0 %>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= image_tag item.photo.url(:thumb) %></td>
-          <td><%= item.title %></td>
-          <td><%= full_name(item.user) %></td>
-          <td>Shipping in Progress</td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td colspan="6">You have no items pending shipment to you.</td>
-      </tr>
+  <% if @items.count > 0 %>
+    <p class="description">You have ordered the following items and are awaiting shipment.
+      Please allow for up to 3 days for the item to be shipped before creating a transaction dispute.</p>
+    <% @items.each do |item| %>
+      <%= render partial: 'thumbnail', :locals => { :item => item } %>
     <% end %>
-    </tbody>
-  </table>
+  <% else %>
+    <p class="description">You have not waiting for any items to arrive.</p>
+  <% end %>
+
 </div>

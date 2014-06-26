@@ -3,36 +3,16 @@
 </div>
 
 <div class="main-col">
+
   <h1>Gone</h1>
 
-  <table border="1">
-    <thead>
-    <tr>
-      <th>Photo</th>
-      <th>Title</th>
-      <th>Purchase Type</th>
-      <th>Order Date</th>
-      <th>Shipped Date</th>
-      <th>Buyer</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% if @items.count > 0 %>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= image_tag item.photo.url(:thumb) %></td>
-          <td><%= item.title %></td>
-          <td><%= item.order.purchase_type %></td>
-          <td><%= item.order.created_at %></td>
-          <td><%= item.order.shipping_date %></td>
-          <td><%= link_to full_name(item.order.buyer), user_url(item.order.buyer.id) %></td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td colspan="5">You have not shipped any items.</td>
-      </tr>
+  <% if @items.count > 0 %>
+    <p class="description">You have shipped these items.</p>
+    <% @items.each do |item| %>
+      <%= render partial: 'thumbnail', :locals => { :item => item } %>
     <% end %>
-    </tbody>
-  </table>
+  <% else %>
+    <p class="description">You have not shipped any items.</p>
+  <% end %>
+
 </div>

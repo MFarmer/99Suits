@@ -1,37 +1,7 @@
-<table border="1">
-  <thead>
-  <th>Photo</th>
-  <th>Title</th>
-  <th>Category</th>
-  <th>Brand</th>
-  <th>Size</th>
-  <th>Sale Price</th>
-  <th>Trade Price</th>
-  <th>Allow Pickup?</th>
-  <th>Seller</th>
-  <th>Action</th>
-  </thead>
-  <tbody>
-
-  <% if @items.count > 0 %>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= image_tag item.photo.url(:thumb) %></td>
-        <td><%= item.title %></td>
-        <td><%= item.category %></td>
-        <td><%= item.brand %></td>
-        <td><%= item.size %></td>
-        <td><%= item.sale_price %></td>
-        <td><%= item.trade_price %></td>
-        <td><%= item.allow_pickup %></td>
-        <td><%= link_to item.user.username, user_url(item.user.id) %></td>
-        <td><%= link_to "View", item_url(item.id) %></td>
-      </tr>
-    <% end %>
-  <% else %>
-    <tr>
-      <td colspan="9">No items fit your criteria.</td>
-    </tr>
+<% if @items.count > 0 %>
+  <% @items.each do |item| %>
+    <%= render partial: "thumbnail", :locals => { :item => item } %>
   <% end %>
-  </tbody>
-</table>
+<% else %>
+  <p>No results.</p>
+<% end %>

@@ -39,6 +39,10 @@ img.polaroid {
   box-shadow: 1px 1px 1px gray;
 }
 
+nav {
+  border-bottom: 3px solid #eee;
+}
+
 nav h1 {
   font-size: 30px;
   text-align: center;
@@ -99,10 +103,16 @@ nav li a {
 .left-col ul ul {
   border-right: 0px solid #eee;
 }
+
 .main-col {
   float: right;
   width: 780px;
   padding: 20px;
+}
+
+.main-col p.description {
+  margin-bottom: 20px;
+  font-weight: lighter;
 }
 
 h1 small {
@@ -126,7 +136,7 @@ h1 small {
 }
 
 .item-box {
-  background-color: pink;
+  //background-color: pink;
 }
 
 .item-box:after {
@@ -135,21 +145,58 @@ h1 small {
   clear: both;
 }
 
+.main-col {
+  .profile-left {
+    width: 150px;
+    //background-color: pink;
+    float: left;
+  }
+
+  .profile-right {
+    width: 630px;
+    float: right;
+
+    form {
+      margin-top: -50px;
+    }
+  }
+}
+
 .item-left {
-  background-color: purple;
+  //background-color: #eee;
   width: 250px;
   float: left;
   text-align: center;
+
+  img {
+    max-width: 250px;
+    display: block;
+    margin: auto;
+  }
+}
+
+.left-col {
+  .thumbnail {
+    width: 100%;
+  }
 }
 
 .item-right {
-  background-color: orange;
+  //background-color: orange;
   float: right;
   width: 530px;
 }
 
 .item-top {
-  background-color: magenta;
+  padding: 20px;
+}
+
+.item-top h3 {
+  font-size: 36px;
+}
+
+.item-bottom {
+  padding: 20px;
 }
 
 .item-top img {
@@ -157,7 +204,12 @@ h1 small {
   width: 75px;
   border: 3px solid #eeeeee;
   box-shadow: 1px 1px 1px gray;
-  float: left;
+}
+
+.item-top .item-header {
+  //background-color: yellow;
+  width: 400px;
+  padding-top: 13px;
 }
 
 .item-top:after {
@@ -166,21 +218,54 @@ h1 small {
   clear: both;
 }
 
-.item-top p {
+.item-top .item-img {
   float: left;
-  font-size: 18px;
-  color: gray;
-  padding-top: 20px;
-  padding-left: 20px;
+  //background-color: blue;
+  width: 85px;
+  text-align: center;
+}
+
+.item-header {
+  float: right;
 }
 
 .item-bottom {
-  background-color: lime;
+  //background-color: lime;
+}
+
+a.buy-button, a.like-button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+
+  display: inline-block;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  background-color: #1abc9c;
+  border-bottom: 5px solid #16a085;
+  border-radius: 5px;
+}
+
+a.like-button {
+  background-color: #3498db;
+  border-bottom: 5px solid #2980b9;
+}
+
+a.like-button:hover {
+  background-color: #339fff;
+  border-bottom: 5px solid #277ac3;
+}
+
+a.buy-button:hover {
+  background-color: #2fdbab;
+  border-bottom: 5px solid #28ba91;
 }
 
 .jumbotron {
   width: 100%;
-  background-color: blue;
+  //background-color: blue;
   padding: 20px;
   height: 250px;
 }
@@ -193,7 +278,7 @@ h1 small {
 
 .jumbotron #jumbo-left {
   float: left;
-  background-color: green;
+  //background-color: green;
   width: 560px;
   padding: 20px;
 }
@@ -209,13 +294,13 @@ h1 small {
 
 .jumbotron #jumbo-right {
   float: right;
-  background-color: purple;
+  //background-color: purple;
   width: 340px;
   padding: 20px;
 }
 
 .feature-bar {
-  background-color: gray;
+  background-color: #eee;
   padding: 10px;
 }
 
@@ -233,7 +318,7 @@ h1 small {
 .col-1 {
   float: left;
   width: 287px;
-  background-color: yellow;
+  //background-color: yellow;
   padding: 20px;
 }
 
@@ -245,39 +330,39 @@ h1 small {
 .right .col-2 {
   float: left;
   width: 286px;
-  background-color: orange;
+  //background-color: orange;
   padding: 20px;
 }
 
 .right .col-3 {
   float: right;
   width: 286px;
-  background-color: lime;
+  //background-color: lime;
   padding: 20px;
 }
 
 .testimonials {
-  background-color: #eee;
+  //background-color: #eee;
   height: 300px;
-  padding: 20px;
+  padding: 100px;
 }
 
 .left-testimonials {
   width: 490px;
-  background-color: brown;
+  //background-color: brown;
   float: left;
 }
 
 .right-testimonials {
   width: 490px;
-  background-color: tan;
+  //background-color: tan;
   float: right;
 }
 
 .testimonial-box {
-  background-color: #eee;
+  //background-color: #eee;
   width: 490px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .testimonial-box .img-holder {
@@ -295,7 +380,7 @@ h1 small {
   padding: 20px;
   width: 322px;
   float: right;
-  background-color: pink;
+  //background-color: pink;
 }
 
 .testimonial-box img {
@@ -322,4 +407,142 @@ h1 small {
   font-size: 14px;
   float: right;
   margin-top: 20px;
+}
+
+/* Thumbnail */
+
+.thumbnail {
+  display: block;
+  width: 180px;
+  border: 1px solid #eee;
+  margin-right: 13px;
+  float: left;
+  margin-bottom: 13px;
+  color: #3a3a3a;
+}
+
+.thumbnail img {
+  height: 100%;
+  width: auto;
+  text-align: center;
+}
+
+.thumbnail .photo-box {
+  text-align: center;
+  height: 150px;
+  border-bottom: 1px solid #eee;
+}
+
+.thumbnail .description-box {
+  width: 170px;
+  padding: 5px;
+}
+
+.description-box .avatar-box {
+  width: 40px;
+  height: 40px;
+  background-color: blue;
+  float: left;
+}
+
+.avatar-box img {
+  border-radius: 20px;
+}
+
+.description-box .detail-box {
+  float: right;
+  width: 120px;
+  padding-left: 10px;
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+.detail-box .price {
+  font-weight: bold;
+}
+
+.description-box:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Forms */
+
+input {
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%
+}
+
+select {
+  width: 100%;
+  font-size: 24px;
+  height: 30px;
+}
+
+label {
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+#comments {
+  //background-color: pink;
+
+  margin-top: 20px;
+
+  img {
+    border-radius: 100px;
+    width: 60px;
+    border: 3px solid #eee;
+    box-shadow: 1px 1px 1px gray;
+  }
+
+  .comment-photo-box {
+    padding: 5px;
+    //background-color: blue;
+    width: 68px;
+    float: left;
+  }
+
+  .comment-text-box {
+    //background-color: yellow;
+    float: right;
+    width: 380px;
+  }
+
+  .comment-author {
+    color: gray;
+  }
+
+  .comment-text {
+    padding: 5px;
+    font-size: 18px;
+  }
+
+  .comment-time {
+    color: #aaa;
+    text-align: right;
+    font-size: 10px;
+  }
+
+  li {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+  }
+
+  li:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
 }

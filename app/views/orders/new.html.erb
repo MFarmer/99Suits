@@ -1,44 +1,43 @@
-<h1>Order <%= @item.title %></h1>
+<div class="left-col">
+  <%= render partial: "dashboard/thumbnail", :locals => { :item => @item } %>
+</div>
 
-<%= image_tag @item.photo.url(:thumb) %>
+<div class="main-col">
+  <h1>Order <%= @item.title %></h1>
 
-<%= render partial: "items/item_detail" %>
+  <p><%= flash[:errors] %></p>
+  <%= form_for @order, :url => item_orders_url(@item.id) do |f| %>
 
-<p>Buyer: <%= current_user.username %></p>
-<p>Seller: <%= @item.user.username %></p>
+    <%= f.label :street %><br>
+    <%= f.text_field :street %><br><br>
 
-<p><%= flash[:errors] %></p>
-<%= form_for @order, :url => item_orders_url(@item.id) do |f| %>
+    <%= f.label :city %><br>
+    <%= f.text_field :city %><br><br>
 
-  <%= f.label :street %>
-  <%= f.text_field :street %><br>
+    <%= f.label :state %><br>
+    <%= f.text_field :state %><br><br>
 
-  <%= f.label :city %>
-  <%= f.text_field :city %><br>
+    <%= f.label :zip %><br>
+    <%= f.text_field :zip %><br><br>
 
-  <%= f.label :state %>
-  <%= f.text_field :state %><br>
+    <%= f.label :purchase_type %><br>
 
-  <%= f.label :zip %>
-  <%= f.text_field :zip %><br>
+    <% if @item.trade_price.nil? %>
+      <%= f.select :purchase_type, ["Purchase"] %><br><br>
+    <% elsif @item.sale_price.nil? %>
+      <%= f.select :purchase_type, ["Trade"] %><br><br>
+    <% else %>
+      <%= f.select :purchase_type, ["Cash", "Trade"] %><br><br>
+    <% end %>
 
-  <%= f.label :purchase_type %>
+    <%= f.label :shipping_type %><br>
+    <% if @item.allow_pickup %>
+      <%= f.select :shipping_type, ["Ship", "Local Pickup"] %><br><br>
+    <% else %>
+      <%= f.select :shipping_type, ["Ship"] %><br><br>
+    <% end %>
 
-  <% if @item.trade_price.nil? %>
-    <%= f.select :purchase_type, ["Purchase"] %><br>
-  <% elsif @item.sale_price.nil? %>
-    <%= f.select :purchase_type, ["Trade"] %><br>
-  <% else %>
-    <%= f.select :purchase_type, ["Cash", "Trade"] %><br>
+    <%= f.submit "Submit Order" %><br><br>
+
   <% end %>
-
-  <%= f.label :shipping_type %>
-  <% if @item.allow_pickup %>
-    <%= f.select :shipping_type, ["Ship", "Local Pickup"] %>
-  <% else %>
-    <%= f.select :shipping_type, ["Ship"] %>
-  <% end %>
-
-  <%= f.submit "Submit Order" %>
-
-<% end %>
+</div>

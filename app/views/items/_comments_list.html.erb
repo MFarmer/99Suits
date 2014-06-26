@@ -1,11 +1,17 @@
-<ul>
+<ul id="comments">
   <% @comments.each do |comment| %>
     <li>
-      <p>
-        <b><%= comment.author.username %></b>
-        <%= comment.content %>
-        <p><%= comment.updated_at %></p>
-      </p>
+      <div class="comment-photo-box">
+        <%= image_tag comment.author.avatar.url(:thumb) %>
+      </div>
+      <div class="comment-text-box">
+        <p class="comment-author">
+          <%= comment.author.username %> says...
+        </p>
+        <p class="comment-text"><%= comment.content %></p>
+        <p class="comment-time"><%= comment.updated_at %></p>
+        </p>
+      </div>
     </li>
   <% end %>
 </ul>

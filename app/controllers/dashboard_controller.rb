@@ -48,7 +48,7 @@ class DashboardController < ApplicationController
   end
 
   def account_leave_feedback
-    @orders = Order.joins("LEFT OUTER JOIN feedbacks ON orders.id = feedbacks.order_id WHERE feedbacks.order_id IS NULL")
+    @orders = Order.joins("LEFT OUTER JOIN feedbacks ON orders.id = feedbacks.order_id WHERE feedbacks.order_id IS NULL AND orders.user_id = #{current_user.id} AND orders.shipping_date IS NOT NULL")
   end
 
   def feed_all

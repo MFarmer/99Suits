@@ -3,36 +3,19 @@
 </div>
 
 <div class="main-col">
-  <h1>Available</h1>
 
-  <table border="1">
-    <thead>
-    <tr>
-      <th>Photo</th>
-      <th>Sale Price</th>
-      <th>Trade Price</th>
-      <th>Title</th>
-      <th>Posted Date</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
+    <h1>Available</h1>
+
     <% if @items.count > 0 %>
+      <p class="description">
+        You currently have <%= pluralize(@items.count, 'item') %> posted for sale. Please choose
+      an item to view your listing. You will have the option to edit or remove the listing.
+      </p>
       <% @items.each do |item| %>
-        <tr>
-          <td><%= image_tag item.photo.url(:thumb) %></td>
-          <td><%= number_to_currency(item.sale_price) %></td>
-          <td><%= item.trade_price %></td>
-          <td><%= item.title %></td>
-          <td><%= item.created_at %></td>
-          <td>Edit Destroy</td>
-        </tr>
+        <%= render partial: 'thumbnail', :locals => { :item => item } %>
       <% end %>
     <% else %>
-      <tr>
-        <td colspan="6">You have no items for sale.</td>
-      </tr>
+      <p class="description">You have no items currently up for sale.</p>
     <% end %>
-    </tbody>
-  </table>
+
 </div>

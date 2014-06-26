@@ -13,32 +13,38 @@
     <div class="item-right">
 
       <div class="item-top">
-        <%= image_tag @item.user.avatar.url(:thumb) %>
-        <p><%= @item.user.username %> is selling his</p>
+        <div class="item-img">
+          <%= image_tag @item.user.avatar.url(:thumb) %>
+        </div>
+        <div class="item-header">
+          <p><%= link_to @item.user.username, user_url(@item.user.id) %> is selling his</p>
+          <h3><%= @item.title %></h3>
+        </div>
       </div>
 
       <div class="item-bottom">
-        <h3><%= @item.title %></h3>
         <%= render partial: "item_detail" %>
+        <br>
+        <p><%= @item.description %></p>
+        <br>
+        <%= link_to "Buy Now", new_item_order_url(@item.id), class: 'buy-button' %>
+        <%= link_to "Like (#{pluralize(@item.like_count, 'Likes')})", item_like_url(@item.id), class: 'like-button' %>
+        <br><br>
+        <!-- Comment Form -->
+        <form action="<%= item_comments_url(@item.id) %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+          <label for="comment">Add Comment</label><br>
+          <input type="hidden" name="comment[item_id]" value="<%= @item.id %>">
+          <textarea id="comment" name="comment[content]"></textarea><br>
+          <input type="submit" value="Submit">
+        </form>
+
+        <%= render partial: "comments_list" %>
       </div>
+
     </div>
 
   </div>
 
-  <p><%= @item.description %></p>
-
-  <h3><%= pluralize(@item.like_count, 'Likes') %></h3>
-
-  <hr>
-  <!-- Comment Form -->
-  <form action="<%= item_comments_url(@item.id) %>" method="POST">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
-    <label for="comment">Add Comment</label><br>
-    <input type="hidden" name="comment[item_id]" value="<%= @item.id %>">
-    <textarea id="comment" name="comment[content]"></textarea><br>
-    <input type="submit" value="Submit">
-  </form>
-
-  <%= render partial: "comments_list" %>
 </div>

@@ -1,0 +1,14 @@
+<a href="<%= item_url(item.id) %>" class="thumbnail">
+  <div class="photo-box">
+    <%= image_tag item.photo.url(:medium) %>
+  </div>
+  <div class="description-box">
+    <div class="avatar-box">
+      <%= image_tag item.user.avatar.url(:thumb) %>
+    </div>
+    <div class="detail-box">
+      <p><%= truncate(item.title, :length => 16) %></p>
+      <p class="price"><%= number_to_currency(item.sale_price) %></p>
+    </div>
+  </div>
+</a>

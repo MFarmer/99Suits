@@ -5,38 +5,43 @@
 <div class="main-col">
   <h1>Profile Settings</h1>
 
-  <%= image_tag current_user.avatar.url(:thumb), class: 'polaroid' %>
+  <div class="profile-left">
+    <%= image_tag current_user.avatar.url(:thumb), class: 'polaroid' %>
+  </div>
 
-  <form action="<%= user_url(current_user.id) %>" method="POST" enctype="multipart/form-data">
+  <div class="profile-right">
+    <form action="<%= user_url(current_user.id) %>" method="POST" enctype="multipart/form-data">
 
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <input type="hidden" name="_method" value="PATCH">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><br>
+      <input type="hidden" name="_method" value="PATCH"><br><br>
 
-    <label for="avatar">Avatar</label>
-    <input id="avatar" type="file" name="user[avatar]"><br>
+      <label for="avatar">Avatar</label><br>
+      <input id="avatar" type="file" name="user[avatar]"><br><br>
 
-    <label>First Name</label>
-    <input type="text" name="user[fname]" value="<%= current_user.fname %>"><br>
+      <label>First Name</label><br>
+      <input type="text" name="user[fname]" value="<%= current_user.fname %>"><br><br>
 
-    <label>Last Name</label>
-    <input type="text" name="user[lname]" value="<%= current_user.lname %>"><br>
+      <label>Last Name</label><br>
+      <input type="text" name="user[lname]" value="<%= current_user.lname %>"><br><br>
 
-    <label>E-Mail</label>
-    <input type="text" name="user[email]" value="<%= current_user.email %>"><br>
+      <label>E-Mail</label><br>
+      <input type="text" name="user[email]" value="<%= current_user.email %>"><br><br>
 
-    <label>Username</label>
-    <input type="text" name="user[username]" value="<%= current_user.username %>"><br>
+      <label>Username</label><br>
+      <input type="text" name="user[username]" value="<%= current_user.username %>"><br><br>
 
-    <label>Current Password</label>
-    <input type="password" name="user[current_password]" value=""><br>
+      <label>Current Password</label><br>
+      <input type="password" name="user[current_password]" value=""><br><br>
 
-    <label>New Password</label>
-    <input type="password" name="user[password]" value=""><br>
+      <label>New Password</label><br>
+      <input type="password" name="user[password]" value=""><br><br>
 
-    <label>Re-enter New Password</label>
-    <input type="password" name="user[password_confirmation]" value=""><br>
+      <label>Re-enter New Password</label><br>
+      <input type="password" name="user[password_confirmation]" value=""><br><br>
 
-    <button>Update Account</button>
+      <button>Update Account</button><br><br>
 
-  </form>
+    </form>
+  </div>
+
 </div>

@@ -1,43 +1,52 @@
 <%= flash[:errors] %>
 
-<%= form_for @item, :url => user_items_url(current_user.id), :html => { :multipart => true } do |f| %>
+<form action="<%= user_items_url(current_user.id) %>" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-  <%= f.label :photo %>
-  <%= f.file_field :photo %><br>
+  <label for="photo">Photo</label><br>
+  <input type="file" name="item[photo]" id="photo"><br><br>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %><br>
+  <label for="title">Title</label><br>
+  <input type="text" name="item[title]" id="title" value="<%= @item.title %>"><br><br>
 
-  <%= f.label :category %>
-  <%= f.select :category, Item::CATEGORY_OPTIONS %><br>
+  <label for="category">Category</label><br>
+  <select id="category" name="item[category]">
+    <%= Item::CATEGORY_OPTIONS.each do |category| %>
+      <option value="<%= category %>"><%= category %></option>
+    <% end %>
+  </select><br><br>
 
-  <%= f.label :brand %>
-  <%= f.text_field :brand %><br>
+  <label for="brand">Brand</label><br>
+  <input type="text" name="item[brand]" id="brand" value="<%= @item.brand %>"><br><br>
 
-  <%= f.label :condition %>
-  <%= f.select :condition, Item::CONDITION_OPTIONS %><br>
+  <label for="condition">Condition</label><br>
+  <select id="condition" name="item[condition]">
+    <%= Item::CONDITION_OPTIONS.each do |category| %>
+      <option value="<%= category %>" <%= "selected" if @item.category == category %>><%= category %></option>
+    <% end %>
+  </select><br><br>
 
-  <%= f.label :original_price %>
-  <%= f.text_field :original_price %><br>
+  <label for="original_price">Original Price</label><br>
+  <input type="text" name="item[original_price]" id="original_price" value="<%= @item.original_price %>"><br><br>
 
-  <%= f.label :description %>
-  <%= f.text_area :description %><br>
+  <label for="description">Description</label><br>
+  <textarea name="item[description]"><%= @item.description %></textarea><br><br>
 
-  <%= f.label :sale_price %>
-  <%= f.text_field :sale_price %><br>
+  <label for="sale_price">Sale Price</label><br>
+  <input type="text" id="sale_price" name="item[sale_price]" value="<%= @item.sale_price %>"><br><br>
 
-  <%= f.label :trade_price %>
-  <%= f.text_field :trade_price %><br>
+  <label for="trade_price">Trade Price</label><br>
+  <input type="text" id="trade_price" name="item[trade_price]" value="<%= @item.trade_price %>"><br><br>
 
-  <%= f.label :allow_pickup %>
-  <%= f.check_box :allow_pickup %><br>
+  <label for="allow_pickup">Allow Pickup?</label>
+  <input type="checkbox" id="allow_pickup" name="item[allow_pickup]" value="<%= @item.allow_pickup %>"><br><br>
 
-  <%= f.label :weight %>
-  <%= f.text_field :weight %><br>
+  <label for="weight">Weight</label><br>
+  <input type="text" id="weight" name="item[weight]" value="<%= @item.weight %>"><br><br>
 
-  <%= f.label :size %>
-  <%= f.text_field :size %><br>
+  <label for="size">Size</label><br>
+  <input type="text" id="size" name="item[size]" value="<%= @item.size %>"><br><br>
 
-  <%= f.submit %>
+  <input type="submit" value="List Item">
 
-<% end %>
+</form>

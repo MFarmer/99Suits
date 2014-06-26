@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
 
-  CATEGORY_OPTIONS = ["Armwear", "Belts", "Coats",
+  CATEGORY_OPTIONS = ["Styling Products", "Armwear", "Belts", "Coats",
                       "Footwear", "Headgear", "Jackets",
                       "Neckwear", "Ponchos", "Robes and Cloaks",
                       "Sports", "Suits", "Tops",
