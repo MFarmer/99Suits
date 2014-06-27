@@ -5,6 +5,7 @@
 <div class="main-col">
   <h1>Ready to Ship</h1>
 
+  <% if @items.count > 0 %>
   <table>
     <thead>
     <tr>
@@ -17,7 +18,6 @@
     </tr>
     </thead>
     <tbody>
-    <% if @items.count > 0 %>
       <% @items.each do |item| %>
         <tr>
           <td><%= image_tag item.photo.url(:thumb) %></td>
@@ -34,11 +34,9 @@
           <td><%= link_to "Mark as Shipped", mark_as_shipped_url(item.order.id) %></td>
         </tr>
       <% end %>
-    <% else %>
-      <tr>
-        <td colspan="6">You have no items awaiting shipment.</td>
-      </tr>
-    <% end %>
     </tbody>
   </table>
+  <% else %>
+    <p class="description">You have no items awaiting shipment.</p>
+  <% end %>
 </div>

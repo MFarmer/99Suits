@@ -47,7 +47,11 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
     order.shipping_date = Time.zone.now
     order.save!
-    redirect_to account_gone_url
+    redirect_to account_ship_url
+  end
+
+  def invoice
+    @order = Order.find(params[:id])
   end
 
   private

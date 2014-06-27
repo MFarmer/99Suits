@@ -5,8 +5,6 @@
 <div class="main-col">
   <h1>Leave Feedback</h1>
 
-  <p class="description">Choose an item to leave feedback for the seller.</p>
-
   <% if @orders.count > 0 %>
     <% @orders.each do |order| %>
       <%= render partial: 'thumbnail', :locals => { :item => order.item } %>

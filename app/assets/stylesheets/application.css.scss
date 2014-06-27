@@ -144,7 +144,7 @@ h1 small {
   font-weight: lighter;
 }
 
-.main-col h1 {
+.main-col h1, .whole-width h1 {
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 20px;
@@ -693,10 +693,10 @@ th {
 
 td {
   img {
-    height: 100%;
-    width: auto;
-    display: block;
-    margin: auto;
+    //height: 100%;
+    //width: auto;
+    //display: block;
+    //margin: auto;
   }
 }
 
@@ -709,4 +709,79 @@ td {
 .late-shipping {
   color: red;
   font-weight: bold;
+}
+
+.alert-error {
+  border: 1px solid red;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: pink;
+  color: darkred;
+
+  li {
+    list-style: circle;
+    margin-left: 20px;
+    padding: 5px;
+  }
+}
+
+.alert-success {
+  border: 1px solid green;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: lightgreen;
+  color: darkgreen;
+}
+
+.receipt {
+  margin: auto;
+  font-size: 18px;
+  font-weight: lighter;
+  border: 1px solid #eee;
+
+  box-shadow: 1px 1px 1px #eee;
+
+  p {
+    padding: 20px;
+  }
+
+  .receipt-row {
+    //border-bottom: 1px solid #eee;
+  }
+
+  .receipt-left {
+    background-color: #eee;
+    float: left;
+    width: 200px;
+    border-bottom: 1px solid #ddd;
+
+    p {
+      text-align: right;
+      color: darkgray;
+    }
+  }
+
+  .receipt-right {
+    float: right;
+    width: 578px;
+    border-bottom: 1px solid #eee;
+
+    p {
+      color: gray;
+    }
+  }
+}
+
+.receipt:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.receipt-row:after {
+  content: "";
+  display: block;
+  clear: both;
 }

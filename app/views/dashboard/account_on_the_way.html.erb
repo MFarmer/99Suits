@@ -7,13 +7,35 @@
   <h1>On the Way</h1>
 
   <% if @items.count > 0 %>
-    <p class="description">You have ordered the following items and are awaiting shipment.
-      Please allow for up to 3 days for the item to be shipped before creating a transaction dispute.</p>
-    <% @items.each do |item| %>
-      <%= render partial: 'thumbnail', :locals => { :item => item } %>
-    <% end %>
+
+    <p class="description">Items which you have purchased but have not yet been shipped by the seller.</p>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Item Title</th>
+        <th>Sale Price</th>
+        <th>Purchase Date</th>
+        <th>Seller</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= image_tag item.photo.url(:thumb) %></td>
+          <td><%= item.title %></td>
+          <td><%= number_to_currency(item.sale_price) %></td>
+          <td><%= item.created_at %></td>
+          <td><%= link_to full_name(item.user) %></td>
+          <td><%= link_to "Invoice", invoice_url(item.order.id) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   <% else %>
-    <p class="description">You have not waiting for any items to arrive.</p>
+    <p class="description">You have no items currently up for sale.</p>
   <% end %>
 
 </div>

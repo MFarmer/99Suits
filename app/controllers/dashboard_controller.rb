@@ -48,7 +48,7 @@ class DashboardController < ApplicationController
     @items = Item.joins(:order).where('items.user_id = ? AND orders.shipping_date IS ? AND orders.shipping_type = ?', current_user.id, nil, "Pickup")
   end
 
-  # Items current user sold and have shipped AND have not received feedback [TODO]
+  # Items current user sold and have shipped AND have not received feedbacks [TODO]
   def account_pending_feedback
     @items = Item.joins(:order).where('items.user_id = ? AND orders.shipping_date IS NOT ? AND ', current_user.id, nil)
   end

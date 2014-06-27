@@ -1,0 +1,10 @@
+<% if flash[:errors] %>
+  <div class="alert-error">
+    <p><%= pluralize(flash[:errors].count, 'error') %> occurred:</p>
+    <ul>
+      <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,4 +1,4 @@
-<%= flash[:errors] %>
+<%= render partial: "dashboard/error_printing" %>
 
 <form action="<%= session_url %>" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -11,5 +11,3 @@
 
   <input type="submit" value="Login">
 </form>
-
-<%= link_to "Create Account", new_user_url %>

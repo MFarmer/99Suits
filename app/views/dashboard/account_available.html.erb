@@ -4,18 +4,39 @@
 
 <div class="main-col">
 
-    <h1>Available</h1>
+  <h1>Available</h1>
 
-    <% if @items.count > 0 %>
-      <p class="description">
-        You currently have <%= pluralize(@items.count, 'item') %> posted for sale. Please choose
-      an item to view your listing. You will have the option to edit or remove the listing.
-      </p>
+  <% if @items.count > 0 %>
+
+    <p class="description">Items which you have up for sale.</p>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Item Title</th>
+        <th>Sale Price</th>
+        <th>Likes</th>
+        <th>Time Posted</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
       <% @items.each do |item| %>
-        <%= render partial: 'thumbnail', :locals => { :item => item } %>
+        <tr>
+          <td><%= image_tag item.photo.url(:thumb) %></td>
+          <td><%= item.title %></td>
+          <td><%= item.sale_price %></td>
+          <td><%= item.like_count %></td>
+          <td><%= distance_of_time_in_words(item.created_at, Time.zone.now) %> ago</td>
+          <td>
+            <%= link_to "View", item_url(item.id) %><br><br><%= link_to "Edit", edit_item_url(item.id) %><br><br><%= link_to "Hide", item_url(item.id), method: :delete %></td>
+        </tr>
       <% end %>
-    <% else %>
-      <p class="description">You have no items currently up for sale.</p>
-    <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="description">You have no items currently up for sale.</p>
+  <% end %>
 
 </div>

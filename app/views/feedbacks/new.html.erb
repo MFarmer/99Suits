@@ -1,0 +1,26 @@
+<div class="whole-width">
+
+  <%= render partial: "dashboard/error_printing" %>
+
+  <h1>Order Feedback</h1>
+
+  <%= render partial: "dashboard/thumbnail", :locals => { :item => @order.item } %>
+
+  <form action="<%= order_feedbacks_url(@order.id) %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <label for="rating">Please Rate your Transaction</label><br>
+    <select id="rating" name="feedback[rating]">
+      <%= (1..5).each do |val| %>
+        <option value="<%= val %>" <%= "selected" if val == 3 %>><%= val %></option>
+      <% end %>
+    </select><br><br>
+
+    <label for="description">Write your feedback here. The seller will be able to see your feedback.</label><br>
+    <textarea id="description" name="feedback[content]"><%= @feedback.content %></textarea>
+
+    <input type="submit" value="Submit">
+
+  </form>
+
+</div>

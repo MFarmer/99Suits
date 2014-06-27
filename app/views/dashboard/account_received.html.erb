@@ -7,10 +7,35 @@
   <h1>Received</h1>
 
   <% if @items.count > 0 %>
-    <p class="description">You have purchased and received these items. Choose an item to view the invoice.</p>
-    <% @items.each do |item| %>
-      <%= render partial: 'thumbnail', :locals => { :item => item } %>
-    <% end %>
+    <table>
+      <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Item Title</th>
+        <th>Sale Price</th>
+        <th>Likes</th>
+        <th>Time Posted</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= image_tag item.photo.url(:thumb) %></td>
+          <td><%= item.title %></td>
+          <td><%= item.sale_price %></td>
+          <td><%= item.like_count %></td>
+          <td><%= distance_of_time_in_words(item.created_at, Time.zone.now) %> ago</td>
+          <td>
+            <%= link_to "Invoice" %>
+            <% if item.order.feedback.nil? %><br><br>
+              <%= link_to "Leave Feedback", new_order_feedback_url(item.order.id) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   <% else %>
     <p class="description">You have not received any purchased items.</p>
   <% end %>

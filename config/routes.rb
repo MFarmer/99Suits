@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   shallow do
     resources :users do
       resources :items do
-        resources :orders
+        resources :orders do
+          resources :feedbacks
+        end
         resources :comments
       end
     end
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
 
   get '/account', to: 'dashboard#account_profile', as: 'account_profile'
   get '/account/reports', to: 'dashboard#account_reports', as: 'account_reports'
-  get '/account/feedback', to: 'dashboard#account_feedback', as: 'account_feedback'
+  get '/account/feedbacks', to: 'dashboard#account_feedback', as: 'account_feedback'
 
   get '/account/available', to: 'dashboard#account_available', as: 'account_available'
   get '/account/received', to: 'dashboard#account_received', as: 'account_received'
@@ -34,7 +36,7 @@ Rails.application.routes.draw do
   get '/account/leave_feedback', to: 'dashboard#account_leave_feedback', as: 'account_leave_feedback'
 
   get '/orders/:id/mark_as_shipped', to: 'orders#mark_as_shipped', as: 'mark_as_shipped'
-
+  get '/orders/:id/invoice', to: 'orders#invoice', as: 'invoice'
   get '/orders/:id/confirmation', to: 'orders#confirmation', as: 'order_confirmation'
 
   get '/items/:id/like', to: 'items#like', as: 'item_like'

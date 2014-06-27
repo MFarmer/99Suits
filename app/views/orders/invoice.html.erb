@@ -1,0 +1,59 @@
+<div class="whole-width">
+  <h1>Invoice</h1>
+
+  <div class="receipt">
+    <div class="receipt-row">
+      <div class="receipt-left">
+        <p>Order Date:</p>
+      </div>
+      <div class="receipt-right">
+        <p><%= @order.created_at %></p>
+      </div>
+    </div>
+
+    <div class="receipt-row">
+      <div class="receipt-left">
+        <p>Item:</p>
+      </div>
+      <div class="receipt-right">
+        <p><%= @order.item.title %></p>
+      </div>
+    </div>
+    <div class="receipt-row">
+      <div class="receipt-left">
+        <p>Payment Method:</p>
+      </div>
+      <div class="receipt-right">
+        <p><%= @order.purchase_type %></p>
+      </div>
+    </div>
+
+    <div class="receipt-row">
+      <div class="receipt-left">
+        <p>Price:</p>
+      </div>
+      <div class="receipt-right">
+        <p><%= number_to_currency(@order.item.sale_price) %></p>
+      </div>
+    </div>
+
+    <div class="receipt-row">
+      <div class="receipt-left">
+        <p>Buyer</p>
+      </div>
+      <div class="receipt-right">
+        <p><%= full_name(@order.buyer) %></p>
+      </div>
+    </div>
+
+    <div class="receipt-row">
+      <div class="receipt-left">
+        <p>Seller</p>
+      </div>
+      <div class="receipt-right">
+        <p><%= full_name(@order.item.user) %></p>
+      </div>
+    </div>
+  </div>
+
+</div>
