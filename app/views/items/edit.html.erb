@@ -1,0 +1,13 @@
+<div class="left-col">
+  <%= render partial: "dashboard/thumbnail", :locals => { :item => @item } %>
+</div>
+
+<div class="main-col">
+  <h1>Edit Listing</h1>
+
+  <form action="<%= item_url(@item.id) %>" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PATCH">
+    <%= render partial: "form" %>
+  </form>
+
+</div>

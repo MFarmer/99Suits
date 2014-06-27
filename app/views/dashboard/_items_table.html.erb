@@ -1,6 +1,6 @@
 <% if @items.count > 0 %>
   <% @items.each do |item| %>
-    <%= render partial: "thumbnail", :locals => { :item => item } %>
+    <%= render partial: "dashboard/thumbnail", :locals => { :item => item } %>
   <% end %>
 <% else %>
   <p>No results.</p>

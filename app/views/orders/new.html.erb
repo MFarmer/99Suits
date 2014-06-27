@@ -20,6 +20,16 @@
     <%= f.label :zip %><br>
     <%= f.text_field :zip %><br><br>
 
+    <%= label_tag :card_number, "Credit Card #" %><br>
+    <%= text_field_tag :card_number, nil, { :name => nil, :'data-stripe' => "number"} %><br><br>
+
+    <%= label_tag :card_code, "CVC" %><br>
+    <%= text_field_tag :card_code, nil, { :name => nil, :'data-stripe' => "cvc"} %><br><br>
+
+    <%= label_tag "Expiration Date" %><br><br>
+    <%= select_month nil, { use_two_digit_numbers: true }, { :name => nil, :'data-stripe' => "exp-month" } %><br><br>
+    <%= select_year nil, { start_year: Date.today.year, end_year: Date.today.year + 10 }, { :name => nil, :'data-stripe' => "exp-year" } %><br><br>
+
     <%= f.label :purchase_type %><br>
 
     <% if @item.trade_price.nil? %>

@@ -3,5 +3,9 @@
 
 <div class="main-col">
   <h1>List Item</h1>
-  <%= render partial: "form" %>
+
+  <form action="<%= user_items_url(current_user.id) %>" method="POST" enctype="multipart/form-data">
+    <%= render partial: "form" %>
+  </form>
+
 </div>

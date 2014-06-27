@@ -3,7 +3,7 @@
   <div class="container">
     <div id="jumbo-left">
       <h1>Welcome to the<br>home page</h1>
-      <h3>More detailed info goes here as subtitle text.</h3>
+      <h3>More detailed info goes here as <br>subtitle text.</h3>
     </div>
 
     <div id="jumbo-right">
@@ -40,16 +40,16 @@
 
 </div>
 
-<div class="testimonials">
+<div class="testimonials group">
   <div class="container">
-    <div class="left-testimonials">
+    <div class="left-testimonials group">
       <div class="testimonial-box">
         <div class="img-holder">
           <%= image_tag "user1.jpg" %>
         </div>
         <div class="text-holder">
           <p>I love trading all of my spare suits on 99Suits.</p>
-          <small>-User 1</small>
+          <small>-John Smith</small>
         </div>
       </div>
       <div class="testimonial-box">
@@ -58,7 +58,7 @@
         </div>
         <div class="text-holder">
           <p>It's great to find such awesome deals on clothes to fill out my closet.</p>
-          <small>-User 2</small>
+          <small>-Ryan Dawson</small>
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@
         </div>
         <div class="text-holder">
           <p>Awesome selection of moustache grooming products.</p>
-          <small>-User 3</small>
+          <small>-Ed Harold</small>
         </div>
       </div>
       <div class="testimonial-box">
@@ -78,7 +78,7 @@
         </div>
         <div class="text-holder">
           <p>I enjoy trading swag with the great community.</p>
-          <small>-User 4</small>
+          <small>-Jim Beltringer</small>
         </div>
       </div>
     </div>
@@ -87,10 +87,11 @@
 
 <div class="feature-bar">
   <div class="container">
-    <h1>Check out the latest items.</h1>
+    <h1 class="center-text">Check out the latest items.</h1>
   </div>
 </div>
 
-<div class="">
-
+<div class="container">
+  <%= render partial: "dashboard/items_table" %>
 </div>
+

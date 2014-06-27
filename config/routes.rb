@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get '/account/available', to: 'dashboard#account_available', as: 'account_available'
   get '/account/received', to: 'dashboard#account_received', as: 'account_received'
   get '/account/gone', to: 'dashboard#account_gone', as: 'account_gone'
+  get '/account/hidden', to: 'dashboard#account_hidden', as: 'account_hidden'
 
   get '/account/ship', to: 'dashboard#account_ship', as: 'account_ship'
   get '/account/pickup', to: 'dashboard#account_pickup', as: 'account_pickup'

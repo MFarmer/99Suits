@@ -41,17 +41,38 @@ img.polaroid {
 
 nav {
   border-bottom: 3px solid #eee;
+  font-weight: lighter;
 }
 
-nav h1 {
-  font-size: 30px;
-  text-align: center;
+
+.logo-bar {
+  height: 50px;
+}
+
+nav img {
+  display: block;
+  margin: auto;
   padding: 10px;
 }
 
 nav ul {
-  max-width: 510px;
+  //background-color: yellow;
+  max-width: 514px;
   margin: auto;
+}
+
+.left-col a {
+  font-weight: lighter;
+}
+
+.left-col .thumbnail img {
+  height: 100%;
+  width: auto;
+}
+
+.left-col .thumbnail {
+  overflow: hidden;
+  margin-top: 20px;
 }
 
 nav ul:after {
@@ -132,7 +153,11 @@ h1 small {
 }
 
 .left-col h3 {
-  font-weight: bold;
+  font-weight: normal;
+}
+
+.left-col img {
+  width: 100%;
 }
 
 .item-box {
@@ -160,6 +185,41 @@ h1 small {
       margin-top: -50px;
     }
   }
+}
+
+nav a {
+  text-decoration: none;
+  color: #afb6bb;
+}
+
+.left-col a {
+  text-decoration: none;
+  color: #afb6bb;
+}
+
+.notice {
+  background-color: #fbf6dc;
+  border: 1px solid #f8e6c1;
+  padding: 20px;
+  color: #765b2d;
+  border-radius: 5px;
+
+  h3 {
+    float: left;
+  }
+
+  a {
+    float: right;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #765b2d;
+  }
+}
+
+.notice:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 .item-left {
@@ -299,20 +359,31 @@ a.buy-button:hover {
   padding: 20px;
 }
 
+.jumbotron #jumbo-right a {
+  padding-top: 20px;
+  float: left;
+}
+
 .feature-bar {
   background-color: #eee;
   padding: 10px;
-}
-
-.feature-bar h1 {
-  font-size: 24px;
-  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .feature-bar:after {
   content: "";
   display: block;
   clear: both;
+}
+
+.feature-bar h1 {
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.feature-bar .center-text {
+  text-align: center;
 }
 
 .col-1 {
@@ -344,13 +415,20 @@ a.buy-button:hover {
 .testimonials {
   //background-color: #eee;
   height: 300px;
-  padding: 100px;
+  padding: 60px;
+  padding-top: 20px;
 }
 
 .left-testimonials {
   width: 490px;
   //background-color: brown;
   float: left;
+}
+
+.group {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 .right-testimonials {
@@ -362,7 +440,7 @@ a.buy-button:hover {
 .testimonial-box {
   //background-color: #eee;
   width: 490px;
-  margin-bottom: 50px;
+  margin-top: 20px;
 }
 
 .testimonial-box .img-holder {
