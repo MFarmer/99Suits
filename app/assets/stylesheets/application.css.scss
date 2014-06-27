@@ -253,6 +253,7 @@ nav a {
 
 .item-top {
   padding: 20px;
+  padding-bottom: 0px;
 }
 
 .item-top h3 {
@@ -295,6 +296,9 @@ nav a {
 
 .item-bottom {
   //background-color: lime;
+  table {
+    margin-bottom: 40px;
+  }
 }
 
 a.buy-button, a.like-button {
@@ -675,7 +679,6 @@ textarea {
 }
 
 th {
-  height: 50px;
   background: #eeeeee; /* Old browsers */
   background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -685,7 +688,7 @@ th {
   background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
   border-right: 1px solid #ccc;
-
+  padding: 10px;
 }
 
 td {
