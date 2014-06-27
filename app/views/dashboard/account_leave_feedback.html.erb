@@ -6,11 +6,33 @@
   <h1>Leave Feedback</h1>
 
   <% if @orders.count > 0 %>
-    <% @orders.each do |order| %>
-      <%= render partial: 'thumbnail', :locals => { :item => order.item } %>
-    <% end %>
+
+    <p class="description">Please leave feedback on the following items you've received.</p>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Item Title</th>
+        <th>Sale Price</th>
+        <th>Order Time</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= image_tag order.item.photo.url(:thumb) %></td>
+          <td><%= order.item.title %></td>
+          <td><%= order.item.sale_price %></td>
+          <td><%= distance_of_time_in_words(order.created_at, Time.zone.now) %> ago</td>
+          <td><%= link_to "Leave Feedback", new_order_feedback_url(order.id) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   <% else %>
-    <p class="description">You have no orders awaiting your feedback.</p>
+    <p class="description">You have no items currently up for sale.</p>
   <% end %>
 
 </div>
