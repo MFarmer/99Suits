@@ -13,7 +13,9 @@ class DashboardController < ApplicationController
       order_map[order.created_at.day] += 1
     end
 
-    @orders_data = order_map
+    #@orders_data = {7.days.ago => 5, 6.days.ago => 3, 5.days.ago => 4, 4.days.ago => 7, 3.days.ago => 4, 2.days.ago => 2, 1.day.ago => 3}
+
+    @purchases_data = @orders_data
   end
 
   def account_feedback
