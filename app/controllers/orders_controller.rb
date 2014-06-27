@@ -15,9 +15,22 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     @order.item_id = @item.id
 
+    Stripe.api_key = ENV["STRIPE_API_KEY"]
+    token = params[:stripeToken]
+
+    begin
+      charge = Stripe::Charge.create(
+          :amount => (@item.sale_price * 100).floor,
+          :currency => "usd",
+          :card => token
+      )
+
+      flash.now[:notice] = "Thanks for ordering!"
+    rescue Stripe::CardError => e
+      flash.now[:danger] = e.message
+    end
 
     if @order.save
-      flash.now[:notice] = "Successfully created order."
       redirect_to order_confirmation_url(@order.id)
     else
       flash.now[:errors] = @order.errors.full_messages

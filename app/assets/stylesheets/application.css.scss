@@ -14,11 +14,15 @@
  *= require_self
  */
 
-body, p, h1, h2, h3, a, img, div, table, hr, ul, li {
+body, p, h1, h2, h3, h4, a, img, div, table, hr, ul, li, table, td, th, tr, thead, tbody {
   margin: 0;
   padding: 0;
   border: 0;
   font: inherit;
+}
+
+table {
+  border-spacing: 0
 }
 
 li {
@@ -370,6 +374,16 @@ a.buy-button:hover {
   margin-bottom: 20px;
 }
 
+#stripe_error {
+  display: none;
+  border: 1px solid red;
+  background-color: pink;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: darkred;
+  border-radius: 5px;
+}
+
 .feature-bar:after {
   content: "";
   display: block;
@@ -492,7 +506,7 @@ a.buy-button:hover {
 .thumbnail {
   display: block;
   width: 180px;
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
   margin-right: 13px;
   float: left;
   margin-bottom: 13px;
@@ -519,7 +533,7 @@ a.buy-button:hover {
 .description-box .avatar-box {
   width: 40px;
   height: 40px;
-  background-color: blue;
+  //background-color: blue;
   float: left;
 }
 
@@ -623,4 +637,73 @@ textarea {
     display: block;
     clear: both;
   }
+}
+
+.whole-width {
+  //background-color: pink;
+  padding-top: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+
+  h3.success {
+    font-weight: lighter;
+    font-size: 34px;
+    text-align: center;
+    color: #31642b;
+  }
+
+  h4.success {
+    text-align: center;
+    color: #ccc;
+    font-size: 26px;
+    font-weight: lighter;
+  }
+
+  .thumbnail {
+    float: none;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  p.info {
+    margin-top: 80px;
+    text-align: center;
+    line-height: 1.6;
+    color: #aaa;
+  }
+}
+
+th {
+  height: 50px;
+  background: #eeeeee; /* Old browsers */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+  border-right: 1px solid #ccc;
+
+}
+
+td {
+  img {
+    height: 100%;
+    width: auto;
+    display: block;
+    margin: auto;
+  }
+}
+
+td {
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  font-weight: lighter;
+}
+
+.late-shipping {
+  color: red;
+  font-weight: bold;
 }

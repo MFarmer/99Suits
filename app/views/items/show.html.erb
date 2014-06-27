@@ -37,7 +37,7 @@
         <p><%= @item.description %></p>
         <br>
         <% if @item.user != current_user %>
-          <%= link_to "Buy Now", new_item_order_url(@item.id), class: 'buy-button' %>
+          <%= link_to "Buy Now", new_item_order_url(@item.id), class: 'buy-button', data: { no_turbolink: true } %>
           <%= link_to "Like (#{pluralize(@item.like_count, 'Likes')})", item_like_url(@item.id), class: 'like-button' %>
         <% end %>
         <br><br>

@@ -1,14 +1,9 @@
 <table>
   <tr>
-    <th>Size</th>
+    <th>Size</th><th>Price</th><th>Condition</th><th>Brand</th>
+  </tr>
+  <tr>
     <td><%= @item.size %></td>
-  </tr>
-  <tr>
-    <th>Condition</th>
-    <td><%= @item.condition %></td>
-  </tr>
-  <tr>
-    <th>Price</th>
     <td>
       <del><%= number_to_currency(@item.original_price) %></del>
       <% if @item.sale_price && @item.trade_price %>
@@ -20,9 +15,7 @@
         <%= @item.trade_price %> Karma
       <% end %>
     </td>
-  </tr>
-  <tr>
-    <th>Brand</th>
+    <td><%= @item.condition %></td>
     <td><%= @item.brand %></td>
   </tr>
 </table>

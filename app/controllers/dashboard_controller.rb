@@ -6,7 +6,14 @@ class DashboardController < ApplicationController
   end
 
   def account_reports
+    orders_within_last_week = Order.where("user_id = ? AND created_at > ?", params[:id], 1.week.ago)
 
+    order_map = Hash.new(0)
+    orders_within_last_week.each do |order|
+      order_map[order.created_at.day] += 1
+    end
+
+    @orders_data = order_map
   end
 
   def account_feedback

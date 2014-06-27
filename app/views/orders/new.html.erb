@@ -1,11 +1,17 @@
 <div class="left-col">
   <%= render partial: "dashboard/thumbnail", :locals => { :item => @item } %>
+  <%= image_tag "popular-credit-cards.jpg" %>
 </div>
 
 <div class="main-col">
   <h1>Order <%= @item.title %></h1>
 
+  <div id="stripe_error">
+    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+  </div>
+
   <p><%= flash[:errors] %></p>
+
   <%= form_for @order, :url => item_orders_url(@item.id) do |f| %>
 
     <%= f.label :street %><br>
@@ -47,7 +53,7 @@
       <%= f.select :shipping_type, ["Ship"] %><br><br>
     <% end %>
 
-    <%= f.submit "Submit Order" %><br><br>
+    <%= f.submit "Submit Order", id: 'test-submit' %><br><br>
 
   <% end %>
 </div>

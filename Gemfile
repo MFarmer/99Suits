@@ -15,6 +15,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # My Chosen Gems
+gem 'chartkick'
 gem 'stripe'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem "paperclip-dropbox", ">= 1.1.7"
