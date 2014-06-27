@@ -653,10 +653,12 @@ textarea {
     font-weight: lighter;
     font-size: 34px;
     text-align: center;
+    margin-top: 20px;
     color: #31642b;
   }
 
   h4.success {
+    margin-top:40px;
     text-align: center;
     color: #ccc;
     font-size: 26px;
@@ -674,7 +676,12 @@ textarea {
     margin-top: 80px;
     text-align: center;
     line-height: 1.6;
-    color: #aaa;
+    color: #ccc;
+    font-weight: lighter;
+
+    a {
+      color: #bbb;
+    }
   }
 }
 

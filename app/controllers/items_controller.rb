@@ -63,6 +63,14 @@ class ItemsController < ApplicationController
     redirect_to item_url(params[:id])
   end
 
+  def relist
+    @item = Item.find(params[:id])
+    @item.hidden = false
+    @item.save!
+    flash.now[:success] = "Successfully re-listed item."
+    redirect_to account_hidden_url
+  end
+
   private
 
   def item_params

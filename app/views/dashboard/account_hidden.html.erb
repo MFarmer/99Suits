@@ -4,6 +4,37 @@
 
 <div class="main-col">
   <h1>Hidden</h1>
-  <p class="description">You have removed these items from public listings. If you would like to re-list an item, click on that item.</p>
-  <%= render partial: "dashboard/items_table" %>
+
+  <% if @items.count > 0 %>
+
+    <p class="description">Item which you have removed from listings.</p>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Item Title</th>
+        <th>Sale Price</th>
+        <th>Likes</th>
+        <th>Time Posted</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= image_tag item.photo.url(:thumb) %></td>
+          <td><%= item.title %></td>
+          <td><%= item.sale_price %></td>
+          <td><%= item.like_count %></td>
+          <td><%= distance_of_time_in_words(item.created_at, Time.zone.now) %> ago</td>
+          <td><%= link_to "Re-List", item_relist_url(item.id) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="description">You have no items currently up for sale.</p>
+  <% end %>
+
 </div>

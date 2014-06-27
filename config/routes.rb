@@ -40,4 +40,5 @@ Rails.application.routes.draw do
   get '/orders/:id/confirmation', to: 'orders#confirmation', as: 'order_confirmation'
 
   get '/items/:id/like', to: 'items#like', as: 'item_like'
+  get '/items/:id/relist', to: 'items#relist', as: 'item_relist'
 end
