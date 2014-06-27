@@ -27,7 +27,7 @@
           <td><%= item.like_count %></td>
           <td><%= distance_of_time_in_words(item.created_at, Time.zone.now) %> ago</td>
           <td>
-            <%= link_to "Invoice" %>
+            <%= link_to "Invoice", invoice_url(item.order.id) %>
             <% if item.order.feedback.nil? %><br><br>
               <%= link_to "Leave Feedback", new_order_feedback_url(item.order.id) %>
             <% end %>
