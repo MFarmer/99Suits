@@ -1,0 +1,52 @@
+<div class="whole-width">
+  <h2>Discover new fashion and people.</h2>
+
+  <div id="search">
+    <form action="<%= discover_url %>" method="GET">
+      <input id="search-box" type="text" name="query" value="<%= params[:query] %>">
+      <button id="search-button">Search</button>
+    </form>
+  </div>
+
+  <% if !@search_results.first.nil? %>
+    <div class="results">
+      <% @search_results.each do |result| %>
+        <% if result.searchable.class == Item %>
+
+          <a href="<%= item_url(result.searchable.id) %>" class="result-box">
+            <div class="result-image-box">
+              <%= image_tag result.searchable.photo.url(:thumb) %>
+            </div>
+            <div class="result-text-box">
+              <p class="title"><%= result.searchable.title %></p>
+              <p><%= number_to_currency(result.searchable.sale_price) %></p>
+            </div>
+          </a>
+
+        <% else %>
+
+          <a href="<%= user_url(result.searchable.id) %>" class="result-box">
+            <div class="result-image-box">
+              <%= image_tag result.searchable.avatar.url(:thumb) %>
+            </div>
+            <div class="result-text-box">
+              <p class="title"><%= full_name(result.searchable) %></p>
+              <p>@<%= result.searchable.username %></p>
+            </div>
+          </a>
+
+        <% end %>
+      <% end %>
+    </div>
+  <% elsif params[:query] %>
+    <h2>No results.</h2>
+  <% end %>
+
+</div>
+
+<script>
+  $(function() {
+    $("#search-box").focus();
+  });
+</script>
+

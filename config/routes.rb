@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get '/account/on_the_way', to: 'dashboard#account_on_the_way', as: 'account_on_the_way'
   get '/account/leave_feedback', to: 'dashboard#account_leave_feedback', as: 'account_leave_feedback'
 
+  get '/discover', to: 'dashboard#discover', as: 'discover'
+
   get '/orders/:id/mark_as_shipped', to: 'orders#mark_as_shipped', as: 'mark_as_shipped'
   get '/orders/:id/invoice', to: 'orders#invoice', as: 'invoice'
   get '/orders/:id/confirmation', to: 'orders#confirmation', as: 'order_confirmation'

@@ -15,6 +15,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # My Chosen Gems
+gem 'pg_search'
 gem 'chartkick'
 gem 'stripe'
 gem 'paperclip', github: 'thoughtbot/paperclip'
@@ -28,6 +29,8 @@ group :doc do
 end
 
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'spring'
 end
 

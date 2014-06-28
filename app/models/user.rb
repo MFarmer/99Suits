@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  include PgSearch
+  multisearchable :against => [:fname, :lname, :username, :email]
+
   # Attributes
   attr_reader :password
 

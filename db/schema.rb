@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627014113) do
+ActiveRecord::Schema.define(version: 20140628184341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20140627014113) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "hidden"
+    t.boolean  "hidden",             default: false
   end
 
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
@@ -88,6 +88,14 @@ ActiveRecord::Schema.define(version: 20140627014113) do
   add_index "orders", ["item_id"], name: "index_orders_on_item_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
+  create_table "pg_search_documents", force: true do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "fname",               null: false
     t.string   "lname",               null: false
@@ -101,6 +109,9 @@ ActiveRecord::Schema.define(version: 20140627014113) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "city"
+    t.string   "state"
+    t.text     "bio"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
