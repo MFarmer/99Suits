@@ -1,34 +1,12 @@
-<div class="left-col">
-  <ul>
-    <li>Available</li>
-    <li>Sold</li>
-    <li>Traded</li>
-  </ul>
-</div>
+<div class="whole-width">
 
-<div class="main-col">
-  <h1><%= @user.username %> <small>Member since <%= @user.created_at %></small></h1>
+  <h2 id="full_name"><%= full_name(@user) %></h2>
+  <h3 id="username">aka @<%= @user.username %></h3>
 
-  <%= image_tag @user.avatar.url(:medium) %>
+  <%= render partial: "users/overview_box", :locals => { :user => @user } %>
 
-  <table border="1">
-    <thead>
-    <tr>
-      <th>Transactions</th>
-      <th>Followers</th>
-      <th>Following</th>
-      <th>Avg. Ship Time</th>
-      <th>Last Seen</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    </tbody>
-  </table>
+  <h2 id="full_name"><%= @user.fname %>'s Closet</h2>
+
+  <%= render partial: "dashboard/items_table" %>
+
 </div>

@@ -56,9 +56,9 @@ class ItemsController < ApplicationController
   def like
     like = Like.new(user_id: current_user.id, item_id: params[:id])
     if like.save
-      flash.now[:notice] = "Item was liked!"
+      flash[:notice] = "Item was liked!"
     else
-      flash.now[:errors] = "Unable to like the item."
+      flash[:errors] = "Unable to like the item."
     end
     redirect_to item_url(params[:id])
   end
@@ -67,7 +67,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.hidden = false
     @item.save!
-    flash.now[:success] = "Successfully re-listed item."
+    flash[:success] = "Successfully re-listed item."
     redirect_to account_hidden_url
   end
 
@@ -88,7 +88,7 @@ class ItemsController < ApplicationController
   def require_visible!
     @item = Item.find(params[:id])
     if @item.hidden
-      flash.now[:errors] = ["Sorry, this item is no longer available from the seller."]
+      flash[:errors] = ["Sorry, this item is no longer available from the seller."]
       redirect_to feed_all_url
     end
   end

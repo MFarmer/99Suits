@@ -1,0 +1,36 @@
+<div class="user-show-box">
+  <div class="user-show-left">
+    <div class="user-show-top">
+      <%= image_tag @user.avatar.url(:medium), class: 'avatar' %>
+    </div>
+    <div class="user-show-bottom">
+      <p id="stars">★★★★★</p>
+    </div>
+  </div>
+  <div class="user-show-right">
+    <a href="" class="user-col">
+      <div class="user-show-top">
+        <p>27</p>
+      </div>
+      <div class="user-show-bottom">
+        <p>Transactions</p>
+      </div>
+    </a>
+    <a href="" class="user-col">
+      <div class="user-show-top">
+        <p>13</p>
+      </div>
+      <div class="user-show-bottom">
+        <p>Followers</p>
+      </div>
+    </a>
+    <a href="" class="user-col">
+      <div class="user-show-top">
+        <p>5</p>
+      </div>
+      <div class="user-show-bottom">
+        <p>Following</p>
+      </div>
+    </a>
+  </div>
+</div>

@@ -5,17 +5,11 @@ class DashboardController < ApplicationController
   def account_profile
   end
 
+  def discover
+    @search_results = PgSearch.multisearch(params[:query])
+  end
+
   def account_reports
-    orders_within_last_week = Order.where("user_id = ? AND created_at > ?", params[:id], 1.week.ago)
-
-    order_map = Hash.new(0)
-    orders_within_last_week.each do |order|
-      order_map[order.created_at.day] += 1
-    end
-
-    #@orders_data = {7.days.ago => 5, 6.days.ago => 3, 5.days.ago => 4, 4.days.ago => 7, 3.days.ago => 4, 2.days.ago => 2, 1.day.ago => 3}
-
-    @purchases_data = @orders_data
   end
 
   def account_feedback
@@ -77,14 +71,6 @@ class DashboardController < ApplicationController
   def feed_trade
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
  orders.item_id IS NULL AND items.trade_price IS NOT NULL AND items.hidden IS NULL OR items.hidden = false").includes(:user)
-  end
-
-  def discover_people
-    @users = User.all
-  end
-
-  def discover_items
-
   end
 
   def activity

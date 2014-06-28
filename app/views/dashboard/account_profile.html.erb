@@ -5,6 +5,8 @@
 <div class="main-col">
   <h1>Profile Settings</h1>
 
+  <%= render partial: "dashboard/error_printing" %>
+
   <div class="profile-left">
     <%= image_tag current_user.avatar.url(:thumb), class: 'polaroid' %>
   </div>
@@ -29,6 +31,15 @@
 
       <label>Username</label><br>
       <input type="text" name="user[username]" value="<%= current_user.username %>"><br><br>
+
+      <label>City</label><br>
+      <input type="text" name="user[city]" value="<%= current_user.city %>"><br><br>
+
+      <label>State</label><br>
+      <input type="text" name="user[state]" value="<%= current_user.state %>"><br><br>
+
+      <label>Bio</label><br>
+      <input type="text" name="user[bio]" value="<%= current_user.bio %>"><br><br>
 
       <label>Current Password</label><br>
       <input type="password" name="user[current_password]" value=""><br><br>

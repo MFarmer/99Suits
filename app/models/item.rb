@@ -1,5 +1,9 @@
 class Item < ActiveRecord::Base
 
+  include PgSearch
+  multisearchable :against => [:title, :brand, :sale_price, :trade_price, :category, :size, :description],
+                  :if => lambda { |item| item.hidden != false }
+
   CATEGORY_OPTIONS = ["Styling Products", "Armwear", "Belts", "Coats",
                       "Footwear", "Headgear", "Jackets",
                       "Neckwear", "Ponchos", "Robes and Cloaks",
@@ -26,6 +30,10 @@ class Item < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
   validates :title, :condition, :category, :original_price, :description, :weight, :size, :presence => true
+
+  def is_not_hidden?
+    !self.hidden
+  end
 
   def like_count
     likes = Like.where("item_id = ?", self.id)
