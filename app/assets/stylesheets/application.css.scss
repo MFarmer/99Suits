@@ -19,6 +19,7 @@ body, p, h1, h2, h3, h4, a, img, div, table, button, hr, ul, li, table, td, th, 
   padding: 0;
   border: 0;
   font: inherit;
+  font-weight: lighter;
 }
 
 table {
@@ -149,7 +150,7 @@ h1 small {
 }
 
 .main-col h1, .whole-width h1 {
-  font-weight: bold;
+  font-weight: lighter;
   font-size: 24px;
   margin-bottom: 20px;
   padding-bottom: 5px;
@@ -998,7 +999,7 @@ td {
 }
 
 .follow-button {
-  padding-top: 10px;
+  float: right;
   border-radius: 5px;
   color: #555;
   border-top: 1px solid #f1f1f1;
@@ -1006,31 +1007,30 @@ td {
   border-bottom: 1px solid #ccc;
   border-right: 1px solid #ccc;
   background-color: #eee;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
   text-align: center;
   display: block;
-  margin: auto;
-  margin-top: 40px;
   width: 144px;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
+  padding: 5px;
+  font-size: 16px;
 }
 
 button.follow-button-disabled {
   float: right;
-  font-size: 16px;
-  padding-top: 10px;
   border-radius: 5px;
+  color: #AAA;
   border: 1px solid #ccc;
-  color: #bbb;
   background-color: #ddd;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
   text-align: center;
   display: block;
-  margin: auto;
+  width: 144px;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  padding: 5px;
+  font-size: 16px;
 }
 
 .header-button-bar {
@@ -1056,4 +1056,13 @@ button.follow-button-disabled {
   content: "";
   display: block;
   clear: both;
+}
+
+.bio-box {
+  //background-color: #eee;
+  font-weight: lighter;
+  border: 1px solid #eee;
+  color: #555;
+  padding: 20px;
+  margin-bottom: 20px;
 }

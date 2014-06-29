@@ -30,6 +30,10 @@
     </tr>
   </table>
 
+  <div class="bio-box">
+    <%= @user.bio %>
+  </div>
+
   <h1><%= @user.fname %>'s Closet</h1>
 
   <%= render partial: "dashboard/items_table" %>
