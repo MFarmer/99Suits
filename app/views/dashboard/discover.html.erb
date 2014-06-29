@@ -1,4 +1,11 @@
-<div class="whole-width">
+<div class="left-col">
+  <ul>
+    <li>Search</li>
+    <li>All Users</li>
+    <li>All Items</li>
+  </ul>
+</div>
+<div class="main-col">
   <h2>Discover new fashion and people.</h2>
 
   <div id="search">
@@ -38,7 +45,7 @@
         <% end %>
       <% end %>
     </div>
-  <% elsif params[:query] %>
+  <% else %>
     <h2>No results.</h2>
   <% end %>
 
