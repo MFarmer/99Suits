@@ -4,4 +4,19 @@
 
 <div class="main-col">
   <h1>Newest Users</h1>
+
+  <div class="results">
+    <% @newest_users.each do |result| %>
+      <a href="<%= user_url(result.id) %>" class="result-box">
+        <div class="result-image-box">
+          <%= image_tag result.avatar.url(:thumb) %>
+        </div>
+        <div class="result-text-box">
+          <p class="title"><%= full_name(result) %></p>
+          <p>@<%= result.username %></p>
+          <p class="context">Joined <%= distance_of_time_in_words(result.created_at, Time.zone.now) %> ago</p>
+        </div>
+      </a>
+    <% end %>
+  </div>
 </div>

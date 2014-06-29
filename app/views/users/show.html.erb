@@ -9,13 +9,19 @@
 <div class="main-col">
 
   <div class="header-button-bar">
-    <h1><%= full_name(@user)%> <small>@<%= @user.username %></small></h1>
+    <% if @user.staff %>
+      <p style="float: left;background-color: #1abc9c; padding: 3px;margin-right: 5px; margin-top: 2px; border-radius: 3px;color:white">staff</p>
+    <% end %>
+    <h1>
+      <%= full_name(@user)%> <small>
+      @<%= @user.username %></small>
+    </h1>
     <%= render partial: "users/follow_button" %>
   </div>
 
   <table class="user-profile-table">
     <tr>
-      <td id="photo-col"><%= image_tag @user.avatar.url(:medium) %></td>
+      <td id="photo-col"><%= image_tag @user.avatar.url(:thumb) %></td>
       <td><%= @transactions_count %></td>
       <td><%= @followed_by.count %></td>
       <td><%= @followed_users.count %></td>

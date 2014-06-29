@@ -1,4 +1,17 @@
-<div class="whole-width">
+<div class="left-col">
+  <ul>
+    <li>Seller Profile</li>
+    <li>More Like This</li>
+    <li><h1>Tips</h1></li>
+    <li>
+      <ul>
+        <li>Safe Buying</li>
+        <li>Avoid Fraud</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class="main-col">
 
   <div class="item-box">
 
@@ -35,6 +48,13 @@
         <% if @item.user != current_user %>
           <%= link_to "Buy Now", new_item_order_url(@item.id), class: 'buy-button', data: { no_turbolink: true } %>
           <%= link_to "Like (#{pluralize(@item.like_count, 'Likes')})", item_like_url(@item.id), class: 'like-button' %>
+          <% if current_user.staff %>
+            <% if !@item.staff_pick %>
+              <%= link_to "Staff Pick", item_staff_pick_url(@item.id), class: 'like-button' %>
+            <% else %>
+              <%= link_to "Picked!", item_url(@item.id), class: 'like-button' %>
+            <% end %>
+          <% end %>
         <% end %>
         <br><br>
         <!-- Comment Form -->

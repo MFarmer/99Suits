@@ -63,6 +63,14 @@ class ItemsController < ApplicationController
     redirect_to item_url(params[:id])
   end
 
+  def staff_pick
+    item = Item.find(params[:id])
+    if current_user.staff
+      item.update(staff_pick: true);
+    end
+    redirect_to item_url(item.id)
+  end
+
   def relist
     @item = Item.find(params[:id])
     @item.hidden = false

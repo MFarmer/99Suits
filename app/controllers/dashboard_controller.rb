@@ -77,34 +77,65 @@ class DashboardController < ApplicationController
   end
 
   def featured_staff_picks
-
+    @items = Item.where("staff_pick = ?", true)
   end
 
   def featured_most_liked
-    items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
+    result = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
 
-    @liked_items = []
-    items.each do |item|
+    @items = []
+    result.each do |item|
       if item.like_count > 0
-        @liked_items << item
+        @items << item
+      end
+      if @items.count >= 8
+        break
       end
     end
 
-    @liked_items.sort! { |a, b| b.like_count <=> a.like_count }
+    @items.sort! { |a, b| b.like_count <=> a.like_count }
 
-    @liked_items
+    @items
   end
 
   def featured_most_commented
+    result = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:comments)
 
+    @items = []
+    result.each do |item|
+      if item.comments.count > 0
+        @items << item
+      end
+      if @items.count >= 8
+        break
+      end
+    end
+
+    @items.sort! { |a, b| b.comments.count <=> a.comments.count }
+
+    @items
   end
 
   def featured_most_active
+    result = User.all.includes(:items)
 
+    @users = []
+    result.each do |user|
+      if user.items.count > 0
+        @users << user
+      end
+      if @users.count >= 8
+        break
+      end
+    end
+
+    @users.sort! { |a, b| b.items.count <=> a.items.count }
+
+    @users
   end
 
   def featured_newest_users
-
+    @newest_users = User.all.order('created_at DESC LIMIT 10')
   end
 
   def activity

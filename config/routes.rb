@@ -50,4 +50,5 @@ Rails.application.routes.draw do
 
   get '/items/:id/like', to: 'items#like', as: 'item_like'
   get '/items/:id/relist', to: 'items#relist', as: 'item_relist'
+  get '/items/:id/staff_pick', to: 'items#staff_pick', as: 'item_staff_pick'
 end

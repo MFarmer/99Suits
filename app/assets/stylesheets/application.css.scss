@@ -49,8 +49,10 @@ img.polaroid {
 }
 
 nav {
+  //background-color: #222222;
   border-bottom: 3px solid #eee;
   font-weight: lighter;
+  margin-bottom: 40px;
 }
 
 
@@ -923,6 +925,12 @@ td {
     float: right;
     color: #555;
   }
+
+  .context {
+    margin-top: 10px;
+    float: right;
+    color: #bbb;
+  }
 }
 
 .results {
@@ -985,6 +993,10 @@ td {
     width: 207px;
     font-size: 50px;
     border-right: 1px solid #eee;
+
+    img {
+      width: 112px;
+    }
   }
 
   .first-col {
@@ -1074,6 +1086,7 @@ button.follow-button-disabled {
 }
 
 footer {
+  margin-top: 30px;
 
   ul {
     border-top: 1px solid #eee;
