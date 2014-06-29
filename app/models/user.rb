@@ -33,7 +33,13 @@ class User < ActiveRecord::Base
   )
 
   # Validations
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :small => "112x112>", :thumb => "100x100>" }
+  if Rails.env.development?
+    has_attached_file :avatar, :styles => { :medium => "300x300>", :small => "112x112>", :thumb => "100x100>" }
+  else
+    has_attached_file :avatar, :styles => { :medium => "300x300>", :small => "112x112>", :thumb => "100x100>" },
+                      :default_url => "/images/:style/missing.png",
+                      :path => ":style/:id_:filename"
+  end
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
