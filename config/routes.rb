@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   get '/feed/most_active_users', to: 'dashboard#featured_most_active', as: 'most_active'
   get '/feed/newest_users', to: 'dashboard#featured_newest_users', as: 'newest_users'
 
+  get '/users/:id/feedback', to: 'users#feedback', as: 'user_feedback'
+  get '/users/:id/followers', to: 'users#followers', as: 'user_followers'
+  get '/users/:id/following', to: 'users#following', as: 'user_following'
+
   get '/account', to: 'dashboard#account_profile', as: 'account_profile'
   get '/account/reports', to: 'dashboard#account_reports', as: 'account_reports'
   get '/account/feedbacks', to: 'dashboard#account_feedback', as: 'account_feedback'

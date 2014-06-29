@@ -1,44 +1,15 @@
 <div class="left-col">
   <ul>
-    <li>Overview</li>
-    <li>Feedback</li>
-    <li>Followers</li>
-    <li>Following</li>
+    <li><%= link_to "Closet", user_url(@user.id) %></li>
+    <li><%= link_to "Feedback", user_feedback_url(@user.id) %></li>
+    <li><%= link_to "Followers", user_followers_url(@user.id) %></li>
+    <li><%= link_to "Following", user_following_url(@user.id) %></li>
   </ul>
 </div>
+
 <div class="main-col">
 
-  <div class="header-button-bar">
-    <% if @user.staff %>
-      <p style="float: left;background-color: #1abc9c; padding: 3px;margin-right: 5px; margin-top: 2px; border-radius: 3px;color:white">staff</p>
-    <% end %>
-    <h1>
-      <%= full_name(@user)%> <small>
-      @<%= @user.username %></small>
-    </h1>
-    <%= render partial: "users/follow_button" %>
-  </div>
-
-  <table class="user-profile-table">
-    <tr>
-      <td id="photo-col"><%= image_tag @user.avatar.url(:thumb) %></td>
-      <td><%= @transactions_count %></td>
-      <td><%= @followed_by.count %></td>
-      <td><%= @followed_users.count %></td>
-    </tr>
-    <tr id="detail">
-      <td style="border-right: 1px solid #eee;">
-        <%= render partial: "users/feedback_rating" %>
-      </td>
-      <td style="border-right: 1px solid #eee;">Transactions</td>
-      <td style="border-right: 1px solid #eee;">Followers</td>
-      <td>Following</td>
-    </tr>
-  </table>
-
-  <div class="bio-box">
-    <%= @user.bio %>
-  </div>
+  <%= render partial: "users/user_summary" %>
 
   <h1><%= @user.fname %>'s Closet</h1>
 

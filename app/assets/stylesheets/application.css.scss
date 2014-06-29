@@ -708,15 +708,6 @@ th {
 }
 
 td {
-  img {
-    //height: 100%;
-    //width: auto;
-    //display: block;
-    //margin: auto;
-  }
-}
-
-td {
   border-bottom: 1px solid #eee;
   padding: 10px;
   font-weight: lighter;
@@ -913,7 +904,8 @@ td {
     img {
       display: block;
       height: 77px;
-      width: 77px;
+      width: auto;
+      margin: auto;
       padding: 5px;
       text-align: center;
     }
@@ -1043,6 +1035,7 @@ button.follow-button-disabled {
   padding: 0;
   padding: 5px;
   font-size: 16px;
+  cursor: default;
 }
 
 .header-button-bar {

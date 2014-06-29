@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
   has_many :orders
 
   has_many :follows
+  has_many(
+      :followed_by,
+      :class_name => Follow,
+      :foreign_key => :following_id,
+      :primary_key => :id
+  )
 
   has_many(
       :followed_users,
@@ -22,7 +28,7 @@ class User < ActiveRecord::Base
 
   has_many(
       :followers,
-      :through => :follows,
+      :through => :followed_by,
       :source => :user
   )
 

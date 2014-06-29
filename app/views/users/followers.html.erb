@@ -1,0 +1,36 @@
+<div class="left-col">
+  <ul>
+    <li><%= link_to "Closet", user_url(@user.id) %></li>
+    <li><%= link_to "Feedback", user_feedback_url(@user.id) %></li>
+    <li><%= link_to "Followers", user_followers_url(@user.id) %></li>
+    <li><%= link_to "Following", user_following_url(@user.id) %></li>
+  </ul>
+</div>
+
+<div class="main-col">
+  <%= render partial: "users/user_summary" %>
+  <h1>Followers <small>(<%= pluralize(@user.followed_users.count, 'User') %>)</small></h1>
+
+  <% if !@user.followers.first.nil? %>
+    <div class="results">
+      <% @user.followers.each do |result| %>
+
+        <a href="<%= user_url(result.id) %>" class="result-box">
+          <div class="result-image-box">
+            <%= image_tag result.avatar.url(:thumb) %>
+          </div>
+          <div class="result-text-box">
+            <p class="title">
+              <%= full_name(result) %>
+            </p>
+            <p>@<%= result.username %></p>
+            <p class="context">Joined <%= distance_of_time_in_words(result.created_at, Time.zone.now) %> ago</p>
+          </div>
+        </a>
+
+      <% end %>
+    </div>
+  <% elsif params[:query] %>
+    <h2>No results.</h2>
+  <% end %>
+</div>
