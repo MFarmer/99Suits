@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_filter :require_signed_out!, :only => [:home, :new]
 
   def home
-    @items = Item.all
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
     render :layout => "home"
   end
 

@@ -7,7 +7,7 @@
       <button id="search-button">Search</button>
     </form>
   </div>
-
+  
   <% if !@search_results.first.nil? %>
     <div class="results">
       <% @search_results.each do |result| %>
@@ -49,4 +49,3 @@
     $("#search-box").focus();
   });
 </script>
-

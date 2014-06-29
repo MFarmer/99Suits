@@ -26,7 +26,7 @@ class DashboardController < ApplicationController
   end
 
   def account_available
-    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.user_id = #{current_user.id} AND items.hidden IS NULL OR items.hidden = false")
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.user_id = #{current_user.id} AND items.hidden = false")
   end
 
   # Items which current user ordered and have shipped
@@ -64,7 +64,6 @@ class DashboardController < ApplicationController
 
   def feed_all
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
-    #@items = Item.all
   end
 
   def feed_sale
@@ -75,6 +74,37 @@ class DashboardController < ApplicationController
   def feed_trade
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
  orders.item_id IS NULL AND items.trade_price IS NOT NULL AND items.hidden = false").includes(:user)
+  end
+
+  def featured_staff_picks
+
+  end
+
+  def featured_most_liked
+    items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
+
+    @liked_items = []
+    items.each do |item|
+      if item.like_count > 0
+        @liked_items << item
+      end
+    end
+
+    @liked_items.sort! { |a, b| b.like_count <=> a.like_count }
+
+    @liked_items
+  end
+
+  def featured_most_commented
+
+  end
+
+  def featured_most_active
+
+  end
+
+  def featured_newest_users
+
   end
 
   def activity

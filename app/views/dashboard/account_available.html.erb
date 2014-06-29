@@ -26,7 +26,7 @@
         <tr>
           <td><%= image_tag item.photo.url(:thumb) %></td>
           <td><%= item.title %></td>
-          <td><%= item.sale_price %></td>
+          <td><%= number_to_currency(item.sale_price) %></td>
           <td><%= item.like_count %></td>
           <td><%= distance_of_time_in_words(item.created_at, Time.zone.now) %> ago</td>
           <td>

@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   get '/feed', to: 'dashboard#feed_all', as: 'feed_all'
   get '/feed/sale', to: 'dashboard#feed_sale', as: 'feed_sale'
   get '/feed/trade', to: 'dashboard#feed_trade', as: 'feed_trade'
+  get '/feed/staff_picks', to: 'dashboard#featured_staff_picks', as: 'staff_picks'
+  get '/feed/most_liked', to: 'dashboard#featured_most_liked', as: 'most_liked'
+  get '/feed/most_commented', to: 'dashboard#featured_most_commented', as: 'most_commented'
+  get '/feed/most_active_users', to: 'dashboard#featured_most_active', as: 'most_active'
+  get '/feed/newest_users', to: 'dashboard#featured_newest_users', as: 'newest_users'
 
   get '/account', to: 'dashboard#account_profile', as: 'account_profile'
   get '/account/reports', to: 'dashboard#account_reports', as: 'account_reports'

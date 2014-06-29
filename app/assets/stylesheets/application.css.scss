@@ -40,7 +40,7 @@ body {
 }
 
 .bottom-bar {
-
+  //background-color: #eee;
 }
 
 img.polaroid {
@@ -582,8 +582,8 @@ input {
 
 select {
   width: 100%;
-  font-size: 24px;
-  height: 30px;
+  font-size: 16px;
+  padding: 5px;
 }
 
 label {
@@ -878,7 +878,7 @@ td {
   clear: both;
 }
 
-.whole-width {
+.whole-width, .main-col {
   h2 {
     font-size: 26px;
     font-weight: lighter;
@@ -1065,4 +1065,42 @@ button.follow-button-disabled {
   color: #555;
   padding: 20px;
   margin-bottom: 20px;
+}
+
+.wrapper:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+footer {
+
+  ul {
+    border-top: 1px solid #eee;
+    display: block;
+    width: 388px;
+    //background-color: yellow;
+    margin: auto;
+  }
+
+  ul:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  li {
+    //background-color: pink;
+    color: #888;
+    float: left;
+    padding: 20px;
+  }
+
+  img {
+    width: 75px;
+    height: auto;
+    display: block;
+    margin: auto;
+    opacity: 0.75;
+  }
 }

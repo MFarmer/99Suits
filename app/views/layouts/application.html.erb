@@ -14,7 +14,10 @@
     <%= render partial: "layouts/navbar" %>
 
     <div class="container">
-      <%= yield %>
+      <div class="wrapper">
+        <%= yield %>
+      </div>
+      <%= render partial: "layouts/footer" %>
     </div>
 
   </body>
