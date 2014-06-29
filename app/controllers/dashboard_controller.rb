@@ -41,7 +41,7 @@ class DashboardController < ApplicationController
 
   # All Items which current user has sold but not yet shipped
   def account_ship
-    @items = Item.joins(:orders).where('items.user_id = ? AND orders.shipping_date IS ? AND orders.shipping_type = ?', current_user.id, nil, "Ship")
+    @items = Item.joins(:order).where('items.user_id = ? AND orders.shipping_date IS ? AND orders.shipping_type = ?', current_user.id, nil, "Ship")
   end
 
   def account_pickup
