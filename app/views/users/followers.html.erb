@@ -9,7 +9,7 @@
 
 <div class="main-col">
   <%= render partial: "users/user_summary" %>
-  <h1>Followers <small>(<%= pluralize(@user.followed_users.count, 'User') %>)</small></h1>
+  <h1>Followers <small>(<%= pluralize(@user.followers.count, 'User') %>)</small></h1>
 
   <% if !@user.followers.first.nil? %>
     <div class="results">
