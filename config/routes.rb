@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/account/leave_feedback', to: 'dashboard#account_leave_feedback', as: 'account_leave_feedback'
 
   get '/discover', to: 'dashboard#discover', as: 'discover'
+  get '/activity', to: 'dashboard#activity', as: 'activity'
+  post '/follow/:id', to: 'users#follow', as: 'follow'
 
   get '/orders/:id/mark_as_shipped', to: 'orders#mark_as_shipped', as: 'mark_as_shipped'
   get '/orders/:id/invoice', to: 'orders#invoice', as: 'invoice'

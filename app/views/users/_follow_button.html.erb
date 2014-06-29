@@ -1,0 +1,7 @@
+<% if @user.id != current_user.id %>
+  <% if Follow.where('user_id = ? AND following_id = ?', current_user.id, @user.id).count == 0 %>
+    <%= button_to "Follow Me", follow_url(@user.id), class: "follow-button" %>
+  <% else %>
+    <button class="follow-button-disabled" disabled>✓ Followed</button>
+  <% end %>
+<% end %>

@@ -9,6 +9,10 @@ class DashboardController < ApplicationController
     @search_results = PgSearch.multisearch(params[:query])
   end
 
+  def activity
+    fail
+  end
+
   def account_reports
   end
 
@@ -37,7 +41,7 @@ class DashboardController < ApplicationController
 
   # All Items which current user has sold but not yet shipped
   def account_ship
-    @items = Item.joins(:order).where('items.user_id = ? AND orders.shipping_date IS ? AND orders.shipping_type = ?', current_user.id, nil, "Ship")
+    @items = Item.joins(:orders).where('items.user_id = ? AND orders.shipping_date IS ? AND orders.shipping_type = ?', current_user.id, nil, "Ship")
   end
 
   def account_pickup
@@ -59,18 +63,18 @@ class DashboardController < ApplicationController
   end
 
   def feed_all
-    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden IS NULL OR items.hidden = false").includes(:user)
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
     #@items = Item.all
   end
 
   def feed_sale
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
- orders.item_id IS NULL AND items.sale_price IS NOT NULL AND items.hidden IS NULL OR items.hidden = false").includes(:user)
+ orders.item_id IS NULL AND items.sale_price IS NOT NULL AND items.hidden = false").includes(:user)
   end
 
   def feed_trade
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
- orders.item_id IS NULL AND items.trade_price IS NOT NULL AND items.hidden IS NULL OR items.hidden = false").includes(:user)
+ orders.item_id IS NULL AND items.trade_price IS NOT NULL AND items.hidden = false").includes(:user)
   end
 
   def activity

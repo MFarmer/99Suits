@@ -1,11 +1,36 @@
-<div class="whole-width">
+<div class="left-col">
+  <ul>
+    <li>Overview</li>
+    <li>Feedback</li>
+    <li>Followers</li>
+    <li>Following</li>
+  </ul>
+</div>
+<div class="main-col">
 
-  <h2 id="full_name"><%= full_name(@user) %></h2>
-  <h3 id="username">aka @<%= @user.username %></h3>
+  <div class="header-button-bar">
+    <h1><%= full_name(@user)%> <small>@<%= @user.username %></small></h1>
+    <%= render partial: "users/follow_button" %>
+  </div>
 
-  <%= render partial: "users/overview_box", :locals => { :user => @user } %>
+  <table class="user-profile-table">
+    <tr>
+      <td id="photo-col"><%= image_tag @user.avatar.url(:medium) %></td>
+      <td><%= @transactions_count %></td>
+      <td><%= @followed_by.count %></td>
+      <td><%= @followed_users.count %></td>
+    </tr>
+    <tr id="detail">
+      <td style="border-right: 1px solid #eee;">
+        <%= render partial: "users/feedback_rating" %>
+      </td>
+      <td style="border-right: 1px solid #eee;">Transactions</td>
+      <td style="border-right: 1px solid #eee;">Followers</td>
+      <td>Following</td>
+    </tr>
+  </table>
 
-  <h2 id="full_name"><%= @user.fname %>'s Closet</h2>
+  <h1><%= @user.fname %>'s Closet</h1>
 
   <%= render partial: "dashboard/items_table" %>
 

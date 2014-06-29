@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   include PgSearch
-  multisearchable :against => [:fname, :lname, :username, :email]
+  multisearchable :against => [:fname, :lname, :username, :city, :state, :bio, :email]
 
   # Attributes
   attr_reader :password
@@ -11,6 +11,21 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :comments
   has_many :orders
+
+  has_many :follows
+
+  has_many(
+      :followed_users,
+      :through => :follows,
+      :source => :followed_user
+  )
+
+  has_many(
+      :followers,
+      :through => :follows,
+      :source => :user
+  )
+
   has_many(
       :feedbacks,
       :through => :orders,
