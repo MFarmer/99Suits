@@ -2,17 +2,6 @@ class Api::DashboardController < ApplicationController
 
   before_filter :require_signed_in!
 
-  def account_profile
-  end
-
-  def discover
-    @search_results = PgSearch.multisearch(params[:query])
-  end
-
-  def activity
-    fail
-  end
-
   def account_reports
   end
 
@@ -154,25 +143,6 @@ class Api::DashboardController < ApplicationController
   def featured_newest_users
     @newest_users = User.all.order('created_at DESC LIMIT 10')
     render :json => @newest_users
-  end
-
-  def activity
-
-  end
-
-  def profile_items_available
-    @items = Item.where("user_id = ?", params[:id])
-    render :json => @items
-  end
-
-  def profile_items_sold
-    @items = Item.where("user_id = ?", params[:id])
-    render :json => @items
-  end
-
-  def profile_items_traded
-    @items = Item.where("user_id = ?", params[:id])
-    render :json => @items
   end
 
 end
