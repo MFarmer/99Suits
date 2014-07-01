@@ -2,6 +2,18 @@ Rails.application.routes.draw do
 
   ### Backbone ###
   namespace :api do
+
+    shallow do
+      resources :users do
+        resources :items do
+          resources :orders do
+            resources :feedbacks
+          end
+          resources :comments
+        end
+      end
+    end
+
     get '/feed', to: 'dashboard#feed_all', as: 'feed_all'
     get '/feed/sale', to: 'dashboard#feed_sale', as: 'feed_sale'
     get '/feed/trade', to: 'dashboard#feed_trade', as: 'feed_trade'

@@ -6,7 +6,7 @@
 
   <h1>On the Way</h1>
 
-  <% if @items.count > 0 %>
+  <% if @orders.count > 0 %>
 
     <p class="description">Items which you have purchased but have not yet been shipped by the seller.</p>
 
@@ -22,14 +22,17 @@
       </tr>
       </thead>
       <tbody>
-      <% @items.each do |item| %>
+      <% @orders.each do |order| %>
         <tr>
-          <td><%= image_tag item.photo.url(:thumb) %></td>
-          <td><%= item.title %></td>
-          <td><%= number_to_currency(item.sale_price) %></td>
-          <td><%= item.created_at %></td>
-          <td><%= link_to full_name(item.user) %></td>
-          <td><%= link_to "Invoice", invoice_url(item.order.id) %></td>
+          <td><%= image_tag order.item.photo.url(:thumb) %></td>
+          <td><%= order.item.title %></td>
+          <td><%= number_to_currency(order.item.sale_price) %></td>
+          <td><%= order.item.created_at %></td>
+          <td><%= link_to full_name(order.item.user) %></td>
+          <td>
+            <%= link_to "Invoice", invoice_url(order.item.order.id) %>
+            <%= link_to "Leave Feedback", new_order_feedback_url %>
+          </td>
         </tr>
       <% end %>
       </tbody>
