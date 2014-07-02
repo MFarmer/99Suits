@@ -70,6 +70,7 @@ GEM
     debug_inspector (0.0.2)
     dropbox-sdk (1.6.4)
       json
+    ejs (1.1.1)
     erubis (2.7.0)
     execjs (2.2.0)
     figaro (0.7.0)
@@ -163,8 +164,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.2)
-      coffee-rails
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
     uglifier (2.5.1)
@@ -182,6 +181,7 @@ DEPENDENCIES
   binding_of_caller
   chartkick
   coffee-rails (~> 4.0.0)
+  ejs
   figaro
   jbuilder (~> 2.0)
   jquery-rails
@@ -195,5 +195,4 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   spring
   stripe
-  turbolinks
   uglifier (>= 1.3.0)

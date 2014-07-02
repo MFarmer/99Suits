@@ -524,6 +524,7 @@ a.buy-button:hover {
   margin-bottom: 13px;
   color: #3a3a3a;
   overflow: hidden;
+  box-shadow: 0px 3px 5px #eee;
 }
 
 .thumbnail img {
@@ -597,6 +598,7 @@ textarea {
   height: 100px;
   border: 1px solid #ccc;
   font-size: 18px;
+  padding: 10px;
 }
 
 #comments {
