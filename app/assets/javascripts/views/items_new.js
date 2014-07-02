@@ -28,6 +28,7 @@ window.Suits.Views.ItemsNew = Backbone.View.extend({
     newItem.save({}, {
       success: function() {
         Suits.Collections.items.add(newItem);
+        Backbone.history.navigate("", { trigger: true });
       }
     });
   },

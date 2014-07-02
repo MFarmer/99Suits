@@ -1,20 +1,14 @@
 window.Suits = {
   Models: {},
   Collections: {},
+  Routers: {},
   Views: {},
 
   initialize: function() {
-
-    // Tell the view what data it will have to render from
-    var view = new Suits.Views.ItemsIndex({
-      collection: Suits.Collections.items
-    });
-
-    Suits.Collections.items.fetch();
-    $(".main-col").append(view.render().$el);
-
-    var view = new Suits.Views.ItemsNew();
-    $(".main-col").append(view.render().$el);
+    // just sets up the routes
+    new Suits.Routers.AppRouter();
+    // start listening to changes to the location
+    Backbone.history.start();
   }
 };
 
