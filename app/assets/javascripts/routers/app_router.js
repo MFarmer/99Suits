@@ -2,6 +2,8 @@ window.Suits.Routers.AppRouter = Backbone.Router.extend({
 
   routes: {
     "": "itemsIndex",
+    "trade": "itemsTrade",
+    "sale": "itemsSale",
     "items/new": "itemsNew"
   },
 
@@ -12,6 +14,24 @@ window.Suits.Routers.AppRouter = Backbone.Router.extend({
     });
 
     Suits.Collections.items.fetch();
+    $(".backbone-content").html(view.render().$el);
+  },
+
+  itemsTrade: function() {
+    var view = new Suits.Views.ItemsTrade({
+      collection: Suits.Collections.items_trade
+    });
+
+    Suits.Collections.items_trade.fetch();
+    $(".backbone-content").html(view.render().$el);
+  },
+
+  itemsSale: function() {
+    var view = new Suits.Views.ItemsSale({
+      collection: Suits.Collections.items_sale
+    });
+
+    Suits.Collections.items_sale.fetch();
     $(".backbone-content").html(view.render().$el);
   },
 

@@ -11,6 +11,19 @@ class Api::ItemsController < ApplicationController
     render :json => @items
   end
 
+  def sale
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
+ orders.item_id IS NULL AND items.sale_price IS NOT NULL AND items.hidden = false").includes(:user)
+
+    render :json => @items
+  end
+
+  def trade
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
+ orders.item_id IS NULL AND items.trade_price IS NOT NULL AND items.hidden = false").includes(:user)
+    render :json => @items
+  end
+
   def show
     @item = Item.find(params[:id])
     render :json => @item

@@ -1,4 +1,4 @@
-window.Suits.Views.ItemsIndex = Backbone.View.extend({
+window.Suits.Views.ItemsTrade = Backbone.View.extend({
 
   template: JST["items/index"],
 
@@ -21,7 +21,7 @@ window.Suits.Views.ItemsIndex = Backbone.View.extend({
     // Give the template data to display. It's expecting something called items in this case.
     var renderedContent = this.template({
       items: this.collection,
-      headerTitle: "Feed - All"
+      headerTitle: "Feed - Trade"
     });
 
     this.$el.html(renderedContent);

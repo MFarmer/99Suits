@@ -10,6 +10,8 @@ Rails.application.routes.draw do
         resources :comments, :only => [:index]
       end
       resources :comments, :only => [:create, :destroy, :show, :update]
+      get '/items_sale', to: 'items#sale', as: 'items_sale'
+      get '/items_trade', to: 'items#trade', as: 'items_trade'
     end
 
     get '/feed', to: 'dashboard#feed_all', as: 'feed_all'
