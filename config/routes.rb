@@ -1,17 +1,15 @@
 Rails.application.routes.draw do
 
   ### Backbone ###
+  #root "site#root"
+
   namespace :api do
 
     shallow do
-      resources :users do
-        resources :items do
-          resources :orders do
-            resources :feedbacks
-          end
-          resources :comments
-        end
+      resources :items do
+        resources :comments, :only => [:index]
       end
+      resources :comments, :only => [:create, :destroy, :show, :update]
     end
 
     get '/feed', to: 'dashboard#feed_all', as: 'feed_all'
@@ -26,7 +24,7 @@ Rails.application.routes.draw do
 
 
   ### Original Rails app ###
-  root "sessions#home"
+  root "site#root"
   resource :session, :only => [:new, :destroy, :create]
 
   shallow do
