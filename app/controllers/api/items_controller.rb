@@ -1,12 +1,12 @@
 class Api::ItemsController < ApplicationController
 
   def index
-    @items = Item.all
+    @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
 
-    @items.each do |item|
-      item.photo_file_name = item.photo.url(:medium)
-      item.photo_content_type = item.user.avatar.url(:thumb)
-    end
+    # @items.each do |item|
+    #   item.photo_file_name = item.photo.url(:medium)
+    #   item.photo_content_type = item.user.avatar.url(:thumb)
+    # end
 
     render :json => @items
   end
@@ -17,7 +17,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(params[:id])
+    @item = Item.new(item_params)
 
     if @item.save
       render :json => @item
@@ -34,4 +34,12 @@ class Api::ItemsController < ApplicationController
       raise "Error in Item Destroy Action"
     end
   end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:title, :brand, :category, :photo, :condition, :original_price, :description,
+                                 :sale_price, :trade_price, :allow_pickup, :weight, :size)
+  end
+
 end

@@ -1,20 +1,22 @@
-<ul>
-  <% items.each(function(item){ %>
+<h1>Feed - All <small>(<%= items.length %> Items)</small></h1>
 
-    <a href="/" class="thumbnail">
-      <div class="photo-box">
-        <img src="<%= item.get("photo_file_name") %>">
-      </div>
-      <div class="description-box">
-        <div class="avatar-box">
-          <img src="<%= item.get("photo_content_type") %>">
-        </div>
-        <div class="detail-box">
-          <p><%= item.get("title").substr(0,16) %></p>
-          <p class="price"><%= item.get("sale_price") %></p>
-        </div>
-      </div>
-    </a>
+<% items.each(function(item){ %>
 
-  <% }) %>
-</ul>
+<a href="/" class="thumbnail">
+  <div class="photo-box">
+    <img src="<%= item.get("photo_file_name") %>">
+  </div>
+  <div class="description-box">
+    <div class="avatar-box">
+      <img src="<%= item.get("photo_content_type") %>">
+    </div>
+    <div class="detail-box">
+      <p><%= item.get("title").substr(0,16) %></p>
+      <p class="price"><%= item.get("sale_price") %></p>
+    </div>
+  </div>
+</a>
+
+<% }) %>
+
+<button id="refresh">Refresh</button>
