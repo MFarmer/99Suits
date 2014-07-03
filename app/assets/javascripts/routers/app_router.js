@@ -4,7 +4,8 @@ window.Suits.Routers.AppRouter = Backbone.Router.extend({
     "": "itemsIndex",
     "trade": "itemsTrade",
     "sale": "itemsSale",
-    "items/new": "itemsNew"
+    "items/new": "itemsNew",
+    "items/:id": "itemShow"
   },
 
   itemsIndex: function() {
@@ -37,6 +38,18 @@ window.Suits.Routers.AppRouter = Backbone.Router.extend({
 
   itemsNew: function() {
     var view = new Suits.Views.ItemsNew();
+    $(".backbone-content").html(view.render().$el);
+  },
+
+  itemShow: function(id) {
+
+    var item = Suits.Collections.items.getOrFetch(id);
+    item.comments().fetch();
+
+    var view = new Suits.Views.ItemShow({
+      model: item
+    });
+
     $(".backbone-content").html(view.render().$el);
   }
 

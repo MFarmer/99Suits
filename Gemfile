@@ -13,6 +13,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'ejs'
+gem 'jquery-fileupload-rails'
 
 # My Chosen Gems
 gem 'pg_search'

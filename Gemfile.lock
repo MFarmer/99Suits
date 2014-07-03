@@ -84,6 +84,9 @@ GEM
     jbuilder (2.1.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jquery-fileupload-rails (0.4.1)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -184,6 +187,7 @@ DEPENDENCIES
   ejs
   figaro
   jbuilder (~> 2.0)
+  jquery-fileupload-rails
   jquery-rails
   paperclip!
   paperclip-dropbox (>= 1.1.7)

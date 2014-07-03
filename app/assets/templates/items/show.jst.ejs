@@ -1,0 +1,17 @@
+<div class="whole-width">
+  <h1><%= item.get("title") %></h1>
+
+  <p>Powered by Backbone JS</p>
+
+
+  <h3>Comments</h3>
+
+  <ul>
+    <% item.comments().each(function(comment){ %>
+      <li><%= comment.get("content") %></li>
+    <% }); %>
+    <li></li>
+  </ul>
+
+  <a href="#/">Back to Index</a>
+</div>

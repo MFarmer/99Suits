@@ -9,21 +9,20 @@ window.Suits.Views.ItemsNew = Backbone.View.extend({
   submit: function(event) {
     event.preventDefault();
 
-    var newItem = new Suits.Models.Item();
-    //var params = $(event.currentTarget).seralizeJSON()["item"];
-    //var newItem = new Suits.Models.Item(params);
-
-    newItem.set("title", $("#title").val());
-    newItem.set("category", $("#category").val());
-    newItem.set("brand", $("#brand").val());
-    newItem.set("condition", $("#condition").val());
-    newItem.set("original_price", $("#original_price").val());
-    newItem.set("description", $("#description").val());
-    newItem.set("sale_price", $("#sale_price").val());
-    newItem.set("trade_price", $("#trade_price").val());
-    newItem.set("allow_pickup", $("#allow_pickup").val());
-    newItem.set("weight", $("#weight").val());
-    newItem.set("size", $("#size").val());
+    //var newItem = new Suits.Models.Item();
+    var params = $("form").serializeJSON()["item"];
+    var newItem = new Suits.Models.Item(params);
+//    newItem.set("title", $("#title").val());
+//    newItem.set("category", $("#category").val());
+//    newItem.set("brand", $("#brand").val());
+//    newItem.set("condition", $("#condition").val());
+//    newItem.set("original_price", $("#original_price").val());
+//    newItem.set("description", $("#description").val());
+//    newItem.set("sale_price", $("#sale_price").val());
+//    newItem.set("trade_price", $("#trade_price").val());
+//    newItem.set("allow_pickup", $("#allow_pickup").val());
+//    newItem.set("weight", $("#weight").val());
+//    newItem.set("size", $("#size").val());
 
     newItem.save({}, {
       success: function() {
