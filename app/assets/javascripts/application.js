@@ -16,6 +16,7 @@
 //= require jquery-fileupload
 //= require underscore
 //= require backbone
+//= require marked
 //= require suits.js
 //= require_tree ./models
 //= require_tree ./collections

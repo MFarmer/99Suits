@@ -12,4 +12,27 @@ window.Suits = {
   }
 };
 
+Backbone.CompositeView = Backbone.View.extend({
+  // map of subviews
+  addSubView: function(selector, view){
+    var selectorSubviews = this.subviews[selector] || (this.subviews[selector] = []);
+    selectorSubviews.push(view);
+  },
+
+  renderSubviews: function() {
+    var view = this;
+
+    _(this.subviews).each(function(selectorSubviews, selector){
+      var $selectorEl = view.$(selector).empty();
+      $selectorEl.empty();
+
+      _(selectorSubviews).each(function(subview) {
+        $selectorEl.append(subview.render().$el);
+      });
+    });
+  },
+
+  subviews: {}
+});
+
 $(Suits.initialize);

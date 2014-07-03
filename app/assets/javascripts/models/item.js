@@ -9,5 +9,15 @@ window.Suits.Models.Item = Backbone.Model.extend({
     }
 
     return this._comments;
+  },
+
+  parse: function(jsonResp) {
+    if(jsonResp.comments){
+      // We grabbed a regular array of objects that happened to be comments. Let's stuff them into our special Comments collections, then cut the regular array.
+      this.comments().set(jsonResp.comments);
+      delete jsonResp.comments;
+    }
+
+    return jsonResp;
   }
 });

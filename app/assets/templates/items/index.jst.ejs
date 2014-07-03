@@ -39,8 +39,8 @@
           <img src="http://s3.amazonaws.com/99suits_dev/users/avatars/000/000/005/medium/128.jpg?1403985764">
         </div>
         <div class="detail-box">
-          <p><%= item.get("title").substr(0,16) %></p>
-          <p class="price"><%= item.get("sale_price") %></p>
+          <p><%= item.escape("title").substr(0,16) %></p>
+          <p class="price"><%= item.escape("sale_price") %></p>
         </div>
       </div>
     </a>

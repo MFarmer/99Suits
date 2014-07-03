@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   ### Backbone ###
   #root "site#root"
 
-  namespace :api do
+  namespace :api, :defaults => { :format => :json } do
 
     shallow do
       resources :items do
         resources :comments, :only => [:index]
       end
-      resources :comments, :only => [:create, :destroy, :show, :update]
+      resources :comments, :only => [:create, :destroy, :show, :index, :update]
       get '/items_sale', to: 'items#sale', as: 'items_sale'
       get '/items_trade', to: 'items#trade', as: 'items_trade'
     end

@@ -1,11 +1,22 @@
-window.Suits.Views.ItemShow = Backbone.View.extend({
+window.Suits.Views.ItemShow = Backbone.CompositeView.extend({
 
   template: JST["items/show"],
 
   initialize: function(options) {
     // this.collection = options.items;
     this.listenTo(this.model, "sync", this.render); //"sync" is fired with fetched automatically
-    this.listenTo(this.model.comments(), "sync", this.render);
+    this.listenTo(this.model.comments(), "sync add remove", this.render);
+
+    // Build a comment view. Put it inside a div I placed in my item_show template
+    var commentNewView = new Suits.Views.CommentsNew({
+      item: this.model
+    });
+
+    this.addSubView(".comment-new", commentNewView);
+  },
+
+  events: {
+
   },
 
   render: function() {
@@ -16,6 +27,7 @@ window.Suits.Views.ItemShow = Backbone.View.extend({
     });
 
     this.$el.html(renderedContent);
+    this.renderSubviews();
 
     return this;
   }

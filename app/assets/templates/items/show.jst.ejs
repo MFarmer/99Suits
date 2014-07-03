@@ -6,12 +6,13 @@
 
   <h3>Comments</h3>
 
-  <ul>
-    <% item.comments().each(function(comment){ %>
-      <li><%= comment.get("content") %></li>
-    <% }); %>
-    <li></li>
+  <ul class="comments">
   </ul>
+
+  <div class="comment-new">
+    <p>:)</p>
+    <!-- Comments will go here -->
+  </div>
 
   <a href="#/">Back to Index</a>
 </div>

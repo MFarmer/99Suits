@@ -7,8 +7,8 @@ class Api::ItemsController < ApplicationController
     #   item.photo_file_name = item.photo.url(:medium)
     #   item.photo_content_type = item.user.avatar.url(:thumb)
     # end
-
-    render :json => @items
+    render "items/index"
+    #render :json => @items
   end
 
   def sale
@@ -26,7 +26,8 @@ class Api::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    render :json => @item
+    render "items/show"
+    #render :json => @item
   end
 
   def create

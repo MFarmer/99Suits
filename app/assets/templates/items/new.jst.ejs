@@ -68,10 +68,9 @@
 
 <script>
   $("#auto-fill").click(function(event){
-    var adjectives = ["Triumphant", "Remarkable", "Lame", "Torn", "Bold", "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet",
+    var adjectives = ["Triumphant", "Remarkable", "Plaid", "Striped", "Fuzzy", "Torn", "Zippered", "Bold", "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet",
       "Cool", "Awesome", "Beautiful", "Stylish", "Silky", "Wool", "Denim", "Soft", "Durable", "Cotton", "Lightweight", "Heavy"];
-    var item_text = ["Shirt", "Sandals", "Pants", "Hat", "Cape", "Hood", "Sword"];
-    var suffix = ["of the Bear", "of the Tiger", "of Spirit"];
+    var item_text = ["Shirt", "Sandals", "Pants", "Hat", "Cape", "Hood", "Suit", "Tuxedo", "Shorts", "Shoes", "Scarf"];
     var sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
     var random_title = "";
@@ -84,9 +83,6 @@
       random_title += (chosen_word + " ");
     }
     random_title += item_text[Math.floor((Math.random() * item_text.length))];
-    if(Math.random() < 0.25){
-      random_title += " " + suffix[Math.floor((Math.random() * suffix.length))];
-    }
 
     original_price = Math.round(Math.random()*1000)/10;
 

@@ -15,7 +15,7 @@ window.Suits.Routers.AppRouter = Backbone.Router.extend({
     });
 
     Suits.Collections.items.fetch();
-    $(".backbone-content").html(view.render().$el);
+    this._swapView(view);
   },
 
   itemsTrade: function() {
@@ -24,7 +24,7 @@ window.Suits.Routers.AppRouter = Backbone.Router.extend({
     });
 
     Suits.Collections.items_trade.fetch();
-    $(".backbone-content").html(view.render().$el);
+    this._swapView(view);
   },
 
   itemsSale: function() {
@@ -33,24 +33,33 @@ window.Suits.Routers.AppRouter = Backbone.Router.extend({
     });
 
     Suits.Collections.items_sale.fetch();
-    $(".backbone-content").html(view.render().$el);
+    this._swapView(view);
   },
 
   itemsNew: function() {
     var view = new Suits.Views.ItemsNew();
-    $(".backbone-content").html(view.render().$el);
+    this._swapView(view);
   },
 
   itemShow: function(id) {
 
     var item = Suits.Collections.items.getOrFetch(id);
-    item.comments().fetch();
 
     var view = new Suits.Views.ItemShow({
       model: item
     });
 
-    $(".backbone-content").html(view.render().$el);
+    this._swapView(view);
+  },
+
+  _swapView: function(view) {
+    if(this.currentView){
+      this.currentView.remove();
+    }
+
+    this.currentView = view;
+
+    $(".backbone-content").html(this.currentView.render().$el);
   }
 
 });
