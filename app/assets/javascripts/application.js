@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.serializeJSON
-//= require jquery-fileupload
 //= require underscore
 //= require backbone
 //= require marked
