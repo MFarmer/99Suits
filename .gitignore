@@ -5,6 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 .idea/
+.DS_Store
 
 # Ignore files uploaded on localhost
 /public/system

@@ -5,7 +5,7 @@ window.Suits.Views.ItemShow = Backbone.CompositeView.extend({
   initialize: function(options) {
     // this.collection = options.items;
     this.listenTo(this.model, "sync", this.render); //"sync" is fired with fetched automatically
-    this.listenTo(this.model.comments(), "sync add remove", this.render);
+    this.listenTo(this.model.comments(), "add", this.addComment);
 
     // Build a comment view. Put it inside a div I placed in my item_show template
     var commentNewView = new Suits.Views.CommentsNew({
@@ -17,6 +17,14 @@ window.Suits.Views.ItemShow = Backbone.CompositeView.extend({
 
   events: {
 
+  },
+
+  addComment: function(comment) {
+    var commentsShowView = new Suits.Views.CommentsShow({
+      model: comment
+    });
+
+    this.addSubView(".comments",commentsShowView);
   },
 
   render: function() {
