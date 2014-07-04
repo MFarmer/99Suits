@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   ### Backbone ###
-  #root "site#root"
 
   namespace :api, :defaults => { :format => :json } do
 
@@ -26,7 +25,7 @@ Rails.application.routes.draw do
 
 
   ### Original Rails app ###
-  root "site#root"
+  root "sessions#home"
   resource :session, :only => [:new, :destroy, :create]
 
   shallow do
