@@ -12,15 +12,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
-gem 'ejs'
-gem 'jquery-fileupload-rails'
 
 # My Chosen Gems
 gem 'pg_search'
 gem 'chartkick'
 gem 'stripe'
 gem 'paperclip', github: 'thoughtbot/paperclip'
-gem "paperclip-dropbox", ">= 1.1.7"
 gem 'aws-sdk', '~> 1.5.7'
 gem "figaro"
 gem 'bcrypt-ruby', :require => 'bcrypt'
