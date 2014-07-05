@@ -30,8 +30,8 @@
           <td><%= order.item.created_at %></td>
           <td><%= link_to full_name(order.item.user) %></td>
           <td>
-            <%= link_to "Invoice", invoice_url(order.item.order.id) %>
-            <%= link_to "Leave Feedback", new_order_feedback_url %>
+            <%= link_to "Invoice", invoice_url(order.id) %><br><br>
+            <%= link_to "Leave Feedback", new_order_feedback_url(order.id) %>
           </td>
         </tr>
       <% end %>

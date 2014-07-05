@@ -1,8 +1,40 @@
 <div class="whole-width">
   <h1>List Item</h1>
 
+  <button id="auto-fill">Auto-Fill</button>
+
   <form action="<%= user_items_url(current_user.id) %>" method="POST" enctype="multipart/form-data">
     <%= render partial: "form" %>
   </form>
 
+  <script>
+    $("#auto-fill").click(function(event){
+      var adjectives = ["Triumphant", "Remarkable", "Plaid", "Striped", "Fuzzy", "Torn", "Zippered", "Bold", "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet",
+        "Cool", "Awesome", "Beautiful", "Stylish", "Silky", "Wool", "Denim", "Soft", "Durable", "Cotton", "Lightweight", "Heavy"];
+      var item_text = ["Shirt", "Sandals", "Pants", "Hat", "Cape", "Hood", "Suit", "Tuxedo", "Shorts", "Shoes", "Scarf"];
+      var sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+
+      var random_title = "";
+      random_title += adjectives[Math.floor((Math.random() * adjectives.length))] + " ";
+      if(Math.random() < 0.5){
+        var chosen_word = adjectives[Math.floor((Math.random() * adjectives.length))];
+        while(chosen_word == random_title){
+          chosen_word = adjectives[Math.floor((Math.random() * adjectives.length))];
+        }
+        random_title += (chosen_word + " ");
+      }
+      random_title += item_text[Math.floor((Math.random() * item_text.length))];
+
+      original_price = Math.round(Math.random()*1000)/10;
+
+      $("#title").val(random_title);
+      $("#brand").val("Cool Shirt");
+      $("#original_price").val(original_price);
+      $("#description").text($("#title").val()+" for sale. Only "+$("#sale_price").val()+"!!! Thanks for looking.");
+      $("#sale_price").val(Math.round(Math.random()*(original_price-10)+10));
+      $("#trade_price").val(Math.round(Math.random()*1000)/10);
+      $("#weight").val(Math.round(Math.random()*100)/100);
+      $("#size").val(sizes[Math.floor(Math.random() * sizes.length)]);
+    });
+  </script>
 </div>

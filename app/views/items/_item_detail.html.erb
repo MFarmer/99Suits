@@ -1,20 +1,19 @@
-<table>
+<del><%= number_to_currency(@item.original_price) %></del>
+<% if @item.sale_price && @item.trade_price %>
+  <h3 style="font-size: 30px; color: green"><%= number_to_currency(@item.sale_price) %> (<%= 100 - (100 * @item.sale_price / @item.original_price).round() %>% off)</h3>
+  OR <%= @item.trade_price %> Karma
+<% elsif @item.sale_price %>
+  <%= number_to_currency(@item.sale_price) %> (<%= 100 - (100 * @item.sale_price / @item.original_price).round() %>% off)
+<% else %>
+  <%= @item.trade_price %> Karma
+<% end %>
+
+<table style="float: right;">
   <tr>
-    <th>Size</th><th>Price</th><th>Condition</th><th>Brand</th>
+    <th>Size</th><th>Condition</th><th>Brand</th>
   </tr>
   <tr>
     <td><%= @item.size %></td>
-    <td>
-      <del><%= number_to_currency(@item.original_price) %></del>
-      <% if @item.sale_price && @item.trade_price %>
-        <%= number_to_currency(@item.sale_price) %> (<%= 100 - (100 * @item.sale_price / @item.original_price).round() %>% off)
-        OR <%= @item.trade_price %> Karma
-      <% elsif @item.sale_price %>
-        <%= number_to_currency(@item.sale_price) %> (<%= 100 - (100 * @item.sale_price / @item.original_price).round() %>% off)
-      <% else %>
-        <%= @item.trade_price %> Karma
-      <% end %>
-    </td>
     <td><%= @item.condition %></td>
     <td><%= @item.brand %></td>
   </tr>

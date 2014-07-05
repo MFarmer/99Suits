@@ -13,11 +13,11 @@
     <li><h1>Featured</h1></li>
     <li>
       <ul>
-        <li><a href="">Staff Picks</a></li>
-        <li><a href="">Most Liked</a></li>
-        <li><a href="">Most Commented</a></li>
-        <li><a href="">Most Active Users</a></li>
-        <li><a href="">Newest Users</a></li>
+        <li><a href="/dashboard/#/staff_picks">Staff Picks</a></li>
+        <li><a href="/dashboard/#/most_liked">Most Liked</a></li>
+        <li><a href="/dashboard/#/most_commented">Most Commented</a></li>
+        <li><a href="/dashboard/#/most_active_users">Most Active Users</a></li>
+        <li><a href="/dashboard/#/newest_users">Newest Users</a></li>
       </ul>
     </li>
   </ul>
@@ -29,17 +29,16 @@
   <h1><%= headerTitle %> <small>(<%= items.length %> Items)</small></h1>
 
   <% items.each(function(item){ %>
-
-    <a href="/#/items/<%= item.id %>" class="thumbnail">
+    <a href="/items/<%= item.id %>" class="thumbnail">
       <div class="photo-box">
-        <img src="http://s3.amazonaws.com/99suits_dev/items/photos/000/000/024/medium/images.jpg?1403823221">
+        <img src="<%= item.escape("photo_url") %>">
       </div>
       <div class="description-box">
         <div class="avatar-box">
-          <img src="http://s3.amazonaws.com/99suits_dev/users/avatars/000/000/005/medium/128.jpg?1403985764">
+          <img src="<%= item.escape("user_avatar_url") %>">
         </div>
         <div class="detail-box">
-          <p><%= item.escape("title").substr(0,16) %></p>
+          <p><%= item.escape("title").substr(0,12) %></p>
           <p class="price"><%= item.escape("sale_price") %></p>
         </div>
       </div>

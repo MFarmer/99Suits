@@ -3,25 +3,21 @@ class Api::ItemsController < ApplicationController
   def index
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
 
-    # @items.each do |item|
-    #   item.photo_file_name = item.photo.url(:medium)
-    #   item.photo_content_type = item.user.avatar.url(:thumb)
-    # end
     render "items/index"
-    #render :json => @items
   end
 
   def sale
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
  orders.item_id IS NULL AND items.sale_price IS NOT NULL AND items.hidden = false").includes(:user)
 
-    render :json => @items
+    render "items/index"
   end
 
   def trade
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
  orders.item_id IS NULL AND items.trade_price IS NOT NULL AND items.hidden = false").includes(:user)
-    render :json => @items
+
+    render "items/index"
   end
 
   def show
@@ -31,7 +27,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = current_user.items.new(item_params)
 
     if @item.save
       render :json => @item
@@ -53,7 +49,7 @@ class Api::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:title, :brand, :category, :photo, :condition, :original_price, :description,
-                                 :sale_price, :trade_price, :allow_pickup, :weight, :size)
+                                 :sale_price, :trade_price, :allow_pickup, :weight, :user_id, :size)
   end
 
 end

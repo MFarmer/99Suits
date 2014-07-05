@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       get '/items_trade', to: 'items#trade', as: 'items_trade'
     end
 
+    get '/items/:id/like', to: 'items#like', as: 'item_like'
+
     get '/feed', to: 'dashboard#feed_all', as: 'feed_all'
     get '/feed/sale', to: 'dashboard#feed_sale', as: 'feed_sale'
     get '/feed/trade', to: 'dashboard#feed_trade', as: 'feed_trade'
@@ -22,7 +24,6 @@ Rails.application.routes.draw do
     get '/feed/most_active_users', to: 'dashboard#featured_most_active', as: 'most_active'
     get '/feed/newest_users', to: 'dashboard#featured_newest_users', as: 'newest_users'
   end
-
 
   ### Original Rails app ###
   root "sessions#home"

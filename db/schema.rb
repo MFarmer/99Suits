@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629164406) do
+ActiveRecord::Schema.define(version: 20140705223814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20140629164406) do
     t.datetime "photo_updated_at"
     t.boolean  "hidden",             default: false
     t.boolean  "staff_pick",         default: false
+    t.integer  "views",              default: 0
   end
 
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree

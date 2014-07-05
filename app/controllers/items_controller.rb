@@ -12,8 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @item = @user.items.new(item_params)
+    @item = current_user.items.new(item_params)
 
     if @item.save
       flash.now[:notice] = "Successfully created item."
@@ -83,7 +82,7 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:title, :brand, :category, :photo, :condition, :original_price, :description,
-                                 :sale_price, :trade_price, :allow_pickup, :weight, :size)
+                                 :sale_price, :trade_price, :allow_pickup, :weight, :user_id, :size)
   end
 
   def require_not_sold!
