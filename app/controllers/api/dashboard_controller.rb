@@ -99,7 +99,7 @@ class Api::DashboardController < ApplicationController
     @items.sort! { |a, b| b.like_count <=> a.like_count }
 
     #@items
-    render :json => @items
+    render "items/index"
   end
 
   def featured_most_commented
@@ -116,9 +116,8 @@ class Api::DashboardController < ApplicationController
     end
 
     @items.sort! { |a, b| b.comments.count <=> a.comments.count }
-
-    #@items
-    render :json => @items
+    
+    render "items/index"
   end
 
   def featured_most_active
