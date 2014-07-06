@@ -63,19 +63,19 @@ class Api::DashboardController < ApplicationController
 
   def feed_all
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE orders.item_id IS NULL AND items.hidden = false").includes(:user)
-    render :json => @items
+    render "items/index"
   end
 
   def feed_sale
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
  orders.item_id IS NULL AND items.sale_price IS NOT NULL AND items.hidden = false").includes(:user)
-    render :json => @items
+    render "items/index"
   end
 
   def feed_trade
     @items = Item.joins("LEFT OUTER JOIN orders ON orders.item_id = items.id WHERE
  orders.item_id IS NULL AND items.trade_price IS NOT NULL AND items.hidden = false").includes(:user)
-    render :json => @items
+    render "items/index"
   end
 
   def featured_staff_picks

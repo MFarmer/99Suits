@@ -1,8 +1,102 @@
 <div class="left-col">
-  <%= render partial: 'dashboard/feed_nav' %>
+  <ul>
+    <li><h3>Latest</h3></li>
+    <li>
+      <ul>
+        <li><%= link_to "All", "#", id: 'all-link' %></li>
+        <li><%= link_to "Sale", "#", id: 'sale-link' %></li>
+        <li><%= link_to "Trade", "#", id: 'trade-link' %></li>
+      </ul>
+    </li>
+    <li><h3>Featured</h3></li>
+    <li>
+      <ul>
+        <li><%= link_to "Staff Picks", "#", id: 'staff-picks' %></li>
+        <li><%= link_to "Most Liked", "#", id: 'most-liked' %></li>
+        <li><%= link_to "Most Commented", "#", id: 'most-commented' %></li>
+        <li><%= link_to "Most Active Users", "#", id: 'most-active-users' %></li>
+        <li><%= link_to "Newest Users", "#", id: 'newest-users' %></li>
+      </ul>
+    </li>
+  </ul>
 </div>
 
 <div class="main-col">
   <h1>Latest Items - All <small>(<%= pluralize(@items.count, 'Items') %>)</small></h1>
-  <%= render partial: "items_table" %>
+
+  <div id="content">
+    <%= image_tag 'spinner.gif' %>
+  </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+
+    //Immediately fetch all of the items
+    $.ajax({
+      url: '/api/feed',
+      method: 'GET',
+      dataType: 'JSON'
+    }).success(function(json){
+      $("#content").html('');
+      if(json.length > 0){
+        renderItems(json, true);
+      } else {
+        $("#content").html('<p>There are no items which meet this criteria at this time.</p>');
+      }
+    }).error(function(response){
+      $("#content").html("<p style='color:red'>Sorry, a server error has occurred.</p>");
+    });
+
+    function renderItems(json, hide) {
+      if(hide){
+        $("#content").hide();
+      }
+      for(var i=0; i<json.length; i++){
+        var htmlString = "";
+        htmlString += "<a href='items/" + json[i].id + "' class='thumbnail'>";
+        htmlString += "<div class='photo-box'><img src='" + json[i].photo_url + "'>";
+        htmlString += "</div><div class='description-box'><div class='avatar-box'>";
+        htmlString += "<img src='" + json[i].user_avatar_url + "'></div><div class='detail-box'>";
+        htmlString += "<p>" + (json[i].title).substr(0,12);
+        if(json[i].title.length > 12){
+          htmlString += "...";
+        }
+        htmlString += "</p><p class='price'>$" + json[i].sale_price + "</p>";
+        htmlString += "</div></div></a>";
+
+        $("#content").append(htmlString);
+      }
+      $("#content").show('fade');
+    }
+
+    // === Listen for events ===
+    setup("#all-link", "api/feed/");
+    setup("#sale-link", "api/feed/sale");
+    setup("#trade-link", "api/feed/trade");
+    setup("#staff-picks", "api/feed/staff_picks");
+    setup("#most-commented", "api/feed/most_commented");
+    setup("#most-liked", "api/feed/most_liked");
+
+    function setup(link_id, url){
+      $(link_id).click(function(event){
+        event.preventDefault();
+        $.ajax({
+          url: url,
+          method: 'GET',
+          dataType: 'JSON'
+        }).success(function(json){
+          $("#content").html('');
+          if(json.length > 0){
+            renderItems(json, false);
+          } else {
+            $("#content").html('<p>There are no items which meet this criteria at this time.</p>');
+          }
+        }).error(function(response){
+          $("#content").html("<p style='color:red'>Sorry, a server error has occurred.</p>");
+        });
+      });
+    }
+
+  });
+</script>
