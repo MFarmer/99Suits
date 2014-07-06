@@ -1,19 +1,20 @@
 <nav>
+  <div class="container">
+    <div class="logo-bar">
+      <%= link_to (image_tag "logo2.png"), root_url %>
+    </div>
 
-  <div class="logo-bar">
-    <%= link_to (image_tag "logo2.png"), root_url %>
-  </div>
-
-  <div class="bottom-bar">
-    <% if signed_in? %>
-      <ul id="horizontal-list">
-        <li><%= link_to "Feed", feed_all_url %></li>
-        <li><%= link_to "Discover", discover_url %></li>
-        <li><%= link_to "List Item", new_user_item_url(current_user.id) %></li>
-        <li><%= link_to 'Activity', activity_url %></li>
-        <li><%= link_to "Account", account_profile_url %></li>
-        <li><%= link_to "Sign Out", session_url, :method => :delete %></li>
-      </ul>
-    <% end %>
+    <div class="bottom-bar">
+      <% if signed_in? %>
+        <ul id="horizontal-list">
+          <li><%= link_to "Feed", feed_all_url %></li>
+          <li><%= link_to "Discover", discover_url %></li>
+          <li><%= link_to "List Item", new_user_item_url(current_user.id) %></li>
+          <li><%= link_to 'Activity', activity_url %></li>
+          <li><%= link_to "Account", account_profile_url %></li>
+          <li><%= link_to "Sign Out", session_url, :method => :delete %></li>
+        </ul>
+      <% end %>
+    </div>
   </div>
 </nav>

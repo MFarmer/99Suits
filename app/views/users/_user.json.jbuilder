@@ -1,4 +1,4 @@
 json.(user, :id, :username, :fname,
-    :lname, :bio)
+    :lname)
 
 json.avatar_url user.avatar.url(:medium)

@@ -1,10 +1,8 @@
 <% rating = 0 %>
 <% count = 0 %>
-<% @shipped_orders.each do |order| %>
-  <% if order.feedback %>
-    <% rating += order.feedback.rating %>
-    <% count += 1 %>
-  <% end %>
+<% @user.feedback_received.each do |feedback| %>
+  <% rating += feedback.rating %>
+  <% count += 1 %>
 <% end %>
 <% if count > 0 %>
   <% rating /= count %>

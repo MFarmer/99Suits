@@ -611,6 +611,16 @@ a.thumbnail:active {
   clear: both;
 }
 
+#feedback {
+  display: block;
+  cursor: pointer;
+  transition: color 0.5s;
+}
+
+#feedback:hover {
+  color: teal;
+}
+
 /* Forms */
 
 input {

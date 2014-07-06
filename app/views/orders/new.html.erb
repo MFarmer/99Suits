@@ -4,6 +4,7 @@
 </div>
 
 <div class="main-col">
+  <button id="auto-fill">Auto-fill</button>
   <h1>Order <%= @item.title %></h1>
 
   <div id="stripe_error">
@@ -15,26 +16,26 @@
   <%= form_for @order, :url => item_orders_url(@item.id) do |f| %>
 
     <%= f.label :street %><br>
-    <%= f.text_field :street %><br><br>
+    <%= f.text_field :street, id: "street" %><br><br>
 
     <%= f.label :city %><br>
-    <%= f.text_field :city %><br><br>
+    <%= f.text_field :city, id: "city" %><br><br>
 
     <%= f.label :state %><br>
-    <%= f.text_field :state %><br><br>
+    <%= f.text_field :state, id: "state" %><br><br>
 
     <%= f.label :zip %><br>
-    <%= f.text_field :zip %><br><br>
+    <%= f.text_field :zip, id: "zip" %><br><br>
 
     <%= label_tag :card_number, "Credit Card #" %><br>
-    <%= text_field_tag :card_number, nil, { :name => nil, :'data-stripe' => "number"} %><br><br>
+    <%= text_field_tag :card_number, nil, { :name => nil, :'data-stripe' => "number", :id => "cc"} %><br><br>
 
     <%= label_tag :card_code, "CVC" %><br>
-    <%= text_field_tag :card_code, nil, { :name => nil, :'data-stripe' => "cvc"} %><br><br>
+    <%= text_field_tag :card_code, nil, { :name => nil, :'data-stripe' => "cvc", :id => "cvc"} %><br><br>
 
     <%= label_tag "Expiration Date" %><br><br>
-    <%= select_month nil, { use_two_digit_numbers: true }, { :name => nil, :'data-stripe' => "exp-month" } %><br><br>
-    <%= select_year nil, { start_year: Date.today.year, end_year: Date.today.year + 10 }, { :name => nil, :'data-stripe' => "exp-year" } %><br><br>
+    <%= select_month nil, { use_two_digit_numbers: true }, { :name => nil, :'data-stripe' => "exp-month", :id => "expiration-month" } %><br><br>
+    <%= select_year nil, { start_year: Date.today.year, end_year: Date.today.year + 10 }, { :name => nil, :'data-stripe' => "exp-year", :id => "expiration-year" } %><br><br>
 
     <%= f.label :purchase_type %><br>
 
@@ -57,3 +58,18 @@
 
   <% end %>
 </div>
+
+<script>
+  $(document).ready(function(){
+    $("#auto-fill").click(function(){
+      $("#city").val("New York");
+      $("#state").val("New York");
+      $("#zip").val("10003");
+      $("#street").val("36 Cooper Square");
+      $("#cc").val("4242424242424242");
+      $("#cvc").val("123");
+      $("#expiration-month").val("7");
+      $("#expiration-year").val("2014");
+    });
+  });
+</script>

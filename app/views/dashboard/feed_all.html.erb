@@ -22,7 +22,7 @@
 </div>
 
 <div class="main-col">
-  <h1>Latest Items - All <small>(<%= pluralize(@items.count, 'Items') %>)</small></h1>
+  <h1 id="title">Latest Items - All <small>(<%= pluralize(@items.count, 'Items') %>)</small></h1>
 
   <div id="content">
     <%= image_tag 'spinner.gif' %>
@@ -82,17 +82,41 @@
       $("#content").show('fade');
     }
 
-    // === Listen for events ===
-    setup("#all-link", "api/feed/");
-    setup("#sale-link", "api/feed/sale");
-    setup("#trade-link", "api/feed/trade");
-    setup("#staff-picks", "api/feed/staff_picks");
-    setup("#most-commented", "api/feed/most_commented");
-    setup("#most-liked", "api/feed/most_liked");
+    function renderUsers(json, hide) {
+      if(hide){
+        $("#content").hide();
+      }
+      for(var i=0; i<json.length; i++){
+        var htmlString = "";
+        htmlString += "<a href='users/" + json[i].id + "' class='thumbnail'>";
+        htmlString += "<div class='photo-box'><img src='" + json[i].avatar_url + "'>";
+        htmlString += "</div><div class='description-box'>";
+        htmlString += "<div class='detail-box'>";
+        htmlString += "<p>" + (json[i].username).substr(0,12);
+        if(json[i].username.length > 12){
+          htmlString += "...";
+        }
+        htmlString += "</p></div></div></a>";
 
-    function setup(link_id, url){
+        $("#content").append(htmlString);
+      }
+      $("#content").show('fade');
+    }
+
+    // === Listen for events ===
+    setup("#all-link", "api/feed/", "Latest Items - All");
+    setup("#sale-link", "api/feed/sale", "Latest Items - Sale");
+    setup("#trade-link", "api/feed/trade", "Latest Items - Trade");
+    setup("#staff-picks", "api/feed/staff_picks", "Staff Picks");
+    setup("#most-commented", "api/feed/most_commented", "Most Commented");
+    setup("#most-liked", "api/feed/most_liked", "Most Liked");
+    setupUserFeed("#most-active-users", "api/feed/most_active_users", "Most Active Users");
+    setupUserFeed("#newest-users", "api/feed/newest_users", "Newest Users");
+
+    function setup(link_id, url, title){
       $(link_id).click(function(event){
         event.preventDefault();
+        $("#title").html(title);
         $.ajax({
           url: url,
           method: 'GET',
@@ -103,6 +127,27 @@
             renderItems(json, false);
           } else {
             $("#content").html('<p>There are no items which meet this criteria at this time.</p>');
+          }
+        }).error(function(response){
+          $("#content").html("<p style='color:red'>Sorry, a server error has occurred.</p>");
+        });
+      });
+    }
+
+    function setupUserFeed(link_id, url, title){
+      $(link_id).click(function(event){
+        event.preventDefault();
+        $("#title").html(title);
+        $.ajax({
+          url: url,
+          method: 'GET',
+          dataType: 'JSON'
+        }).success(function(json){
+          $("#content").html('');
+          if(json.length > 0){
+            renderUsers(json, false);
+          } else {
+            $("#content").html('<p>There are no users which meet this criteria at this time.</p>');
           }
         }).error(function(response){
           $("#content").html("<p style='color:red'>Sorry, a server error has occurred.</p>");

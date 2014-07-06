@@ -136,12 +136,34 @@ class Api::DashboardController < ApplicationController
     @users.sort! { |a, b| b.items.count <=> a.items.count }
 
     #@users
-    render :json => @users
+    #render :json => @users
+    render "users/index"
   end
 
   def featured_newest_users
-    @newest_users = User.all.order('created_at DESC LIMIT 10')
-    render :json => @newest_users
+    @users = User.all.order('created_at DESC LIMIT 10')
+    #render :json => @newest_users
+    render "users/index"
+  end
+
+  def profile_items_available
+    @items = Item.where("user_id = ?", params[:user_id])
+    render "items/index"
+  end
+
+  def followers
+    @users = User.find(params[:user_id]).followers
+    render "users/index"
+  end
+
+  def following
+    @users = User.find(params[:user_id]).followed_users
+    render "users/index"
+  end
+
+  def feedback
+    @feedback = User.find(params[:user_id]).feedback_received
+    render "users/feedbacks"
   end
 
 end

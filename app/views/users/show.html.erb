@@ -1,18 +1,237 @@
 <div class="left-col">
   <ul>
-    <li><%= link_to "Closet", user_url(@user.id) %></li>
-    <li><%= link_to "Feedback", user_feedback_url(@user.id) %></li>
-    <li><%= link_to "Followers", user_followers_url(@user.id) %></li>
-    <li><%= link_to "Following", user_following_url(@user.id) %></li>
+    <li><%= link_to "Closet", "#", id: "closet-link" %></li>
+    <li><%= link_to "Feedback", "#", id: "feedback-link" %></li>
+    <li><%= link_to "Followers", "#", id: "followers-link" %></li>
+    <li><%= link_to "Following", "#", id: "following-link" %></li>
   </ul>
 </div>
 
 <div class="main-col">
 
-  <%= render partial: "users/user_summary" %>
+  <div class="header-button-bar">
+    <% if @user.staff %>
+      <p style="float: left;background-color: #1abc9c; padding: 3px;margin-right: 5px; margin-top: 2px; border-radius: 3px;color:white">staff</p>
+    <% end %>
+    <h1>
+      <%= full_name(@user)%> <small>
+      @<%= @user.username %></small>
+    </h1>
 
-  <h1><%= @user.fname %>'s Closet</h1>
+    <% if @user.id != current_user.id %>
+      <% if Follow.where('user_id = ? AND following_id = ?', current_user.id, @user.id).count == 0 %>
+        <%= button_to "Follow Me", "#", class: "follow-button" %>
+      <% else %>
+        <button class="follow-button-disabled" disabled>✓ Followed</button>
+      <% end %>
+    <% end %>
 
-  <%= render partial: "dashboard/items_table" %>
+  </div>
+
+  <table class="user-profile-table">
+    <tr>
+      <td id="photo-col"><%= image_tag @user.avatar.url(:thumb) %></td>
+      <td id="transactions-count"><%= @transactions_count %></td>
+      <td id="followed-count"><%= @followed_by.count %></td>
+      <td id="followed-users-count"><%= @followed_users.count %></td>
+    </tr>
+    <tr id="detail">
+      <td style="border-right: 1px solid #eee;" id="feedback">
+        <%= render partial: "users/feedback_rating" %>
+      </td>
+      <td style="border-right: 1px solid #eee;">Transactions</td>
+      <td style="border-right: 1px solid #eee;">Followers</td>
+      <td>Following</td>
+    </tr>
+  </table>
+
+  <div class="bio-box">
+    <%= @user.bio ? @user.bio : "No bio information provided." %>
+  </div>
+
+
+
+
+  <!-- Content Area -->
+  <h1 id="title"></h1>
+  <div id="content">
+
+  </div>
 
 </div>
+
+<script>
+  $(document).ready(function(){
+
+    // Immediately download the items which the user is selling
+    $.ajax({
+      url: "/api/users/<%= @user.id %>/closet",
+      method: "GET",
+      dataType: "JSON"
+    }).success(function(json){
+      $("#title").html("<%= @user.username %>'s Closet");
+      renderItems(json, true);
+    }).error(function(response){
+      alert("Error fetching user closet.");
+    });
+
+    // === Respond to events ===
+
+    $("#feedback").click(function(){
+      $("#feedback-link").trigger("click");
+    });
+
+    setup("#closet-link", "/api/users/<%= @user.id %>/closet", "<%= @user.username %>'s Closet");
+    setupFeedback("#feedback-link", "/api/users/<%= @user.id %>/feedback", "Feedback");
+    setupUserFeed("#followers-link", "/api/users/<%= @user.id %>/followers", "Followers");
+    setupUserFeed("#following-link", "/api/users/<%= @user.id %>/following", "Following");
+
+    function setup(link_id, url, title){
+      $(link_id).click(function(event){
+        event.preventDefault();
+        $("#title").html(title);
+        $("#content").html("<p>Loading...</p>");
+        $.ajax({
+          url: url,
+          method: 'GET',
+          dataType: 'JSON'
+        }).success(function(json){
+          $("#content").html('');
+          if(json.length > 0){
+            renderItems(json, false);
+          } else {
+            $("#content").html('<p>There are no items which meet this criteria at this time.</p>');
+          }
+        }).error(function(response){
+          $("#content").html("<p style='color:red'>Sorry, a server error has occurred.</p>");
+        });
+      });
+    }
+
+    function setupFeedback(link_id, url, title){
+      $(link_id).click(function(event){
+        event.preventDefault();
+        $("#title").html(title);
+        $("#content").html("<p>Loading...</p>");
+        $.ajax({
+          url: url,
+          method: 'GET',
+          dataType: 'JSON'
+        }).success(function(json){
+          $("#content").html('');
+          if(json.length > 0){
+            renderFeedback(json, false);
+          } else {
+            $("#content").html('<p>There is no feedback for this user.</p>');
+          }
+        }).error(function(response){
+          $("#content").html("<p style='color:red'>Sorry, a server error has occurred.</p>");
+        });
+      });
+    }
+
+    function setupUserFeed(link_id, url, title){
+      $(link_id).click(function(event){
+        event.preventDefault();
+        $("#title").html(title);
+        $("#content").html("<p>Loading...</p>");
+        $.ajax({
+          url: url,
+          method: 'GET',
+          dataType: 'JSON'
+        }).success(function(json){
+          $("#content").html('');
+          if(json.length > 0){
+            renderUsers(json, false);
+          } else {
+            $("#content").html('<p>There are no users which meet this criteria at this time.</p>');
+          }
+        }).error(function(response){
+          $("#content").html("<p style='color:red'>Sorry, a server error has occurred.</p>");
+        });
+      });
+    }
+
+    function renderFeedback(json, hide){
+      if(hide){
+        $("#content").hide();
+      }
+      $("#content").append("<div class='results'></div>");
+      for(var i=0; i<json.length; i++){
+        var htmlString = "";
+        htmlString += "<a href='/users/" + json[i].reviewer_id + "' class='result-box'>";
+        htmlString += "<div class='result-image-box'>";
+        htmlString += "<img src='" + json[i].user_avatar_url + "'></div>";
+        htmlString += "<div class='result-text-box'><p class='title'>";
+
+        for(var j=0; j<json[i].rating; j++){
+          htmlString += "★";
+        }
+
+        htmlString += "</p><p>" + json[i].content + "</p>";
+        htmlString += "<p class='context'>-" + json[i].user_fname + " " + json[i].user_lname + "</p></div></a>";
+
+        $(".results").append(htmlString);
+      }
+
+      $("content").show("fade");
+    }
+
+    function renderUsers(json, hide) {
+      if(hide){
+        $("#content").hide();
+      }
+      for(var i=0; i<json.length; i++){
+        var htmlString = "";
+        htmlString += "<a href='/users/" + json[i].id + "' class='thumbnail'>";
+        htmlString += "<div class='photo-box'><img src='" + json[i].avatar_url + "'>";
+        htmlString += "</div><div class='description-box'>";
+        htmlString += "<div class='detail-box'>";
+        htmlString += "<p>" + (json[i].username).substr(0,12);
+        if(json[i].username.length > 12){
+          htmlString += "...";
+        }
+        htmlString += "</p></div></div></a>";
+
+        $("#content").append(htmlString);
+      }
+      $("#content").show('fade');
+    }
+
+    function renderItems(json, hide) {
+      if(hide){
+        $("#content").hide();
+      }
+      for(var i=0; i<json.length; i++){
+        var htmlString = "";
+        htmlString += "<a href='/items/" + json[i].id + "' class='thumbnail'>";
+        htmlString += "<div class='photo-box'><img src='" + json[i].photo_url + "'>";
+        htmlString += "</div><div class='description-box'><div class='avatar-box'>";
+        htmlString += "<img src='" + json[i].user_avatar_url + "'></div><div class='detail-box'>";
+        htmlString += "<p>" + (json[i].title).substr(0,12);
+        if(json[i].title.length > 12){
+          htmlString += "...";
+        }
+        htmlString += "</p>";
+
+        // Is this item offered for sale?
+        htmlString += "<p class='price'>";
+        if(json[i].sale_price != null){
+          if(json[i].trade_price == null){
+            htmlString += "<del style='font-weight:lighter;color:#bbb'>$" + json[i].original_price + "</del> ";
+          }
+          htmlString += "$" + json[i].sale_price;
+        }
+        if(json[i].trade_price != null){
+          htmlString += "<span style='background-color:#9b59b6;padding:3px;margin-left:5px;border-radius:3px;color:white'>" + json[i].trade_price + " k</span>";
+        }
+        htmlString += "</p></div></div></a>";
+
+        $("#content").append(htmlString);
+      }
+      $("#content").show('fade');
+    }
+
+
+  });
+</script>

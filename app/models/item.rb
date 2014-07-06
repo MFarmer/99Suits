@@ -17,6 +17,11 @@ class Item < ActiveRecord::Base
   has_many :likes
   has_many :comments
   has_one :order
+  has_one(
+      :feedback,
+      :through => :order,
+      :source => :feedback
+  )
 
   # Validations
   if Rails.env.development?

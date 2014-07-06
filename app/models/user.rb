@@ -38,6 +38,12 @@ class User < ActiveRecord::Base
       :source => :feedback
   )
 
+  has_many(
+      :feedback_received,
+      :through => :items,
+      :source => :feedback
+  )
+
   # Validations
   if Rails.env.development?
     has_attached_file :avatar, :styles => { :medium => "300x300>", :small => "112x112>", :thumb => "100x100>" }
