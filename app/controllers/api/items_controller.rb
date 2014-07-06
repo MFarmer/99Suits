@@ -21,10 +21,14 @@ class Api::ItemsController < ApplicationController
   end
 
   def like
-    like = Like.new(user_id: current_user.id, item_id: params[:id])
-    like.save
-    item = Item.find(params[:id])
-    render :json => item.likes.count
+    if Like.where("user_id = ? AND item_id = ?", current_user.id, params[:id]).count == 0
+      like = Like.new(user_id: current_user.id, item_id: params[:id])
+      like.save
+      item = Item.find(params[:id])
+      render :json => item.likes.count
+    else
+      render :json => item.likes.count
+    end
   end
 
   def view
@@ -32,6 +36,13 @@ class Api::ItemsController < ApplicationController
     item.views += 1
     item.save
     render :json => item.views
+  end
+
+  def staff_pick
+    item = Item.find(params[:id])
+    item.staff_pick = true
+    item.save
+    render :json => item
   end
 
   def show

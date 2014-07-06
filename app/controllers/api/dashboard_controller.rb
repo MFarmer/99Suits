@@ -80,7 +80,7 @@ class Api::DashboardController < ApplicationController
 
   def featured_staff_picks
     @items = Item.where("staff_pick = ?", true)
-    render :json => @items
+    render "items/index"
   end
 
   def featured_most_liked
@@ -116,7 +116,7 @@ class Api::DashboardController < ApplicationController
     end
 
     @items.sort! { |a, b| b.comments.count <=> a.comments.count }
-    
+
     render "items/index"
   end
 

@@ -62,8 +62,20 @@
         if(json[i].title.length > 12){
           htmlString += "...";
         }
-        htmlString += "</p><p class='price'>$" + json[i].sale_price + "</p>";
-        htmlString += "</div></div></a>";
+        htmlString += "</p>";
+
+        // Is this item offered for sale?
+        htmlString += "<p class='price'>";
+        if(json[i].sale_price != null){
+          if(json[i].trade_price == null){
+            htmlString += "<del style='font-weight:lighter;color:#bbb'>$" + json[i].original_price + "</del> ";
+          }
+          htmlString += "$" + json[i].sale_price;
+        }
+        if(json[i].trade_price != null){
+          htmlString += "<span style='background-color:#9b59b6;padding:3px;margin-left:5px;border-radius:3px;color:white'>" + json[i].trade_price + " k</span>";
+        }
+        htmlString += "</p></div></div></a>";
 
         $("#content").append(htmlString);
       }

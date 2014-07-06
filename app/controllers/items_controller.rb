@@ -51,6 +51,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @comments = @item.comments
     @like_count = @item.likes.count
+    @item_liked_by_user = (Like.where("user_id = ? AND item_id = ?", current_user.id, @item.id).count > 0)
   end
 
   def like

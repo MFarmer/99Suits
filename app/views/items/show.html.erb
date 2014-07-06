@@ -39,8 +39,15 @@
     <tr>
       <td id="item-show-buttons">
         <%= link_to "BUY NOW", new_item_order_url(@item.id), class: "buy-button" %>
-        <%= link_to "Trade", "#", class: "trade-button" %>
-        <%= link_to "Like", "#", class: "like-button" %>
+        <% unless @item.trade_price.nil? %>
+          <%= link_to "Trade", "#", class: "trade-button" %>
+        <% end %>
+        <% unless @item_liked_by_user %>
+          <%= link_to "Like", "#", class: "like-button" %>
+        <% end %>
+        <% if @item.staff_pick.nil? %>
+          <%= link_to "Staff Pick", "#", class: "staff-pick-button" %>
+        <% end %>
       </td>
     </tr>
   </table>
@@ -48,6 +55,13 @@
   <div class="item-show-bottom-section">
     <div class="bottom-left" style="width: 200px;float: left;">
       <table style="width: 100%">
+        <tr>
+          <td colspan="2" id="pick-status">
+            <% if @item.staff_pick %>
+              Staff Pick
+            <% end %>
+          </td>
+        </tr>
         <tr>
           <td>Views</td>
           <td id="view-counter"><%= @item.views %></td>
@@ -103,6 +117,21 @@
     $("form").hide();
 
     // === Respond to events ===
+    $(".staff-pick-button").click(function(event){
+      $(".staff-pick-button").html("Picked");
+      event.preventDefault();
+
+      $.ajax({
+        url: "/api/items/<%= @item.id %>/pick", //submits it to the given url of the form
+        method: 'POST',
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+      }).success(function(json){
+        $("#pick-status").html("Staff Pick");
+      }).error(function(response){
+        alert("Error with staff pick function.")
+      });
+    });
+
     $(".like-button").click(function(event){
       $(".like-button").html("Liked!");
       event.preventDefault();
@@ -113,7 +142,6 @@
         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
       }).success(function(json){
         $("#like-counter").html(json);
-        $( ".like-button" ).prop( "disabled", true );
       });
     });
 
@@ -134,7 +162,7 @@
           htmlString = "<li><div class='comment-photo-box'>";
           htmlString += "<img src='" + json[i].user_avatar_url + "'>";
           htmlString += "</div><div class='comment-text-box'><p class='comment-author'>";
-          htmlString += "<a href='users/" + json[i].user_id + "'>" + json[i].user_username + "</a>";
+          htmlString += "<a href='/users/" + json[i].user_id + "'>" + json[i].user_username + "</a>";
           htmlString += "</p><p class='comment-text'>" + json[i].content + "</p><p class='comment-time'>" + json[i].created_at + "</p>";
           htmlString += "</div>";
           htmlString += "</li>";
