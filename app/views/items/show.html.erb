@@ -1,70 +1,182 @@
-<div class="left-col">
-  <ul>
-    <li>Seller Profile</li>
-    <li>More Like This</li>
-  </ul>
-</div>
-<div class="main-col">
+<div class="whole-width">
 
-  <div class="item-box">
+  <span id="breadcrumbs"><%= link_to "Feed", feed_all_url %> / <%= @item.title %></span>
 
-    <div class="item-left">
-      <%= image_tag @item.photo.url(:medium) %>
+  <% if @item.user == current_user %>
+    <div class="notice">
+      <h3>You listed this item <%= distance_of_time_in_words(@item.created_at, Time.zone.now) %> ago</h3>
+      <%= link_to "Edit", edit_item_url(@item.id), class: 'edit-button' %>
+      <%= link_to "Delete", item_url(@item.id), class: 'delete-button',
+                  :confirm => "Are you sure you want to remove this item from listings?", :method => :delete %>
     </div>
+  <% end %>
 
-    <div class="item-right">
+  <table class="item-show">
+    <tr>
+      <td rowspan="3" id="item-show-img">
+        <%= image_tag @item.photo.url(:medium)%>
+        <p id="details"><%= @item.size %> | <%= @item.brand %> | <%= @item.condition %></p>
+      </td>
+      <td id="item-show-user">
+        <p><%= image_tag @item.user.avatar.url(:thumb) %> <a href="/users/<%= @item.user.id %>"><%= @item.user.username %></a> is selling his</p>
+        <h3><%= @item.title %></h3>
+        <p id="quote">
+          <%= image_tag "triangle.png", id: "decor" %>
+          <%= @item.description %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td id="item-show-detail">
+        <p>
+          <del><%= number_to_currency(@item.original_price) %></del>
+        </p>
+        <p>
+          <span id="sale_price"><%= number_to_currency(@item.sale_price) %></span> or <span id="trade_price"><%= @item.trade_price %> karma</span>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td id="item-show-buttons">
+        <%= link_to "BUY NOW", new_item_order_url(@item.id), class: "buy-button" %>
+        <%= link_to "Trade", "#", class: "trade-button" %>
+        <%= link_to "Like", "#", class: "like-button" %>
+      </td>
+    </tr>
+  </table>
 
-      <% if @item.user == current_user %>
-        <div class="notice">
-          <h3>You listed this item <%= distance_of_time_in_words(@item.created_at, Time.zone.now) %> ago</h3>
-          <%= link_to "Edit", edit_item_url(@item.id), class: 'edit-button' %>
-          <%= link_to "Delete", item_url(@item.id), class: 'delete-button',
-                      :confirm => "Are you sure you want to remove this item from listings?", :method => :delete %>
-        </div>
-      <% end %>
-
-      <div class="item-top">
-        <div class="item-img">
-          <%= image_tag @item.user.avatar.url(:thumb) %>
-        </div>
-        <div class="item-header">
-          <p><%= link_to @item.user.username, user_url(@item.user.id) %> is selling his</p>
-          <h3><%= @item.title %></h3>
-        </div>
-      </div>
-
-      <div class="item-bottom">
-        <%= render partial: "item_detail" %>
-        <br>
-        <p><%= @item.description %></p>
-        <br>
-        <% if @item.user != current_user %>
-          <%= link_to "Buy Now", new_item_order_url(@item.id), class: 'buy-button', data: { no_turbolink: true } %>
-          <%= link_to "Like (#{pluralize(@item.like_count, 'Likes')})", item_like_url(@item.id), class: 'like-button' %>
-          <% if current_user.staff %>
-            <% if !@item.staff_pick %>
-              <%= link_to "Staff Pick", item_staff_pick_url(@item.id), class: 'like-button' %>
-            <% else %>
-              <%= link_to "Picked!", item_url(@item.id), class: 'like-button' %>
-            <% end %>
-          <% end %>
-        <% end %>
-        <br><br>
-        <!-- Comment Form -->
-        <form action="<%= item_comments_url(@item.id) %>" method="POST">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
-          <label for="comment">Add Comment</label><br>
-          <input type="hidden" name="comment[item_id]" value="<%= @item.id %>">
-          <textarea id="comment" name="comment[content]"></textarea><br>
-          <input type="submit" value="Submit">
-        </form>
-
-        <%= render partial: "comments_list" %>
-      </div>
-
+  <div class="item-show-bottom-section">
+    <div class="bottom-left" style="width: 200px;float: left;">
+      <table style="width: 100%">
+        <tr>
+          <td>Views</td>
+          <td id="view-counter"><%= @item.views %></td>
+        </tr>
+        <tr>
+          <td>Likes</td>
+          <td id="like-counter"><%= @like_count %></td>
+        </tr>
+        <tr>
+          <td>Time Posted</td>
+          <td>0</td>
+        </tr>
+      </table>
     </div>
+    <div class="bottom-right" style="float: right; width: 500px; padding: 10px;">
+      <!-- Comment Form -->
+      <span id="show-comment" href="#">+ADD</span>
+      <h1 id="comment-count">Comments <small>(<%= pluralize(@item.comments.count, "comment") %>)</small></h1>
 
+      <form action="/api/comments/" method="POST">
+        <input type="hidden" name="authenticity_token" value="lGu8JcJ0bRYRwmXLhUQdi9j0rti1f3et914Cm26v5GM=">
+        <input type="hidden" value="<%= @item.id %>" name="comment[item_id]">
+        <textarea id="comment" name="comment[content]"></textarea><br>
+        <input type="submit" value="Submit">
+      </form>
+
+      <ul id="comments">
+
+      </ul>
+    </div>
   </div>
 
 </div>
+
+<script>
+  $(document).ready(function(){
+
+    // Increment the view counter for this item immediately
+    $.ajax({
+      url: "/api/items/<%= @item.id %>/view", //submits it to the given url of the form
+      method: 'POST',
+      dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+    }).success(function(json){
+      $("#view-counter").html(json);
+    });
+
+    // Fetch and refresh the new comments
+    $("#comments").hide();
+    fetchAndRenderComments();
+
+    // Hide the form immediately
+    var comments_show = false;
+    $("form").hide();
+
+    // === Respond to events ===
+    $(".like-button").click(function(event){
+      $(".like-button").html("Liked!");
+      event.preventDefault();
+
+      $.ajax({
+        url: "/api/items/<%= @item.id %>/like", //submits it to the given url of the form
+        method: 'POST',
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+      }).success(function(json){
+        $("#like-counter").html(json);
+        $( ".like-button" ).prop( "disabled", true );
+      });
+    });
+
+    $("#show-comment").click(function(event){
+      comment_form_toggle();
+    });
+
+    function fetchAndRenderComments(){
+      $.ajax({
+        url: "/api/items/<%= @item.id %>/comments",
+        method: "GET",
+        dataType: "JSON"
+      }).success(function(json){
+        $("#comment-count").html("Comments <small>(" + json.length + " comments)</small>");
+        $("#comments").html('');
+        for(var i=0; i<json.length; i++){
+          var htmlString = "";
+          htmlString = "<li><div class='comment-photo-box'>";
+          htmlString += "<img src='" + json[i].user_avatar_url + "'>";
+          htmlString += "</div><div class='comment-text-box'><p class='comment-author'>";
+          htmlString += "<a href='users/" + json[i].user_id + "'>" + json[i].user_username + "</a>";
+          htmlString += "</p><p class='comment-text'>" + json[i].content + "</p><p class='comment-time'>" + json[i].created_at + "</p>";
+          htmlString += "</div>";
+          htmlString += "</li>";
+
+          $("#comments").append(htmlString);
+        }
+        $("#comments").show('slow');
+      });
+    }
+
+    function comment_form_toggle(){
+      if(comments_show){
+        $("#show-comment").html("+ADD");
+        $("form").hide("ease");
+        comments_show = false;
+      } else {
+        $("#show-comment").html("HIDE");
+        $("form").show("ease");
+        comments_show = true;
+      }
+    }
+
+    $('form').submit(function(event) {
+      event.preventDefault();
+
+      var valuesToSubmit = $(this).serialize();
+
+      comment_form_toggle();
+      $("textarea").val('');
+
+      event.preventDefault();
+
+      $.ajax({
+        url: $(this).attr('action'), //submits it to the given url of the form
+        method: 'POST',
+        data: valuesToSubmit,
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+      }).success(function(json){
+        fetchAndRenderComments();
+      });
+
+      //return false;
+    });
+  });
+</script>
