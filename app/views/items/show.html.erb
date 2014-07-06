@@ -2,7 +2,6 @@
 
   <span id="breadcrumbs"><%= link_to "Feed", feed_all_url %> / <%= @item.title %></span>
 
-  <h1><%= @item.title %> <small><%= number_to_currency(@item.sale_price) %></small></h1>
   <% if @item.user == current_user %>
     <div class="notice">
       <h3>You listed this item <%= distance_of_time_in_words(@item.created_at, Time.zone.now) %> ago</h3>
@@ -51,11 +50,11 @@
       <table style="width: 100%">
         <tr>
           <td>Views</td>
-          <td>0</td>
+          <td id="view-counter"><%= @item.views %></td>
         </tr>
         <tr>
           <td>Likes</td>
-          <td>0</td>
+          <td id="like-counter"><%= @like_count %></td>
         </tr>
         <tr>
           <td>Time Posted</td>
@@ -65,30 +64,18 @@
     </div>
     <div class="bottom-right" style="float: right; width: 500px; padding: 10px;">
       <!-- Comment Form -->
-      <h1>Comments <small>(<%= pluralize(@item.comments.count, "comment") %>)</small> <span id="show-comment" href="#">+ADD</span></h1>
-      <form action="<%= item_comments_url(@item.id) %>" method="POST">
-        <input type="hidden" name="authenticity_token" value="lGu8JcJ0bRYRwmXLhUQdi9j0rti1f3et914Cm26v5GM=">
+      <span id="show-comment" href="#">+ADD</span>
+      <h1 id="comment-count">Comments <small>(<%= pluralize(@item.comments.count, "comment") %>)</small></h1>
 
+      <form action="/api/comments/" method="POST">
+        <input type="hidden" name="authenticity_token" value="lGu8JcJ0bRYRwmXLhUQdi9j0rti1f3et914Cm26v5GM=">
+        <input type="hidden" value="<%= @item.id %>" name="comment[item_id]">
         <textarea id="comment" name="comment[content]"></textarea><br>
         <input type="submit" value="Submit">
       </form>
 
       <ul id="comments">
-        <% @item.comments.reverse.each do |comment| %>
-          <li>
-            <div class="comment-photo-box">
-              <%= image_tag comment.author.avatar.url(:thumb) %>
-            </div>
-            <div class="comment-text-box">
-              <p class="comment-author">
-                adam says...
-              </p>
-              <p class="comment-text"><%= comment.content %></p>
-              <p class="comment-time"><%= comment.created_at %></p>
-              </p>
-            </div>
-          </li>
-        <% end %>
+
       </ul>
     </div>
   </div>
@@ -97,10 +84,68 @@
 
 <script>
   $(document).ready(function(){
+
+    // Increment the view counter for this item immediately
+    $.ajax({
+      url: "/api/items/<%= @item.id %>/view", //submits it to the given url of the form
+      method: 'POST',
+      dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+    }).success(function(json){
+      $("#view-counter").html(json);
+    });
+
+    // Fetch and refresh the new comments
+    $("#comments").hide();
+    fetchAndRenderComments();
+
+    // Hide the form immediately
     var comments_show = false;
     $("form").hide();
 
+    // === Respond to events ===
+    $(".like-button").click(function(event){
+      $(".like-button").html("Liked!");
+      event.preventDefault();
+
+      $.ajax({
+        url: "/api/items/<%= @item.id %>/like", //submits it to the given url of the form
+        method: 'POST',
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+      }).success(function(json){
+        $("#like-counter").html(json);
+        $( ".like-button" ).prop( "disabled", true );
+      });
+    });
+
     $("#show-comment").click(function(event){
+      comment_form_toggle();
+    });
+
+    function fetchAndRenderComments(){
+      $.ajax({
+        url: "/api/items/<%= @item.id %>/comments",
+        method: "GET",
+        dataType: "JSON"
+      }).success(function(json){
+        $("#comment-count").html("Comments <small>(" + json.length + " comments)</small>");
+        $("#comments").html('');
+        for(var i=0; i<json.length; i++){
+          var htmlString = "";
+          htmlString = "<li><div class='comment-photo-box'>";
+          htmlString += "<img src='" + json[i].user_avatar_url + "'>";
+          htmlString += "</div><div class='comment-text-box'><p class='comment-author'>";
+          htmlString += "<a href='users/" + json[i].user_id + "'>" + json[i].user_username + "</a>";
+          htmlString += "</p><p class='comment-text'>" + json[i].content + "</p><p class='comment-time'>" + json[i].created_at + "</p>";
+          htmlString += "</div>";
+          htmlString += "</li>";
+
+          $("#comments").append(htmlString);
+        }
+        $("#comments").show('slow');
+      });
+    }
+
+    function comment_form_toggle(){
       if(comments_show){
         $("#show-comment").html("+ADD");
         $("form").hide("ease");
@@ -110,6 +155,28 @@
         $("form").show("ease");
         comments_show = true;
       }
+    }
+
+    $('form').submit(function(event) {
+      event.preventDefault();
+
+      var valuesToSubmit = $(this).serialize();
+
+      comment_form_toggle();
+      $("textarea").val('');
+
+      event.preventDefault();
+
+      $.ajax({
+        url: $(this).attr('action'), //submits it to the given url of the form
+        method: 'POST',
+        data: valuesToSubmit,
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+      }).success(function(json){
+        fetchAndRenderComments();
+      });
+
+      //return false;
     });
   });
 </script>

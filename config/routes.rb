@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  ### Backbone ###
+  ### JSON API ###
 
   namespace :api, :defaults => { :format => :json } do
 
@@ -13,7 +13,8 @@ Rails.application.routes.draw do
       get '/items_trade', to: 'items#trade', as: 'items_trade'
     end
 
-    get '/items/:id/like', to: 'items#like', as: 'item_like'
+    post '/items/:id/like', to: 'items#like', as: 'item_like'
+    post '/items/:id/view', to: 'items#view', as: 'item_view'
 
     get '/feed', to: 'dashboard#feed_all', as: 'feed_all'
     get '/feed/sale', to: 'dashboard#feed_sale', as: 'feed_sale'
@@ -78,7 +79,7 @@ Rails.application.routes.draw do
   get '/orders/:id/invoice', to: 'orders#invoice', as: 'invoice'
   get '/orders/:id/confirmation', to: 'orders#confirmation', as: 'order_confirmation'
 
-  get '/items/:id/like', to: 'items#like', as: 'item_like'
+  post '/items/:id/like', to: 'items#like', as: 'item_like'
   get '/items/:id/relist', to: 'items#relist', as: 'item_relist'
   get '/items/:id/staff_pick', to: 'items#staff_pick', as: 'item_staff_pick'
 end

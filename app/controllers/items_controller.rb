@@ -50,6 +50,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @comments = @item.comments
+    @like_count = @item.likes.count
   end
 
   def like

@@ -20,6 +20,20 @@ class Api::ItemsController < ApplicationController
     render "items/index"
   end
 
+  def like
+    like = Like.new(user_id: current_user.id, item_id: params[:id])
+    like.save
+    item = Item.find(params[:id])
+    render :json => item.likes.count
+  end
+
+  def view
+    item = Item.find(params[:id])
+    item.views += 1
+    item.save
+    render :json => item.views
+  end
+
   def show
     @item = Item.find(params[:id])
     render "items/show"
