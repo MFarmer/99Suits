@@ -20,7 +20,9 @@
     </div>
 
     <script>
-      window.current_user_id = <%= current_user.id %>;
+      <% if current_user %>
+        window.current_user_id = <%= current_user.id %>;
+      <% end %>
     </script>
   </body>
 </html>

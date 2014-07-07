@@ -12,6 +12,7 @@
     <div id="jumbo-right">
       <%= render partial: "sign_in" %>
       <%= link_to "Create Account", new_user_url %>
+      <a href="#" id="demo-login" style="float:right">Login as DEMO User</a>
     </div>
   </div>
 
@@ -98,4 +99,15 @@
 <div class="container">
   <%= render partial: "dashboard/items_table" %>
 </div>
+
+<script>
+  $(document).ready(function(){
+    $("#demo-login").click(function(event){
+      event.preventDefault();
+      $("#username").val("demo");
+      $("#password").val("demouser");
+      $("#submit").trigger("click");
+    });
+  });
+</script>
 
