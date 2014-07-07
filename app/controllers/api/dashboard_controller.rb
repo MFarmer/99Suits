@@ -2,6 +2,11 @@ class Api::DashboardController < ApplicationController
 
   before_filter :require_signed_in!
 
+  def discover
+    @search_results = PgSearch.multisearch(params[:query])
+    render "dashboard/searchable"
+  end
+
   def account_reports
   end
 

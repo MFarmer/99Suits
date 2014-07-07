@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
     post '/users/:user_id/follow', to: 'dashboard#follow', as: 'follow'
 
+    get '/discover', to: 'dashboard#discover', as: 'discover'
+
     get '/users/:user_id/closet', to: 'dashboard#profile_items_available', as: 'closet'
     get '/users/:user_id/followers', to: 'dashboard#followers', as: 'followers'
     get '/users/:user_id/following', to: 'dashboard#following', as: 'following'

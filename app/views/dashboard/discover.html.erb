@@ -2,50 +2,71 @@
   <h2>Discover new fashion and people.</h2>
 
   <div id="search">
-    <form action="<%= discover_url %>" method="GET">
       <input id="search-box" type="text" name="query" value="<%= params[:query] %>">
       <button id="search-button">Search</button>
-    </form>
   </div>
   
-  <% if !@search_results.first.nil? %>
-    <div class="results">
-      <% @search_results.each do |result| %>
-        <% if result.searchable.class == Item %>
+  <div id="content" class="results">
 
-          <a href="<%= item_url(result.searchable.id) %>" class="result-box">
-            <div class="result-image-box">
-              <%= image_tag result.searchable.photo.url(:thumb) %>
-            </div>
-            <div class="result-text-box">
-              <p class="title"><%= result.searchable.title %></p>
-              <p><%= number_to_currency(result.searchable.sale_price) %></p>
-            </div>
-          </a>
-
-        <% else %>
-
-          <a href="<%= user_url(result.searchable.id) %>" class="result-box">
-            <div class="result-image-box">
-              <%= image_tag result.searchable.avatar.url(:thumb) %>
-            </div>
-            <div class="result-text-box">
-              <p class="title"><%= full_name(result.searchable) %></p>
-              <p>@<%= result.searchable.username %></p>
-            </div>
-          </a>
-
-        <% end %>
-      <% end %>
-    </div>
-  <% elsif params[:query] %>
-    <h2>No results.</h2>
-  <% end %>
+  </div>
 
 </div>
 
 <script>
-  $(function() {
-    $("#search-box").focus();
+  $(document).ready(function(){
+    $(function() {
+      $("#search-box").focus();
+    });
+
+    $('#search-box').keypress(function (e) {
+      if (e.which == 13) {
+        $('#search-button').trigger("click");
+        return false;    //<---- Add this line
+      }
+    });
+
+    $("#search-button").click(function(){
+      $("#content").html('');
+      $("#content").hide();
+      $.ajax({
+        url: "/api/discover?query=" + encodeURIComponent($("#search-box").val()),
+        method: "GET",
+        dataType: "JSON"
+      }).success(function(json){
+        renderSearchResult(json);
+      }).error(function(response){
+        alert("Error! " + response);
+      });
+    });
+
+    function renderSearchResult(json){
+      var htmlString = "";
+
+      for(var i=0; i<json.length; i++){
+        htmlString = "";
+
+        if(json[i].searchable_type == "Item"){
+
+          htmlString += "<a href='/items/" + json[i].searchable_id + "' class='result-box'>";
+          htmlString += "<div class='result-image-box'>";
+          htmlString += "<img src='" + json[i].image_url + "'>";
+          htmlString += "</div>";
+          htmlString += "<div class='result-text-box'>";
+          htmlString += "<p class='title'>" + json[i].title +"</p>";
+          htmlString += "<p>$" + json[i].sale_price + "</p></div></a>"
+
+        } else {
+
+          htmlString += "<a href='users/" + json[i].searchable_id + "' class='result-box'>";
+          htmlString += "<div class='result-image-box'>";
+          htmlString += "<img src='" + json[i].image_url + "'></div><div class='result-text-box'>";
+          htmlString += "<p class='title'>" + json[i].header_text + "</p>";
+          htmlString += "<p>" + json[i].subtitle_text + "</p></div></a>";
+        }
+
+        $("#content").append(htmlString);
+      }
+      $("#content").show();
+    }
   });
 </script>
