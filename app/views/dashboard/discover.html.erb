@@ -20,13 +20,13 @@
 
     $('#search-box').keypress(function (e) {
       if (e.which == 13) {
+        $("#content").html('');
         $('#search-button').trigger("click");
         return false;    //<---- Add this line
       }
     });
 
     $("#search-button").click(function(){
-      $("#content").html('');
       $("#content").hide();
       $.ajax({
         url: "/api/discover?query=" + encodeURIComponent($("#search-box").val()),
@@ -65,6 +65,10 @@
         }
 
         $("#content").append(htmlString);
+      }
+
+      if(json.length == 0){
+        $("#content").append("<p>No results.</p>");
       }
       $("#content").show();
     }
