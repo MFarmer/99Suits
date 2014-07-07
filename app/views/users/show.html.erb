@@ -110,6 +110,7 @@
         method: "POST",
         dataType: "JSON"
       }).success(function(json){
+        $("#followed-count").html(json);
         $(".follow-button").text("✓ Followed");
         $(".follow-button").removeClass("follow-button").addClass("follow-button-disabled");
         $(".follow-button-disabled").prop("disabled", true);

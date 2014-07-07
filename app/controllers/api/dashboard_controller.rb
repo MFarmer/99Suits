@@ -174,7 +174,7 @@ class Api::DashboardController < ApplicationController
   def follow
     follow = Follow.new(user_id: current_user.id, following_id: params[:user_id])
     follow.save
-    render :json => follow
+    render :json => User.find(params[:user_id]).followers.count
   end
 
 end
