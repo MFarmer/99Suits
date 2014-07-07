@@ -74,6 +74,7 @@ nav ul {
 
 .left-col a {
   font-weight: lighter;
+  display: block;
 }
 
 .left-col .thumbnail img {
@@ -561,7 +562,7 @@ a.thumbnail:hover {
 }
 
 a.thumbnail:active {
-  border: 1px solid transparent;
+  border: 1px solid #eee;
 }
 
 .thumbnail img {

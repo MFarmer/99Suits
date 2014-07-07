@@ -113,8 +113,30 @@
     setupUserFeed("#most-active-users", "api/feed/most_active_users", "Most Active Users");
     setupUserFeed("#newest-users", "api/feed/newest_users", "Newest Users");
 
+    var currentChosenLinkId = "#all-link";
+    manageSideNavCSS("#all-link"); // set default category to have the 'chosen' style
+
+    function manageSideNavCSS(link_id){
+      // Undo previously clicked category style
+      $(currentChosenLinkId).css("background-color", "transparent");
+      $(currentChosenLinkId).css("border-right", "none");
+      $(currentChosenLinkId).css("color", "#afb6bb");
+
+      // Set clicked category to have new style
+      $(link_id).css("background-color", "lightgreen");
+      $(link_id).css("border-right", "1px solid teal");
+      $(link_id).css("color", "teal");
+      $(link_id).css("display", "block");
+      $(link_id).css("transition", "background-color 0.5s");
+
+      currentChosenLinkId = link_id;
+    }
+
     function setup(link_id, url, title){
       $(link_id).click(function(event){
+
+        manageSideNavCSS(link_id);
+
         event.preventDefault();
         $("#title").html(title);
         $.ajax({
@@ -136,6 +158,7 @@
 
     function setupUserFeed(link_id, url, title){
       $(link_id).click(function(event){
+        manageSideNavCSS(link_id);
         event.preventDefault();
         $("#title").html(title);
         $.ajax({

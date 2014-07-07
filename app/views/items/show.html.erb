@@ -163,7 +163,7 @@
           htmlString += "<img src='" + json[i].user_avatar_url + "'>";
           htmlString += "</div><div class='comment-text-box'><p class='comment-author'>";
           htmlString += "<a href='/users/" + json[i].user_id + "'>" + json[i].user_username + "</a>";
-          htmlString += "</p><p class='comment-text'>" + json[i].content + "</p><p class='comment-time'>" + json[i].created_at + "</p>";
+          htmlString += "</p><p class='comment-text'>" + escapeHtml(json[i].content) + "</p><p class='comment-time'>" + json[i].created_at + "</p>";
           htmlString += "</div>";
           htmlString += "</li>";
 
@@ -172,6 +172,12 @@
         $("#comments").show('slow');
       });
     }
+
+    function escapeHtml(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    };
 
     function comment_form_toggle(){
       if(comments_show){
@@ -189,6 +195,7 @@
       event.preventDefault();
 
       var valuesToSubmit = $(this).serialize();
+      console.log(valuesToSubmit);
 
       comment_form_toggle();
       $("textarea").val('');

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     post '/items/:id/view', to: 'items#view', as: 'item_view'
     post '/items/:id/pick', to: 'items#staff_pick', as: 'item_staff_pick'
 
+    post '/users/:user_id/follow', to: 'dashboard#follow', as: 'follow'
+
     get '/users/:user_id/closet', to: 'dashboard#profile_items_available', as: 'closet'
     get '/users/:user_id/followers', to: 'dashboard#followers', as: 'followers'
     get '/users/:user_id/following', to: 'dashboard#following', as: 'following'

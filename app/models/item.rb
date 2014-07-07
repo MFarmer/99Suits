@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
 
   include PgSearch
   multisearchable :against => [:title, :brand, :sale_price, :trade_price, :category, :size, :description],
-                  :if => lambda { |item| item.hidden != false }
+                  :if => lambda { |item| item.hidden != true }
 
   CATEGORY_OPTIONS = ["Styling Products", "Armwear", "Belts", "Coats",
                       "Footwear", "Headgear", "Jackets",

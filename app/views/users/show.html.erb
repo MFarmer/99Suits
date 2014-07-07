@@ -20,7 +20,7 @@
 
     <% if @user.id != current_user.id %>
       <% if Follow.where('user_id = ? AND following_id = ?', current_user.id, @user.id).count == 0 %>
-        <%= button_to "Follow Me", "#", class: "follow-button" %>
+        <button class="follow-button">Follow Me</button>
       <% else %>
         <button class="follow-button-disabled" disabled>✓ Followed</button>
       <% end %>
@@ -49,11 +49,10 @@
     <%= @user.bio ? @user.bio : "No bio information provided." %>
   </div>
 
-
-
-
   <!-- Content Area -->
-  <h1 id="title"></h1>
+  <h1 id="title">
+    
+  </h1>
   <div id="content">
 
   </div>
@@ -76,6 +75,24 @@
     });
 
     // === Respond to events ===
+    var currentChosenLinkId = "#closet-link";
+    manageSideNavCSS("#closet-link"); // set default category to have the 'chosen' style
+
+    function manageSideNavCSS(link_id){
+      // Undo previously clicked category style
+      $(currentChosenLinkId).css("background-color", "transparent");
+      $(currentChosenLinkId).css("border-right", "none");
+      $(currentChosenLinkId).css("color", "#afb6bb");
+
+      // Set clicked category to have new style
+      $(link_id).css("background-color", "lightgreen");
+      $(link_id).css("border-right", "1px solid teal");
+      $(link_id).css("color", "teal");
+      $(link_id).css("display", "block");
+      $(link_id).css("transition", "background-color 0.5s");
+
+      currentChosenLinkId = link_id;
+    }
 
     $("#feedback").click(function(){
       $("#feedback-link").trigger("click");
@@ -86,8 +103,24 @@
     setupUserFeed("#followers-link", "/api/users/<%= @user.id %>/followers", "Followers");
     setupUserFeed("#following-link", "/api/users/<%= @user.id %>/following", "Following");
 
+    $(".follow-button").click(function(event){
+      event.preventDefault();
+      $.ajax({
+        url: "/api/users/<%= @user.id %>/follow",
+        method: "POST",
+        dataType: "JSON"
+      }).success(function(json){
+        $(".follow-button").text("✓ Followed");
+        $(".follow-button").removeClass("follow-button").addClass("follow-button-disabled");
+        $(".follow-button-disabled").prop("disabled", true);
+      }).error(function(response){
+        alert("Error with follow: " + response);
+      });
+    });
+
     function setup(link_id, url, title){
       $(link_id).click(function(event){
+        manageSideNavCSS(link_id);
         event.preventDefault();
         $("#title").html(title);
         $("#content").html("<p>Loading...</p>");
@@ -110,6 +143,7 @@
 
     function setupFeedback(link_id, url, title){
       $(link_id).click(function(event){
+        manageSideNavCSS(link_id);
         event.preventDefault();
         $("#title").html(title);
         $("#content").html("<p>Loading...</p>");
@@ -132,6 +166,7 @@
 
     function setupUserFeed(link_id, url, title){
       $(link_id).click(function(event){
+        manageSideNavCSS(link_id);
         event.preventDefault();
         $("#title").html(title);
         $("#content").html("<p>Loading...</p>");
