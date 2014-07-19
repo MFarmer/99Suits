@@ -1,4 +1,4 @@
 99Suits
 =======
 
-Final project for App Academy
+Rails prototype for a men's clothing commerce site
